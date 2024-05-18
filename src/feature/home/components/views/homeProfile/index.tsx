@@ -70,14 +70,14 @@ const HomeProfile: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <IMSearchInput
+      {/* <IMSearchInput
         testId={''}
         name={''}
         label={''}
         searchValue={''}
         setSearchValue={() => { }}
         styles={{ searchContainerStyle: { height: 45, backgroundColor: '#E3E3E7', borderRadius: 100 }}}
-      />
+      /> */}
       <Text style={styles.textStyle}>Property Management Services</Text>
       <ScrollView contentContainerStyle={styles.cardsContainer}>
         {homeProfileCardData.map((item, index) => (
