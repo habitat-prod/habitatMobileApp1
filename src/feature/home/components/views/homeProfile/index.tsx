@@ -2,13 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TextInput } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import HomeProfileCard from '../../HomeProfileCard';
 import useStyles from './styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HBStackParamList } from '../../../../../navigation/rootNavigation';
 import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constant/screens';
+import IMSearchInput from '../../../../../components/IMInput/HBSearchInput';
 
 const HomeProfile: React.FC = () => {
   const theme = useTheme();
@@ -69,6 +70,14 @@ const HomeProfile: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <IMSearchInput
+        testId={''}
+        name={''}
+        label={''}
+        searchValue={''}
+        setSearchValue={() => { }}
+        styles={{ searchContainerStyle: { height: 45, backgroundColor: '#E3E3E7', borderRadius: 100 }}}
+      />
       <Text style={styles.textStyle}>Property Management Services</Text>
       <ScrollView contentContainerStyle={styles.cardsContainer}>
         {homeProfileCardData.map((item, index) => (

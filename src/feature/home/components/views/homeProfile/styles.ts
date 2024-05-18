@@ -6,6 +6,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     container: {
       flex: 1,
       margin: 16,
+      marginVertical: 0,
       gap: 12,
     },
     textStyle: {
@@ -25,6 +26,11 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       width: '48%',
       marginBottom: 16,
     },
+    input: {
+      borderWidth: 1,
+      borderColor: 'black',
+      borderRadius: 16,
+    }
   });
 
 export default useStyles;
