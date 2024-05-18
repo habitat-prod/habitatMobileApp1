@@ -5,25 +5,11 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      margin: 16,
-      gap: 12,
     },
     textStyle: {
       display: 'flex',
-      alignSelf: 'flex-start',
-      paddingTop: '10%',
-      color: 'black',
-      fontSize: 14,
-      fontWeight: '500',
-    },
-    cardsContainer: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-    },
-    card: {
-      width: '48%',
-      marginBottom: 16,
+      alignSelf: 'center',
+      marginTop: hp('50%'),
     },
   });
 
