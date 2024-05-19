@@ -6,7 +6,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     container: {
       flex: 1,
       padding: 16,
-      backgroundColor: 'white',
+      backgroundColor: 'white'
     },
     textStyle: {
       fontSize: 15,
@@ -17,6 +17,13 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
+    },
+    subContainer: {
+      flex:1,
+    },
+    iconContainerStyle: {
+      display: 'flex',
+      alignSelf: 'flex-start'
     },
   });
 

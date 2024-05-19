@@ -16,4 +16,5 @@ export enum MaintainanceAreasScreens {
   SecurityApprovals = 'SecurityApprovals',
   HazardAreas = 'HazardAreas',
   AmbulanceArea = 'AmbulanceArea',
+  LogDetailsArea = 'LogDetailsArea',
 }

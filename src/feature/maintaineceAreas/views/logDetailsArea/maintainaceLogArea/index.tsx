@@ -1,85 +1,73 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-
-import MaintainanceListingCard from '../../components/maintainanceListingCard';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { HBStackParamList } from '../../../../navigation/rootNavigation';
-import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constant/screens';
 import useStyles from './styles';
+import MaintainanceLogCard from '../../../components/maintainanceLogCard';
 
-const MaintainaceDetailsArea: React.FC = () => {
+const MaintainanceLogArea: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
-  const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
-  const maintainanceListingCardData = [
+  const maintainanceLogCardData = [
     {
       title: 'Clubhouse',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Parking',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Gardens',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Stairs',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Elevators',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Pavements',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Waiting area',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Guest Parking',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       title: 'Log',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.LogDetailsArea,
-        params: {},
-      }),
+      onClick: () => { },
     }
   ];
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.textStyle}> All Spaces </Text>
-      <View style={styles.cardsContainer}>
-        {maintainanceListingCardData.map((item, index) => (
-          <MaintainanceListingCard
-            key={index}
-            title={item.title}
-            imageUri={item.imageUri}
-            onClick={item.onClick}
-          />
-        ))}
-      </View>
-    </View>
+    <ScrollView>
+      {maintainanceLogCardData.map((item, index) =>
+        <MaintainanceLogCard
+          key={index}
+          title={item.title}
+          imageUri={item.imageUri}
+          onClick={item.onClick}
+        />
+      )}
+    </ScrollView>
   );
 };
 
-export default MaintainaceDetailsArea;
+export default MaintainanceLogArea;
