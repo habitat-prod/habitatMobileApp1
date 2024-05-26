@@ -3,11 +3,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaintainanceAreasScreens } from '../../../constant/screens';
 import MaintainaceDetailsArea from '../views/maintainaceDetailsArea';
 import LogDetailsArea from '../views/logDetailsArea';
+import MaintainanceCardDetails from '../components/maintainanceCardDetails';
 
 
 export type MaintainaceAreaList = {
     MaintainanceAreas: undefined;
     LogDetailsArea: undefined;
+    MaintainanceCardDetails: {
+      title: string;
+      imageUrl: string;
+    };
 };
 
 const MaintainaceAreaStackNav: React.FC = () => {
@@ -17,6 +22,7 @@ const MaintainaceAreaStackNav: React.FC = () => {
     <StackNav.Navigator screenOptions={{ headerShown: false }}>
       <StackNav.Screen name={MaintainanceAreasScreens.MaintainanceAreas} component={MaintainaceDetailsArea} />
       <StackNav.Screen name={MaintainanceAreasScreens.LogDetailsArea} component={LogDetailsArea} />
+      <StackNav.Screen name={MaintainanceAreasScreens.MaintainanceCardDetails} component={MaintainanceCardDetails} />
     </StackNav.Navigator>
   );
 };
