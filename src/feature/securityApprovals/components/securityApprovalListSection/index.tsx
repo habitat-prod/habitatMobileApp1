@@ -55,7 +55,25 @@ const securityApprovalListingCardData = [
     onAccept: () => { },
   },
   {
-    title: 'Ferrari',
+    title: 'Horn',
+    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+    onReject: () => { },
+    onAccept: () => { },
+  },
+  {
+    title: 'Honda',
+    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+    onReject: () => { },
+    onAccept: () => { },
+  },
+  {
+    title: 'Gonda',
+    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+    onReject: () => { },
+    onAccept: () => { },
+  },
+  {
+    title: 'Monda',
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },

@@ -4,21 +4,21 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
-      height: 55,
-      margin: 16,
-      backgroundColor: '#ECECEC',
-      borderRadius: 12,
       display: 'flex',
+      height: hp('6.87%'),
+      marginTop: wp('4.44%%'),
+      backgroundColor: '#ECECEC',
+      borderRadius: wp('2.22%'),
       flexDirection: 'row',
-      padding: 12,
+      padding: wp('3.33%'),
     },
     imageContainer: {
-      width: 68,
-      height: 32,
-      borderRadius: 8,
+      width: wp('16.88%'),
+      height: hp('4%'),
+      borderRadius: wp('1.11%'),
     },
     textStyle: {
-      paddingLeft: 8,
+      paddingLeft: wp('2.22%'),
       alignSelf: 'center',
       color: 'black',
       fontSize: 14,
@@ -29,7 +29,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       display: 'flex',
       justifyContent: 'flex-end',
       flexDirection: 'row',
-      gap: 12,
+      gap: wp('3.33%'),
     }
   });
 
