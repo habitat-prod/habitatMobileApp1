@@ -4,14 +4,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     cardContainerStyles: {
-      borderRadius: 8,
+      borderRadius: wp('2.22%'),
       borderColor: 'grey',
       backgroundColor: '#F5F5F5',
-      paddingTop: 8,
-      paddingBottom: 12,
-      paddingHorizontal: 16,
-      width: 170,
-      marginTop: 16,
+      paddingTop: wp('2.22%'),
+      paddingBottom: wp('3.33%'),
+      paddingHorizontal: wp('4.44%'),
+      width: wp('43.22%'),
+      marginTop: wp('4.44%'),
     },
     subContainer: {
       display: 'flex',
@@ -21,13 +21,12 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     title: {
       fontSize: 14,
       fontWeight: '500',
-      paddingRight: 50,
+      paddingRight: wp('13.88%'),
     },
     imageStyle: {
-      height: 160,
-      width: 140,
-      marginTop: 12,
-      borderRadius: 16,
+      height: hp('20%'),
+      marginTop: wp('3.33%'),
+      borderRadius: wp('4.44%'),
     },
   });
 

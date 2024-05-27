@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import useStyles from './styles';
 import ReserveAreaListingCard from '../../components/maintainanceListingCard';
@@ -58,7 +58,7 @@ const ReserveAreaDetails: React.FC = () => {
   const styles = useStyles(theme);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.textStyle}> Clubhouse Management </Text>
       <ScrollView contentContainerStyle={styles.cardsContainer}>
         {maintainanceListingCardData.map((item, index) => (
@@ -70,7 +70,7 @@ const ReserveAreaDetails: React.FC = () => {
           />
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

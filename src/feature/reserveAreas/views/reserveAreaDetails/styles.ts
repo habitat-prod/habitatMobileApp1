@@ -5,13 +5,15 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      padding: 16,
+      paddingHorizontal: wp('4.44%'),
       backgroundColor: 'white',
+      paddingBottom: wp('4.44%'),
     },
     textStyle: {
       fontSize: 15,
       fontWeight: '700',
       color: 'black',
+      padding: wp('4.44%'),
     },
     cardsContainer: {
       flexDirection: 'row',
