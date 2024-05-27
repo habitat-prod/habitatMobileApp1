@@ -7,9 +7,9 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       display: 'flex',
       justifyContent: 'space-between',
       backgroundColor: '#EAEAEA',
-      marginHorizontal: 16,
-      marginVertical: 12,
-      padding: 8
+      marginHorizontal: wp('4.44%'),
+      marginVertical: wp('3.33%'),
+      padding: wp('2.22%'),
     },
     primaryText: {
       fontSize: 14,
@@ -19,27 +19,27 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       fontSize: 12,
       fontWeight: '500',
       color: 'black',
-      paddingTop: 16,
+      paddingTop: wp('4.44%'),
     },
     iconContainer: {
       position: 'absolute',
       backgroundColor: 'white',
-      left: 15,
-      top: 20,
+      left: wp('4.16%'),
+      top: hp('2.25%'),
       zIndex: 1,
       borderWidth: 1,
-      paddingHorizontal: 8,
-      paddingVertical: 2,
-      borderRadius: 20,
+      paddingHorizontal: wp('2.22%'),
+      paddingVertical: wp('0.55%'),
+      borderRadius: wp('5.55%'),
       alignItems: 'center'
     },
     iconSvg: {
-      height: 40,
-      width: 40
+      height: wp('11.11%'),
+      width: wp('11.11%'),
     },
     imageContainer: {
       width: '100%',
-      height: 245,
+      height: wp('68.05%'),
       position: 'relative',
     },
     titleContainer: {
@@ -47,16 +47,16 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       textAlign: 'center',
       alignSelf: 'center',
       justifyContent: 'center',
-      paddingVertical: 12,
-      paddingHorizontal: 24,
-      borderRadius: 10,
+      paddingVertical: wp('3.33%'),
+      paddingHorizontal: wp('6.66%'),
+      borderRadius: wp('2.77%'),
       position: 'absolute',
-      top: 225,
+      top: hp('30.12%'),
       zIndex: 1,
       color: 'white'
     },
     scrollviewContainer: {
-      paddingTop: 50,
+      paddingTop: wp('13.88%'),
     },
   });
 

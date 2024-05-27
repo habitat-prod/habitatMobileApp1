@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, ScrollView, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import useStyles from './styles';
+
 import PendingLogCard from '../../../components/pendingLogCard';
+import useStyles from './styles';
 
 const PendingLogArea: React.FC = () => {
   const theme = useTheme();
