@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -16,7 +16,7 @@ const LogDetailsArea: React.FC = () => {
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <IMIcon
         testId='icon'
         onClick={defaultNavigation.goBack}
@@ -26,7 +26,7 @@ const LogDetailsArea: React.FC = () => {
       <View style={styles.subContainer}>
         <LogAreaTabs />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

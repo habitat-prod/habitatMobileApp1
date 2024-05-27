@@ -66,7 +66,6 @@ const PendingLogArea: React.FC = () => {
   ];
 
   return (
-    //   <Text>PendingArea is coming sooon...</Text>
     <ScrollView>
       {pendingLogCardData.map((item, index) =>
         <PendingLogCard

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Image, SafeAreaView, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import useStyles from './styles';
 import SimpleArrowRight from '../../../../assets/svg/SimpleArrowRight';
@@ -21,7 +21,7 @@ const PendingLogCard: React.FC<IPendingLogCard> = (props) => {
   const styles = useStyles(theme);
 
   return (
-    <View style={[styles.containerStyle, props.cardStyle]}>
+    <SafeAreaView style={[styles.containerStyle, props.cardStyle]}>
       <View style={styles.cardContainerStyles}>
         <Text style={styles.title}>{props.title}</Text>
         <View style={styles.iconContainer}>
@@ -30,7 +30,7 @@ const PendingLogCard: React.FC<IPendingLogCard> = (props) => {
         </View>
       </View>
       <Text style={styles.dateTitle}>{props.date}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

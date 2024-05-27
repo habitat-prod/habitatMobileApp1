@@ -4,30 +4,30 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     containerStyle: {
-      borderRadius: 8,
+      borderRadius: wp('2.22%'),
       backgroundColor: '#EDEDED',
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginTop: 16,
+      paddingHorizontal: wp('3.33%'),
+      paddingVertical: wp('3.33%'),
+      marginTop: wp('4.44%'),
     },
     cardContainerStyles: {
       display: 'flex',
       flexDirection: 'row',
-      borderRadius: 8,
+      borderRadius: wp('2.22%'),
       backgroundColor: '#EDEDED',
       alignItems: 'flex-start'
     },
     title: {
       fontSize: 14,
       fontWeight: '700',
-      paddingLeft: 8,
-      width: 226,
+      paddingLeft: wp('2.22%'),
+      width: wp('62.77%'),
     },
     dateTitle: {
       fontSize: 14,
       fontWeight: '800',
-      paddingLeft: 8,
-      paddingTop: 16,
+      paddingLeft: wp('2.22%'),
+      paddingTop: wp('4.44%'),
       color: 'black',
     },
     iconContainer: {
@@ -35,7 +35,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       display: 'flex',
       justifyContent: 'flex-end',
       flexDirection: 'row',
-      gap: 12,
+      gap: wp('3.33%'),
     }
   });
 
