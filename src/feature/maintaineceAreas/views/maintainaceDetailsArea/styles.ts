@@ -5,7 +5,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      padding: 16,
+      paddingHorizontal: wp('2.22%'),
       backgroundColor: 'white',
     },
     textStyle: {

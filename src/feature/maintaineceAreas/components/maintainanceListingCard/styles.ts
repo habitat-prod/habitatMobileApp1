@@ -3,24 +3,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
-    container: {
-    //   flex: 1,
-    },
-    textStyle: {
-    //   display: 'flex',
-    //   alignSelf: 'center',
-    //   marginTop: hp('50%'),
-    },
     cardContainerStyles: {
-      borderRadius: 8,
-      borderWidth: 0.6,
+      borderRadius: wp('2.22%'),
+      borderWidth: wp('0.16%'),
       borderColor: 'grey',
       backgroundColor: 'white',
-      height: 174,
-      width: 117,
-      paddingHorizontal: 8,
-      paddingVertical: 8,
-      marginTop: 16,
+      height: hp('21.75%'),
+      paddingHorizontal: wp('2.22%'),
+      paddingVertical: wp('2.22%'),
+      marginTop: wp('4.44%'),
     },
     subContainer: {
       display: 'flex',
@@ -32,10 +23,10 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       fontWeight: '500',
     },
     imageStyle: {
-      height: 129,
-      width: 99.5,
-      marginTop: 8,
-      borderRadius: 16,
+      height: hp('16.12%'),
+      width: wp('24.58%'),
+      marginTop: wp('2.22%'),
+      borderRadius: wp('4.44%'),
     },
   });
 
