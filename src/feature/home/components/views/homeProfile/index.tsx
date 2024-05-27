@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 
-import { View, Text, ScrollView } from 'react-native';
+import { Text, ScrollView, SafeAreaView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import HomeProfileCard from '../../HomeProfileCard';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -68,7 +68,7 @@ const HomeProfile: React.FC = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.textStyle}>Property Management Services</Text>
       <ScrollView contentContainerStyle={styles.cardsContainer}>
         {homeProfileCardData.map((item, index) => (
@@ -81,7 +81,7 @@ const HomeProfile: React.FC = () => {
           />
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

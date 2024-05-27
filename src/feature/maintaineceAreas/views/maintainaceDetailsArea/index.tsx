@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -66,7 +66,7 @@ const MaintainaceDetailsArea: React.FC = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.textStyle}> All Spaces </Text>
       <View style={styles.cardsContainer}>
         {maintainanceListingCardData.map((item, index) => (
@@ -78,7 +78,7 @@ const MaintainaceDetailsArea: React.FC = () => {
           />
         ))}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
