@@ -5,9 +5,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      margin: 16,
-      marginVertical: 0,
-      gap: 12,
+      marginHorizontal: wp('2.22%'),
+      gap: wp('3.33%'),
     },
     textStyle: {
       display: 'flex',
@@ -23,14 +22,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       justifyContent: 'space-between',
     },
     card: {
-      width: '48%',
-      marginBottom: 16,
+      marginBottom: wp('4.44%'),
     },
-    input: {
-      borderWidth: 1,
-      borderColor: 'black',
-      borderRadius: 16,
-    }
   });
 
 export default useStyles;
