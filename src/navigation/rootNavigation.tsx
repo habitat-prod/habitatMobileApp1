@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { NAVIGATION } from '../constant/screens';
+import { NAVIGATION } from '../constants/screens';
 import HomeProfile from '../feature/home/components/views/homeProfile';
 import MaintainaceAreaStackNav from '../feature/maintaineceAreas/navigation';
 import ParkingAreaStackNav from '../feature/parkingAccess/navigation';

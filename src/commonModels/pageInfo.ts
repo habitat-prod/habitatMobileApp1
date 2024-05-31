@@ -1,4 +1,4 @@
-import { defaultPageSize, defaultPageNumber } from '../constant/string';
+import { defaultPageSize, defaultPageNumber } from '../constants/strings';
 
 export interface IPageInfo {
   cursor?: string | number;

@@ -67,7 +67,7 @@ const PendingLogArea: React.FC = () => {
   ];
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.container}>
       {pendingLogCardData.map((item, index) =>
         <PendingLogCard
           key={index}

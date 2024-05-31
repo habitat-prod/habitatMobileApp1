@@ -7,7 +7,7 @@ import { useTheme } from 'react-native-paper';
 import HomeProfileCard from '../../HomeProfileCard';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HBStackParamList } from '../../../../../navigation/rootNavigation';
-import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constant/screens';
+import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constants/screens';
 import useStyles from './styles';
 
 const HomeProfile: React.FC = () => {

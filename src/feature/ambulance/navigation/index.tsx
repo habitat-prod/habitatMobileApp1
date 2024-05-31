@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MaintainanceAreasScreens } from '../../../constant/screens';
+import { MaintainanceAreasScreens } from '../../../constants/screens';
 import AmbulanceAreaDetails from '../views/ambulanceAreaDetails';
 
 

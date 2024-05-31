@@ -6,7 +6,7 @@ import { useTheme } from 'react-native-paper';
 
 import MaintainanceLogCard from '../../../components/maintainanceLogCard';
 import { HBStackParamList } from '../../../../../navigation/rootNavigation';
-import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constant/screens';
+import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constants/screens';
 import useStyles from './styles';
 
 const MaintainanceLogArea: React.FC = () => {
@@ -117,7 +117,7 @@ const MaintainanceLogArea: React.FC = () => {
   ];
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.container}>
       {maintainanceLogCardData.map((item, index) =>
         <MaintainanceLogCard
           key={index}

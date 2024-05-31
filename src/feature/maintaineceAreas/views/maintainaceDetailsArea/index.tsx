@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import MaintainanceListingCard from '../../components/maintainanceListingCard';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HBStackParamList } from '../../../../navigation/rootNavigation';
-import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constant/screens';
+import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
 import useStyles from './styles';
 
 const MaintainaceDetailsArea: React.FC = () => {
@@ -18,42 +18,90 @@ const MaintainaceDetailsArea: React.FC = () => {
     {
       title: 'Clubhouse',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Clubhouse',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Parking',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Parking',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Gardens',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Gardens',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Stairs',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Stairs',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Elevators',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Elevators',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Pavements',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Pavements',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Waiting area',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Waiting area',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Guest Parking',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => {},
+      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+        screen: MaintainanceAreasScreens.MaintainanceListDetails,
+        params: {
+          title: 'Guest Parking',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
     },
     {
       title: 'Log',

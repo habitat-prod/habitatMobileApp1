@@ -4,11 +4,11 @@ import { useTheme } from 'react-native-paper';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import IMIcon from '../../../../components/IMIcon';
-import ArrowBackFilled from '../../../../assets/svgv1/ArrowBackFilled';
-import { HBStackParamList } from '../../../../navigation/rootNavigation';
-import { MaintainaceAreaList } from '../../navigation';
-import { MaintainanceAreasScreens } from '../../../../constant/screens';
+import IMIcon from '../../../../../components/IMIcon';
+import ArrowBackFilled from '../../../../../assets/svgv1/ArrowBackFilled';
+import { HBStackParamList } from '../../../../../navigation/rootNavigation';
+import { MaintainaceAreaList } from '../../../navigation';
+import { MaintainanceAreasScreens } from '../../../../../constants/screens';
 import useStyles from './styles';
 
 export interface IMaintainanceCardDetails {

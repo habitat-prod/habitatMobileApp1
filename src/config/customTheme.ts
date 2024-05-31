@@ -1,7 +1,7 @@
 import { TextStyle } from 'react-native';
 import { DefaultTheme } from 'react-native-paper';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { Noto } from '../constant/string';
+import { Noto } from '../constants/strings';
 
 
 interface IMPaletteMainOption {
