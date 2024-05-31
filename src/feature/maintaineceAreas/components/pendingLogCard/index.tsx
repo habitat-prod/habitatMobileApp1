@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Image, SafeAreaView, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import useStyles from './styles';
-import SimpleArrowRight from '../../../../assets/svg/SimpleArrowRight';
-import IMIcon from '../../../../components/HBIcon';
-import Close from '../../../../assets/svg/Close';
-import Correct from '../../../../assets/svg/Correct';
+import SimpleArrowRight from '../../../../assets/svgv1/SimpleArrowRight';
+import IMIcon from '../../../../components/IMIcon';
+import Close from '../../../../assets/svgv1/Close';
+import Correct from '../../../../assets/svgv1/Correct';
 
 export interface IPendingLogCard {
   title: string;

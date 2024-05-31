@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import useStyles from './styles';
-import Close from '../../../../assets/svg/Close';
-import IMIcon from '../../../../components/HBIcon';
-import Correct from '../../../../assets/svg/Correct';
+import Close from '../../../../assets/svgv1/Close';
+import IMIcon from '../../../../components/IMIcon';
+import Correct from '../../../../assets/svgv1/Correct';
 
 interface ISecurityApprovalListingCardProps {
   title: string;

@@ -13,3 +13,15 @@ export const Noto = {
   }
   
   export type CountryCodes = 'IN' | 'US';
+
+
+/**
+ * For Listing Screens , WE are defining a common page size
+ * if everytime we hit the scroll end (service hit)
+ */
+export const defaultPageSize = 10;
+
+export const defaultPageNumber = 0;
+export const defaultCursorValue = '0';
+export const maxPageSize = 1000;
+export const pinCodeDigits = 6;

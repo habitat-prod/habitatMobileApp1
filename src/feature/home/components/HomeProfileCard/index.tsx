@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import ArrowRight from '../../../../assets/svg/ArrowRight';
+import ArrowRight from '../../../../assets/svgv1/ArrowRight';
 import useStyles from './styles';
 
 export interface IHomeProfileCard {

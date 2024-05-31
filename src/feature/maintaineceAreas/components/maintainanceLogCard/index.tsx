@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import useStyles from './styles';
-import SimpleArrowRight from '../../../../assets/svg/SimpleArrowRight';
+import SimpleArrowRight from '../../../../assets/svgv1/SimpleArrowRight';
 
 export interface IMaintainanceLogCard {
   title: string;

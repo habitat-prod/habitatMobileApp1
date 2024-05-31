@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from 'react-native-paper';
 
 import useStyle from './styles';
-import { IMTopTabNavigation } from '../../../../components/HBTopTabNavigator';
+import { IMTopTabNavigator } from '../../../../components/IMTopTabNavigator';
 import MaintainanceLogArea from '../../views/logDetailsArea/maintainaceLogArea';
 import PendingLogArea from '../../views/logDetailsArea/pendingLogArea';
 
@@ -38,7 +38,7 @@ const LogAreaTabs: React.FC = () => {
   ];
 
   return (
-    <IMTopTabNavigation
+    <IMTopTabNavigator
       screenData={tabs}
       navigatorData={{
         backBehavior: 'none',

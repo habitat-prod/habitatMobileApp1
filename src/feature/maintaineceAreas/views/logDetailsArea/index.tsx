@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import LogAreaTabs from '../../components/logAreaTabs';
-import IMIcon from '../../../../components/HBIcon';
-import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';
+import IMIcon from '../../../../components/IMIcon';
+import ArrowBackFilled from '../../../../assets/svgv1/ArrowBackFilled';
 import { HBStackParamList } from '../../../../navigation/rootNavigation';
 import useStyles from './styles';
 

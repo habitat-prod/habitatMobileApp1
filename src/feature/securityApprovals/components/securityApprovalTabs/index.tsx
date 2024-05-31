@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-native-paper';
 
 import useStyle from './styles';
-import { IMTopTabNavigation } from '../../../../components/HBTopTabNavigator';
+import { IMTopTabNavigator } from '../../../../components/IMTopTabNavigator';
 import SecurityApprovalListSection from '../securityApprovalListSection';
 
 export enum SecurityApprovalListTabs {
@@ -38,7 +38,7 @@ const SecurityApprovalTabs: React.FC = () => {
   ];
 
   return (
-    <IMTopTabNavigation
+    <IMTopTabNavigator
       screenData={tabs}
       navigatorData={{
         backBehavior: 'none',
