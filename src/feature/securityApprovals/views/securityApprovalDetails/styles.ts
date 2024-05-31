@@ -5,8 +5,13 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      padding: wp('4.44%'),
+      padding: wp('3.33%'),
       backgroundColor: 'white'
+    },
+    subContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
     textStyle: {
       fontSize: 15,
@@ -14,8 +19,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       color: 'black',
     },
     tabStyle: {
-      flex: 1, 
-      marginTop: wp('2.22%') 
+      flex: 1,
+      marginTop: wp('2.22%')
     }
   });
 

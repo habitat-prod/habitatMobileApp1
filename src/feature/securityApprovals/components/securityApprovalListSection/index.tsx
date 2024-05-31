@@ -1,8 +1,12 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import useStyles from './styles';
+import { RouteProp } from '@react-navigation/native';
+
 import SecurityApprovalListingCard from '../securityApprovalListingCard';
+import { MaintainanceAreasScreens } from '../../../../constants/screens';
+import { SecurityApprovalList } from '../../navigation';
+import useStyles from './styles';
 
 
 const securityApprovalListingCardData = [
@@ -80,12 +84,17 @@ const securityApprovalListingCardData = [
   }
 ];
 
-const SecurityApprovalListSection: React.FC = () => {
+interface ISecurityApprovalListSection {
+  route: RouteProp<SecurityApprovalList, MaintainanceAreasScreens.SecurityApprovals>;
+}
+
+const SecurityApprovalListSection: React.FC<ISecurityApprovalListSection> = (props) => {
   const theme = useTheme();
   const styles = useStyles(theme);
+  const selectedTab = props.route.params.selectedTab;
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.container}>
       {securityApprovalListingCardData.map((item, index) =>
         <SecurityApprovalListingCard
           key={index}
@@ -93,6 +102,7 @@ const SecurityApprovalListSection: React.FC = () => {
           imageUri={item.imageUri}
           onReject={item.onReject}
           onApprove={item.onAccept}
+          selectedTab={selectedTab}
         />
       )}
     </ScrollView>
