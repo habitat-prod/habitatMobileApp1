@@ -65,6 +65,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
           testId="singlePicker"
           name="status"
           label=""
+          bottomSheetHeader={showConditionalDropdownList() ? 'Select Location of tower': 'Select Location'}
           pickerOptions={showConditionalDropdownList() ? locationOfTowerDropdownList : locationDropdownList}
           value={showConditionalDropdownList() ? locationOfTowerDropdownList[0] : locationDropdownList[0]}
           // onChange={formikData.setFieldValue}
@@ -79,6 +80,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
             testId="singlePicker"
             name="status"
             label=""
+            bottomSheetHeader='Select Location of floor'
             pickerOptions={locationOfFloorDropdownList}
             value={locationOfFloorDropdownList[0]}
             // onChange={formikData.setFieldValue}
@@ -89,22 +91,10 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
           // }
           />
         )}
-        {/* <IMSinglePicker
-          testId="singlePicker"
-          name="status"
-          label=""
-          pickerOptions={locationDropdownList}
-          value={locationDropdownList[0]}
-          // onChange={formikData.setFieldValue}
-          // onFocus={formikData.setFieldTouched}
-          styles={{ pickerContainer: styles.pickerContainer }}
-        // errorText={
-        //   formikData.touched.status?.value && formikData.errors.status?.value ? t('deal:errorMessage.status') : ''
-        // }
-        /> */}
         <IMSinglePicker
           testId="singlePicker"
           name="status"
+          bottomSheetHeader='Select Problem'
           label=""
           pickerOptions={problemDropdownList}
           value={problemDropdownList[0]}
