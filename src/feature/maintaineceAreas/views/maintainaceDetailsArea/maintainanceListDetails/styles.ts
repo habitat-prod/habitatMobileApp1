@@ -81,6 +81,13 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       minHeight: hp('6.25%'),
       borderRadius: wp('2.77%'),
       backgroundColor: '#F2F2F2',
+    },
+    btnContainer: {
+      display: 'flex',
+      width: '94%',
+      alignSelf: 'center',
+      backgroundColor: '#4682B4',
+      marginVertical: wp('3.33%'),
     }
   });
 

@@ -11,6 +11,7 @@ import { MaintainaceAreaList } from '../../../navigation';
 import { MaintainanceAreasScreens } from '../../../../../constants/screens';
 import { IMSinglePicker } from '../../../../../components/IMPicker';
 import IMTextInput from '../../../../../components/IMInput/IMTextInput';
+import IMButton from '../../../../../components/IMButton';
 import useStyles from './styles';
 
 const locationDropdownList = [
@@ -41,9 +42,9 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   const showConditionalDropdownList = () => {
-    if(routeParams === 'Stairs') return true;
-    if( routeParams === 'Elevators') return true;
-    if( routeParams === 'Waiting area') return true;
+    if (routeParams === 'Stairs') return true;
+    if (routeParams === 'Elevators') return true;
+    if (routeParams === 'Waiting area') return true;
   }
 
   return (
@@ -65,7 +66,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
           testId="singlePicker"
           name="status"
           label=""
-          bottomSheetHeader={showConditionalDropdownList() ? 'Select Location of tower': 'Select Location'}
+          bottomSheetHeader={showConditionalDropdownList() ? 'Select Location of tower' : 'Select Location'}
           pickerOptions={showConditionalDropdownList() ? locationOfTowerDropdownList : locationDropdownList}
           value={showConditionalDropdownList() ? locationOfTowerDropdownList[0] : locationDropdownList[0]}
           // onChange={formikData.setFieldValue}
@@ -119,6 +120,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
           style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
         />
       </ScrollView>
+      <IMButton id="send-request" title='Send request' styles={{ container: styles.btnContainer }} />
     </View>
   );
 };
