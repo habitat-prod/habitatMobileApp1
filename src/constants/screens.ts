@@ -6,7 +6,7 @@ export enum NAVIGATION {
   SecurityApprovalsStackNav = 'SecurityApprovalsStackNav',
   HazardAreaStackNav = 'HazardAreaStackNav',
   AmbulanceAreaStackNav = 'AmbulanceAreaStackNav',
-  
+
 }
 
 export enum MaintainanceAreasScreens {
@@ -19,4 +19,5 @@ export enum MaintainanceAreasScreens {
   LogDetailsArea = 'LogDetailsArea',
   MaintainanceCardDetails = "MaintainanceCardDetails",
   MaintainanceListDetails = "MaintainanceListDetails",
+  NotificationDetails = 'NotificationDetails',
 }
