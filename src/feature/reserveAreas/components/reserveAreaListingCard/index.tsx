@@ -24,7 +24,7 @@ const ReserveAreaListingCard: React.FC<IReserveAreaListingCard> = (props) => {
         <Text style={styles.title}>{props.title}</Text>
         <SimpleArrowRight />
       </View>
-      <Image source={require('../../../../assets/png/reserveCommonAreas.png')}
+      <Image source={require('../../../../assets/png/basketball.png')}
         style={styles.imageStyle}
       />
     </TouchableOpacity>

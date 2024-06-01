@@ -25,6 +25,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     },
     imageStyle: {
       height: hp('20%'),
+      width: wp('34.5%'),
       marginTop: wp('3.33%'),
       borderRadius: wp('4.44%'),
     },

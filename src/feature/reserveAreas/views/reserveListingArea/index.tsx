@@ -9,61 +9,116 @@ import ReserveAreaListingCard from '../../components/reserveAreaListingCard';
 import IMIcon from '../../../../components/IMIcon';
 import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';
 import { HBStackParamList } from '../../../../navigation/rootNavigation';
+import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
 import useStyles from './styles';
-
-const reserveListingCardData = [
-  {
-    title: 'Table Tennis',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Tennis court',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Basketball court',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Badminton court',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Fooseball table',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Swimming pool',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Pool table',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Party hall',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  },
-  {
-    title: 'Cricket pitch',
-    imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-    onClick: () => { },
-  }
-];
-
 
 const ReserveListingArea: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+
+  const reserveListingCardData = [
+    {
+      title: 'Table Tennis',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Table Tennis',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Tennis court',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Tennis court',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Basketball court',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Basketball court',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Badminton court',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Badminton court',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Fooseball table',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Fooseball table',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Swimming pool',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Swimming pool',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Pool table',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Pool table',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Party hall',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Party hall',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    },
+    {
+      title: 'Cricket pitch',
+      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
+        screen: MaintainanceAreasScreens.ReserveDetailsArea,
+        params: {
+          title: 'Cricket pitch',
+          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        },
+      }),
+    }
+  ];
+
 
   return (
     <SafeAreaView style={styles.container}>

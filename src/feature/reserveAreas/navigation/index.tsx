@@ -2,10 +2,15 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaintainanceAreasScreens } from '../../../constants/screens';
 import ReserveListingArea from '../views/reserveListingArea';
+import ReserveDetailsArea from '../views/reserveDetailsArea';
 
 
 export type ReserveCommonAreaList = {
   ReserveCommonAreas: undefined;
+  ReserveDetailsArea: {
+    title: string;
+    imageUrl: string;
+  };
 };
 
 const ReserveCommonAreaStackNav: React.FC = () => {
@@ -14,6 +19,7 @@ const ReserveCommonAreaStackNav: React.FC = () => {
   return (
     <StackNav.Navigator screenOptions={{ headerShown: false }}>
       <StackNav.Screen name={MaintainanceAreasScreens.ReserveCommonAreas} component={ReserveListingArea} />
+      <StackNav.Screen name={MaintainanceAreasScreens.ReserveDetailsArea} component={ReserveDetailsArea} />
     </StackNav.Navigator>
   );
 };
