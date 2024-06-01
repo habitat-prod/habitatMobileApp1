@@ -72,7 +72,6 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     inputStyle: {
       minHeight: hp('17.5%'),
       paddingHorizontal: wp('2.22%'),
-      backgroundColor: 'pink'
     },
     labelContainer: {
       top: 0,
