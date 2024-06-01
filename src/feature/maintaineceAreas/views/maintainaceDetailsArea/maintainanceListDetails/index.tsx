@@ -58,18 +58,20 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <IMIcon
-        testId='icon'
-        onClick={defaultNavigation.goBack}
-        size='large'
-        iconSvg={<ArrowBackFilled style={styles.iconSvg} />}
-        containerStyle={styles.iconContainer}
-      />
+      <View style={styles.subContainer}>
+        <IMIcon
+          testId='icon'
+          onClick={defaultNavigation.goBack}
+          size='medium'
+          iconSvg={<ArrowBackFilled style={styles.iconSvg} />}
+        />
+        <Text style={styles.titleContainer}>{props.route.params.title}</Text>
+      </View>
       <Image
         source={require('../../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
       />
-      <Text style={styles.titleContainer}>{props.route.params.title}</Text>
+      {/* <Text style={styles.titleContainer}>{props.route.params.title}</Text> */}
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         <IMSinglePicker
           testId="singlePicker"

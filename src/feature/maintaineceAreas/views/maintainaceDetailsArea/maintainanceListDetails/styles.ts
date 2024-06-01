@@ -7,6 +7,13 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       flex: 1,
       backgroundColor: 'white',
     },
+    subContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: wp('4.44%'),
+      gap: wp('2.22%'),
+    },
     textContainer: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -47,17 +54,9 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       position: 'relative',
     },
     titleContainer: {
-      backgroundColor: 'black',
-      textAlign: 'center',
-      alignSelf: 'center',
-      justifyContent: 'center',
-      paddingVertical: wp('3.33%'),
-      paddingHorizontal: wp('6.66%'),
-      borderRadius: wp('2.77%'),
-      position: 'absolute',
-      top: hp('30.12%'),
-      zIndex: 1,
-      color: 'white'
+      fontSize: 14,
+      fontWeight: '500',
+      color: 'black',
     },
     scrollviewContainer: {
       paddingVertical: wp('11.88%'),

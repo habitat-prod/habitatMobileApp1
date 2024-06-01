@@ -3,6 +3,7 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import IMIcon from '../../../../../components/IMIcon';
 import ArrowBackFilled from '../../../../../assets/svgv1/ArrowBackFilled';
@@ -29,19 +30,20 @@ const MaintainanceCardDetails: React.FC<IMaintainanceCardDetails> = (props) => {
   );
 
   return (
-    <View>
-      <IMIcon
-        testId='icon'
-        onClick={defaultNavigation.goBack}
-        size='large'
-        iconSvg={<ArrowBackFilled style={styles.iconSvg} />}
-        containerStyle={styles.iconContainer}
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.subContainer}>
+        <IMIcon
+          testId='icon'
+          onClick={defaultNavigation.goBack}
+          size='medium'
+          iconSvg={<ArrowBackFilled style={styles.iconSvg} />}
+        />
+        <Text style={styles.titleContainer}>{props.route.params.title}</Text>
+      </View>
       <Image
         source={require('../../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
       />
-      <Text style={styles.titleContainer}>{props.route.params.title}</Text>
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         {renderLabelPair()}
         {renderLabelPair()}
@@ -56,7 +58,7 @@ const MaintainanceCardDetails: React.FC<IMaintainanceCardDetails> = (props) => {
         {renderLabelPair()}
         {renderLabelPair()}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

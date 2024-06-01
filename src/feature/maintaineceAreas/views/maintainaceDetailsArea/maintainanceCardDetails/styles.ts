@@ -3,6 +3,18 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'white',
+      display: 'flex',
+    },
+    subContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: wp('4.44%'),
+      gap: wp('2.22%'),
+    },
     textContainer: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -21,18 +33,6 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       color: 'black',
       paddingTop: wp('4.44%'),
     },
-    iconContainer: {
-      position: 'absolute',
-      backgroundColor: 'white',
-      left: wp('4.16%'),
-      top: hp('2.25%'),
-      zIndex: 1,
-      borderWidth: 1,
-      paddingHorizontal: wp('2.22%'),
-      paddingVertical: wp('0.55%'),
-      borderRadius: wp('5.55%'),
-      alignItems: 'center'
-    },
     iconSvg: {
       height: wp('11.11%'),
       width: wp('11.11%'),
@@ -40,23 +40,14 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     imageContainer: {
       width: '100%',
       height: wp('68.05%'),
-      position: 'relative',
     },
     titleContainer: {
-      backgroundColor: 'black',
-      textAlign: 'center',
-      alignSelf: 'center',
-      justifyContent: 'center',
-      paddingVertical: wp('3.33%'),
-      paddingHorizontal: wp('6.66%'),
-      borderRadius: wp('2.77%'),
-      position: 'absolute',
-      top: hp('30.12%'),
-      zIndex: 1,
-      color: 'white'
+      fontSize: 14,
+      fontWeight: '500',
+      color: 'black'
     },
     scrollviewContainer: {
-      paddingTop: wp('13.88%'),
+      paddingTop: wp('2%'),
     },
   });
 
