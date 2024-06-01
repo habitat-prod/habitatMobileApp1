@@ -10,6 +10,7 @@ export enum NAVIGATION {
 }
 
 export enum MaintainanceAreasScreens {
+  HomeProfile = 'HomeProfile',
   MaintainanceAreas = 'MaintainanceAreas',
   ParkingAreas = 'ParkingAreas',
   ReserveCommonAreas = 'ReserveCommonAreas',

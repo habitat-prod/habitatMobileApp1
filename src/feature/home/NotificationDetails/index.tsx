@@ -4,9 +4,9 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
 
-import IMIcon from '../../../../components/IMIcon';
-import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';
-import { HBStackParamList } from '../../../../navigation/rootNavigation';
+import IMIcon from '../../../components/IMIcon';
+import ArrowBackFilled from '../../../assets/svg/ArrowBackFilled';
+import { HBStackParamList } from '../../../navigation/rootNavigation';
 import NotificationDetailsCard from './notificationDetailsCard';
 import useStyles from './styles';
 

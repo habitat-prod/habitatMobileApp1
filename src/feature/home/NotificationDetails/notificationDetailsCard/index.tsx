@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import IMIcon from '../../../../../components/IMIcon';
-import InfoOutlined from '../../../../../assets/svg/InfoOutlined';
-import IMButton from '../../../../../components/IMButton';
+import IMIcon from '../../../../components/IMIcon';
+import InfoOutlined from '../../../../assets/svg/InfoOutlined';
+import IMButton from '../../../../components/IMButton';
 import useStyles from './styles';
 
 interface INotificationDetailsCardProps {

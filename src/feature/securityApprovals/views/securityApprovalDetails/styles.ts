@@ -8,11 +8,6 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       padding: wp('3.33%'),
       backgroundColor: 'white'
     },
-    subContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
     textStyle: {
       fontSize: 15,
       fontWeight: '700',

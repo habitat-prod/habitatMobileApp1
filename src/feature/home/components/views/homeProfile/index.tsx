@@ -2,13 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 
-import { Text, ScrollView, SafeAreaView } from 'react-native';
+import { Text, ScrollView, SafeAreaView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import HomeProfileCard from '../../HomeProfileCard';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HBStackParamList } from '../../../../../navigation/rootNavigation';
 import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constants/screens';
 import useStyles from './styles';
+import BellOutlined from '../../../../../assets/svgv1/BellOutlined';
+import IMIcon from '../../../../../components/IMIcon';
 
 const HomeProfile: React.FC = () => {
   const theme = useTheme();
@@ -67,8 +69,17 @@ const HomeProfile: React.FC = () => {
     },
   ];
 
+
+  const handleBellIcon = () => (
+    defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
+      screen: MaintainanceAreasScreens.NotificationDetails,
+      params: {}
+    }
+    ));
+
   return (
     <SafeAreaView style={styles.container}>
+      <IMIcon testId='Bell' iconSvg={<BellOutlined />} onClick={handleBellIcon} containerStyle={styles.subContainer} />
       <Text style={styles.textStyle}>Property Management Services</Text>
       <ScrollView contentContainerStyle={styles.cardsContainer}>
         {homeProfileCardData.map((item, index) => (

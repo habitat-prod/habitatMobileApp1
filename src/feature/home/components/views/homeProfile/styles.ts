@@ -8,13 +8,15 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       marginHorizontal: wp('2.22%'),
       gap: wp('3.33%'),
     },
-    textStyle: {
+    subContainer: {
       display: 'flex',
-      alignSelf: 'flex-start',
-      paddingTop: '10%',
+      alignSelf: 'flex-end',
+      paddingTop: wp('4.44%'),
+    },
+    textStyle: {
+      fontSize: 15,
+      fontWeight: '700',
       color: 'black',
-      fontSize: 14,
-      fontWeight: '500',
     },
     cardsContainer: {
       flexDirection: 'row',
