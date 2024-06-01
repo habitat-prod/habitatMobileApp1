@@ -5,13 +5,13 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import ReserveAreaListingCard from '../../components/maintainanceListingCard';
+import ReserveAreaListingCard from '../../components/reserveAreaListingCard';
 import IMIcon from '../../../../components/IMIcon';
 import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';
 import { HBStackParamList } from '../../../../navigation/rootNavigation';
 import useStyles from './styles';
 
-const maintainanceListingCardData = [
+const reserveListingCardData = [
   {
     title: 'Table Tennis',
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -60,7 +60,7 @@ const maintainanceListingCardData = [
 ];
 
 
-const ReserveAreaDetails: React.FC = () => {
+const ReserveListingArea: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
@@ -71,9 +71,8 @@ const ReserveAreaDetails: React.FC = () => {
         <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
         <Text style={styles.textStyle}> Clubhouse Management </Text>
       </View>
-
       <ScrollView contentContainerStyle={styles.cardsContainer}>
-        {maintainanceListingCardData.map((item, index) => (
+        {reserveListingCardData.map((item, index) => (
           <ReserveAreaListingCard
             key={index}
             title={item.title}
@@ -86,4 +85,4 @@ const ReserveAreaDetails: React.FC = () => {
   );
 };
 
-export default ReserveAreaDetails;
+export default ReserveListingArea;

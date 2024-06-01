@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaintainanceAreasScreens } from '../../../constants/screens';
-import ParkingAreaDetails from '../views/reserveAreaDetails';
+import ReserveListingArea from '../views/reserveListingArea';
 
 
 export type ReserveCommonAreaList = {
@@ -13,7 +13,7 @@ const ReserveCommonAreaStackNav: React.FC = () => {
 
   return (
     <StackNav.Navigator screenOptions={{ headerShown: false }}>
-      <StackNav.Screen name={MaintainanceAreasScreens.ReserveCommonAreas} component={ParkingAreaDetails} />
+      <StackNav.Screen name={MaintainanceAreasScreens.ReserveCommonAreas} component={ReserveListingArea} />
     </StackNav.Navigator>
   );
 };
