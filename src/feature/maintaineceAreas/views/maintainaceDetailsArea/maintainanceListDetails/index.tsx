@@ -15,19 +15,27 @@ import IMButton from '../../../../../components/IMButton';
 import useStyles from './styles';
 
 const locationDropdownList = [
-  { label: 'Location', value: 'location' },
+  { label: 'Location 1', value: 'location1' },
+  { label: 'Location 2', value: 'location2', },
+  { label: 'Location 3', value: 'location3', },
+  { label: 'Location 4', value: 'location4', },
+  { label: 'Location 5', value: 'location5', },
+  { label: 'Location 6', value: 'location6', },
 ];
 
 const locationOfTowerDropdownList = [
   { label: 'Location of tower', value: 'location' },
+  { label: 'Keshav Vyas', value: 'keshav' },
 ];
 
 const locationOfFloorDropdownList = [
   { label: 'Location of floor', value: 'floor' },
+  { label: 'Shreyas', value: 'location' },
 ];
 
 const problemDropdownList = [
   { label: 'Problem', value: 'problem' },
+  { label: 'Vishwas', value: 'location' },
 ];
 
 export interface IMaintainanceListDetails {
