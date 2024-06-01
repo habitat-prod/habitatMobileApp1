@@ -7,6 +7,8 @@ import MaintainanceListingCard from '../../components/maintainanceListingCard';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HBStackParamList } from '../../../../navigation/rootNavigation';
 import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
+import IMIcon from '../../../../components/IMIcon';
+import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';
 import useStyles from './styles';
 
 const MaintainaceDetailsArea: React.FC = () => {
@@ -115,7 +117,10 @@ const MaintainaceDetailsArea: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.textStyle}> All Spaces </Text>
+      <View style={styles.subContainer}>
+        <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
+        <Text style={styles.textStyle}> All Spaces </Text>
+      </View>
       <View style={styles.cardsContainer}>
         {maintainanceListingCardData.map((item, index) => (
           <MaintainanceListingCard

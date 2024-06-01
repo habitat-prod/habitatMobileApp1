@@ -9,11 +9,15 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       backgroundColor: 'white',
       paddingBottom: wp('4.44%'),
     },
+    subContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      paddingVertical: wp('3.33%'),
+    },
     textStyle: {
       fontSize: 15,
       fontWeight: '700',
       color: 'black',
-      padding: wp('4.44%'),
     },
     cardsContainer: {
       flexDirection: 'row',
