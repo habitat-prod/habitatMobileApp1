@@ -22,7 +22,7 @@ const SecurityApprovalListingCard: React.FC<ISecurityApprovalListingCardProps> =
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: props.imageUri }}
+        source={require('../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
       />
       <Text style={styles.textStyle}>{props.title}</Text>

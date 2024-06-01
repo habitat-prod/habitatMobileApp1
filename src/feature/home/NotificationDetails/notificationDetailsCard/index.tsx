@@ -24,11 +24,13 @@ const NotificationDetailsCard: React.FC<INotificationDetailsCardProps> = (props)
     </View>
   );
 
+  console.log('images', props.imageUri);
+
   return (
     <View style={styles.container}>
       <View style={styles.imageTextContainer}>
         <Image
-          source={{ uri: props.imageUri }}
+          source={require('../../../../assets/png/reserveCommonAreas.png')}
           style={styles.imageContainer}
         />
         <Text style={styles.textStyle}>{props.title}</Text>

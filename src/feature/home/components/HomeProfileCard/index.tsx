@@ -18,13 +18,15 @@ const HomeProfileCard: React.FC<IHomeProfileCard> = (props) => {
   const styles = useStyles(theme);
   const { t } = useTranslation('customer');
 
+  console.log('imagehome', props.imageUri);
+
   return (
     <TouchableOpacity onPress={props.onClick} style={[styles.cardContainerStyles, props.cardStyle]}>
       <View style={styles.subContainer}>
         <Text numberOfLines={2} style={styles.title}>{props.title}</Text>
         <ArrowRight />
       </View>
-      <Image source={{ uri: props.imageUri, }}
+      <Image source={require('../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageStyle}
       />
     </TouchableOpacity>

@@ -16,13 +16,15 @@ const ReserveAreaListingCard: React.FC<IReserveAreaListingCard> = (props) => {
   const theme = useTheme();
   const styles = useStyles(theme);
 
+  console.log('images', props.imageUri);
+
   return (
     <TouchableOpacity onPress={props.onClick} style={[styles.cardContainerStyles, props.cardStyle]}>
       <View style={styles.subContainer}>
         <Text style={styles.title}>{props.title}</Text>
         <SimpleArrowRight />
       </View>
-      <Image source={{ uri: props.imageUri }}
+      <Image source={require('../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageStyle}
       />
     </TouchableOpacity>

@@ -34,8 +34,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     },
     imageContainer: {
       width: wp('9%'),
-      height: hp('4.5%'),
-      borderRadius: wp('6.66%'),
+      height: wp('9%'),
+      borderRadius: wp('9%'),
     },
     denyBtnContainer: {
       borderColor: '#4682B4',

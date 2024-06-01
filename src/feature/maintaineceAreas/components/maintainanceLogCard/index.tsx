@@ -16,9 +16,11 @@ const MaintainanceLogCard: React.FC<IMaintainanceLogCard> = (props) => {
   const theme = useTheme();
   const styles = useStyles(theme);
 
+  console.log('image', props.imageUri);
+
   return (
     <TouchableOpacity onPress={props.onClick} style={[styles.cardContainerStyles, props.cardStyle]}>
-      <Image source={{ uri: props.imageUri, }}
+      <Image source={require('../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageStyle}
       />
       <Text numberOfLines={1} style={styles.title}>{props.title}</Text>

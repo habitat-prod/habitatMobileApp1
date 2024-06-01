@@ -38,7 +38,7 @@ const MaintainanceCardDetails: React.FC<IMaintainanceCardDetails> = (props) => {
         containerStyle={styles.iconContainer}
       />
       <Image
-        source={{ uri: props.route.params.imageUrl }}
+        source={require('../../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
       />
       <Text style={styles.titleContainer}>{props.route.params.title}</Text>
