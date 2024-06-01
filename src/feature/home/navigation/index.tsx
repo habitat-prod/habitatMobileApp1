@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { MaintainanceAreasScreens } from '../../../constants/screens';
 import NotificationDetails from '../../home/NotificationDetails';
-import HomeProfile from '../components/views/homeProfile';
+import HomeProfile from '../views/homeProfile';
 
 
 export type HomeList = {

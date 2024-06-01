@@ -5,13 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import HomeProfileCard from '../../HomeProfileCard';
+import HomeProfileCard from '../../components/HomeProfileCard';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { HBStackParamList } from '../../../../../navigation/rootNavigation';
-import { MaintainanceAreasScreens, NAVIGATION } from '../../../../../constants/screens';
+import { HBStackParamList } from '../../../../navigation/rootNavigation';
+import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
+import BellOutlined from '../../../../assets/svgv1/BellOutlined';
+import IMIcon from '../../../../components/IMIcon';
 import useStyles from './styles';
-import BellOutlined from '../../../../../assets/svgv1/BellOutlined';
-import IMIcon from '../../../../../components/IMIcon';
 
 const HomeProfile: React.FC = () => {
   const theme = useTheme();
