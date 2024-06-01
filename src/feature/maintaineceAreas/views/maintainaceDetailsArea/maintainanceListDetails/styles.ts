@@ -73,9 +73,6 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       minHeight: hp('17.5%'),
       paddingHorizontal: wp('2.22%'),
     },
-    labelContainer: {
-      top: 0,
-    },
     pickerContainer: {
       minHeight: hp('6.25%'),
       borderRadius: wp('2.77%'),

@@ -158,7 +158,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         <Text style={styles.subtitleText}>You can also describe your problem?</Text>
         <IMTextInput
           testId="ihbCustomerDetails-customerName"
-          label=""
+          label="Remarks"
           placeholder='What do you need the maintenance for?'
           name="remarks"
           type="non-masked"
@@ -167,7 +167,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
           onFocus={formikData.setFieldTouched}
           onChange={formikData.setFieldValue}
           errorText={formikData.touched.remarks ? formikData.errors.remarks : ''}
-          style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
+          style={{ container: styles.inputStyle }}
         />
       </ScrollView>
       <IMButton
