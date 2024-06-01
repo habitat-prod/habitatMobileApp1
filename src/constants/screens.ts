@@ -21,5 +21,7 @@ export enum MaintainanceAreasScreens {
   MaintainanceCardDetails = "MaintainanceCardDetails",
   MaintainanceListDetails = "MaintainanceListDetails",
   NotificationDetails = 'NotificationDetails',
-  ReserveDetailsArea = 'ReserveDetailsArea'
+  ReserveDetailsArea = 'ReserveDetailsArea',
+  AddReserveParkingDetails = 'AddReserveParkingDetails',
+  ReservedConfirmation = 'ReservedConfirmation'
 }
