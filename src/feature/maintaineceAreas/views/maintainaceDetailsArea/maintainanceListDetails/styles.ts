@@ -4,8 +4,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const useStyles = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     container: {
-      backgroundColor: 'white',
       flex: 1,
+      backgroundColor: 'white',
     },
     textContainer: {
       display: 'flex',

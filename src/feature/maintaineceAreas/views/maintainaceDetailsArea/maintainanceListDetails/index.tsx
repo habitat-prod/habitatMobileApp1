@@ -3,6 +3,7 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import IMIcon from '../../../../../components/IMIcon';
 import ArrowBackFilled from '../../../../../assets/svgv1/ArrowBackFilled';
@@ -56,7 +57,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <IMIcon
         testId='icon'
         onClick={defaultNavigation.goBack}
@@ -129,7 +130,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         />
       </ScrollView>
       <IMButton id="send-request" title='Send request' styles={{ container: styles.btnContainer }} />
-    </View>
+    </SafeAreaView>
   );
 };
 

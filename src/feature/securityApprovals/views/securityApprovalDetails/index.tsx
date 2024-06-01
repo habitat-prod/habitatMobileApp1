@@ -1,8 +1,9 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import {  Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SecurityApprovalTabs from '../../components/securityApprovalTabs';
 import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';

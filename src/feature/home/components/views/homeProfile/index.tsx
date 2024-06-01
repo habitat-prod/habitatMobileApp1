@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Text, ScrollView, SafeAreaView, View } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import HomeProfileCard from '../../HomeProfileCard';
 import { StackNavigationProp } from '@react-navigation/stack';

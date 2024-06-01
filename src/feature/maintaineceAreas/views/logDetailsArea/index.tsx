@@ -1,8 +1,9 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import LogAreaTabs from '../../components/logAreaTabs';
 import IMIcon from '../../../../components/IMIcon';

@@ -1,7 +1,8 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MaintainanceListingCard from '../../components/maintainanceListingCard';
 import { StackNavigationProp } from '@react-navigation/stack';
