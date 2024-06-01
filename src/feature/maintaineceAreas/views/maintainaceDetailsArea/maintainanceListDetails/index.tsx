@@ -1,7 +1,8 @@
 import React from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native'
+import { useFormik } from 'formik';;
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,13 +11,14 @@ import ArrowBackFilled from '../../../../../assets/svgv1/ArrowBackFilled';
 import { HBStackParamList } from '../../../../../navigation/rootNavigation';
 import { MaintainaceAreaList } from '../../../navigation';
 import { MaintainanceAreasScreens } from '../../../../../constants/screens';
-import { IMSinglePicker } from '../../../../../components/IMPicker';
+import { IMSinglePicker, IPickerOption } from '../../../../../components/IMPicker';
 import IMTextInput from '../../../../../components/IMInput/IMTextInput';
 import IMButton from '../../../../../components/IMButton';
+import MaintainanceListDetailsValidationSchema from './helper';
 import useStyles from './styles';
 
 const locationDropdownList = [
-  { label: 'Location 1', value: 'location1' },
+  { label: 'Location', value: 'location1' },
   { label: 'Location 2', value: 'location2', },
   { label: 'Location 3', value: 'location3', },
   { label: 'Location 4', value: 'location4', },
@@ -50,6 +52,21 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   const routeParams = props.route.params.title;
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
+  const formikData = useFormik({
+    initialValues: {
+      location: {} as IPickerOption,
+      locationOfTower: {} as IPickerOption,
+      locationOfFloor: {} as IPickerOption,
+      problem: {} as IPickerOption,
+      remarks: '',
+    },
+    validationSchema: MaintainanceListDetailsValidationSchema,
+    validateOnMount: true,
+    onSubmit: (values) => { 
+      //TODO: will do the api call here
+    },
+  });
+
   const showConditionalDropdownList = () => {
     if (routeParams === 'Stairs') return true;
     if (routeParams === 'Elevators') return true;
@@ -71,67 +88,95 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         source={require('../../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
       />
-      {/* <Text style={styles.titleContainer}>{props.route.params.title}</Text> */}
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
-        <IMSinglePicker
-          testId="singlePicker"
-          name="status"
-          label=""
-          bottomSheetHeader={showConditionalDropdownList() ? 'Select Location of tower' : 'Select Location'}
-          pickerOptions={showConditionalDropdownList() ? locationOfTowerDropdownList : locationDropdownList}
-          value={showConditionalDropdownList() ? locationOfTowerDropdownList[0] : locationDropdownList[0]}
-          // onChange={formikData.setFieldValue}
-          // onFocus={formikData.setFieldTouched}
-          styles={{ pickerContainer: styles.pickerContainer }}
-        // errorText={
-        //   formikData.touched.status?.value && formikData.errors.status?.value ? t('deal:errorMessage.status') : ''
-        // }
-        />
+        {!showConditionalDropdownList() && (
+          <IMSinglePicker
+            testId="singlePicker"
+            name="location"
+            label=""
+            placeholder='Location'
+            bottomSheetHeader={'Select Location'}
+            pickerOptions={locationDropdownList}
+            value={formikData.values.location}
+            onChange={formikData.setFieldValue}
+            onFocus={formikData.setFieldTouched}
+            styles={{ pickerContainer: styles.pickerContainer }}
+            errorText={
+              formikData.touched.location?.value ? formikData.errors.location?.value : ''
+            }
+          />
+        )}
         {showConditionalDropdownList() && (
           <IMSinglePicker
             testId="singlePicker"
-            name="status"
+            name="locationOfTower"
+            label=""
+            bottomSheetHeader={'Select Location of tower'}
+            placeholder='Location of tower'
+            pickerOptions={locationOfTowerDropdownList}
+            value={formikData.values.locationOfTower}
+            onChange={formikData.setFieldValue}
+            onFocus={formikData.setFieldTouched}
+            styles={{ pickerContainer: styles.pickerContainer }}
+            errorText={
+              formikData.touched.locationOfTower?.value ? formikData.errors.locationOfTower?.value : ''
+            }
+          />
+        )}
+        {showConditionalDropdownList() && (
+          <IMSinglePicker
+            testId="singlePicker"
+            name="locationOfFloor"
+            placeholder='Location of floor'
             label=""
             bottomSheetHeader='Select Location of floor'
             pickerOptions={locationOfFloorDropdownList}
-            value={locationOfFloorDropdownList[0]}
-            // onChange={formikData.setFieldValue}
-            // onFocus={formikData.setFieldTouched}
+            value={formikData.values.locationOfFloor}
+            onChange={formikData.setFieldValue}
+            onFocus={formikData.setFieldTouched}
             styles={{ pickerContainer: styles.pickerContainer }}
-          // errorText={
-          //   formikData.touched.status?.value && formikData.errors.status?.value ? t('deal:errorMessage.status') : ''
-          // }
+            errorText={
+              formikData.touched.locationOfFloor?.value ? formikData.errors.locationOfFloor?.value : ''
+            }
           />
         )}
         <IMSinglePicker
           testId="singlePicker"
-          name="status"
+          name="problem"
           bottomSheetHeader='Select Problem'
+          placeholder='Problem'
           label=""
           pickerOptions={problemDropdownList}
-          value={problemDropdownList[0]}
-          // onChange={formikData.setFieldValue}
-          // onFocus={formikData.setFieldTouched}
+          value={formikData.values.problem}
+          onChange={formikData.setFieldValue}
+          onFocus={formikData.setFieldTouched}
           styles={{ pickerContainer: styles.pickerContainer }}
-        // errorText={
-        //   formikData.touched.status?.value && formikData.errors.status?.value ? t('deal:errorMessage.status') : ''
-        // }
+          errorText={
+            formikData.touched.problem?.value ? formikData.errors.problem?.value : ''
+          }
         />
         <Text style={styles.subtitleText}>You can also describe your problem?</Text>
         <IMTextInput
           testId="ihbCustomerDetails-customerName"
           label=""
           placeholder='What do you need the maintenance for?'
-          name="customerName"
+          name="remarks"
           type="non-masked"
-          value=""
-          // onFocus={formikData.setFieldTouched}
-          // onChange={formikData.setFieldValue}
-          // errorText={formikData.touched.customerName ? formikData.errors.customerName : ''}
+          multiline
+          value={formikData.values.remarks}
+          onFocus={formikData.setFieldTouched}
+          onChange={formikData.setFieldValue}
+          errorText={formikData.touched.remarks ? formikData.errors.remarks : ''}
           style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
         />
       </ScrollView>
-      <IMButton id="send-request" title='Send request' styles={{ container: styles.btnContainer }} />
+      <IMButton
+        id="send-request"
+        title='Send request'
+        disabled={!formikData.isValid}
+        onClick={formikData.handleChange}
+        styles={{ container: styles.btnContainer }}
+      />
     </SafeAreaView>
   );
 };
