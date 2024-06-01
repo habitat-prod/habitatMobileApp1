@@ -16,7 +16,7 @@ const useStyles = (theme: ReactNativePaper.Theme, variant: ButtonVariant, size: 
       borderWidth: variant === 'outlined' ? wp('0.277') : 0,
       borderRadius: wp('1.11%'),
       borderColor: disabled ? theme.Palette.grey['A800'] : theme.Palette.IMPrimary.border,
-      backgroundColor: variant === 'contained' ? theme.Palette.IMPrimary.main : 'transparent',
+      backgroundColor: variant === 'contained' ? '#4682B4' : 'transparent',
       ...(disabled && variant === 'contained' && { backgroundColor: theme.Palette.IMActions.disabledBackground }),
       ...(disabled && variant === 'outlined' && { borderColor: theme.Palette.IMActions.disabledBackground }),
     },

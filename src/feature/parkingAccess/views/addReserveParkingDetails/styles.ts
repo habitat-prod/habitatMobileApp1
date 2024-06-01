@@ -28,13 +28,11 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       display: 'flex',
       width: '94%',
       alignSelf: 'center',
-      backgroundColor: '#4682B4',
       marginVertical: wp('3.33%'),
     },
     btnTitle: {
       fontSize: 15,
       fontWeight: '600',
-      color: 'white',
     },
     inputStyle: {
       height: hp('5.75%'),
