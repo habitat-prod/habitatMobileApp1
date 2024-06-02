@@ -25,14 +25,53 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       flexDirection: 'row',
     },
     btnContainer: {
-      backgroundColor: '#4682B4', 
       width: wp('40%'),
     },
     btnTitle: {
       fontSize: 15,
       fontWeight: '600',
       color: 'white',
-    }
+    },
+    itemContainer: {
+      width: wp('45%'),
+      borderWidth: wp('0.278%'),
+      borderColor: '#D1D1D1',
+      height: hp('9%'),
+      backgroundColor: 'transparent',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    selectedSlot: {
+      borderColor: '#000000',
+      backgroundColor: '#000000'
+    },
+    availableSlot: {
+      borderColor: '#06C368',
+      backgroundColor: '#06C368'
+    },
+    reservedSlot: {
+      backgroundColor: '#4682B4',
+      borderColor: '#4682B4',
+    },
+    rightContainer: {
+      borderRightWidth: 0,
+    },
+    leftContainer: {
+      borderLeftWidth: 0,
+    },
+    btnText: {
+      color: 'white'
+    },
+    flatListContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'row',
+      borderTopWidth: wp('0.138%'),
+      borderBottomWidth: wp('0.138%'),
+    },
+    rightIcon: {
+      paddingBottom: wp('5.4%'),
+    },
   });
 
 export default useStyles;

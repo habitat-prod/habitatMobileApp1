@@ -8,9 +8,11 @@ import ReservedConfirmation from '../views/reservedDetails';
 
 export type ParkingAreaList = {
   ParkingAreas: undefined;
-  AddReserveParkingDetails: undefined;
+  AddReserveParkingDetails: {
+    selectedSlot: string
+  };
   ReservedConfirmation: {
-    slotNumber: string;
+    selectedSlot: string;
   };
 };
 

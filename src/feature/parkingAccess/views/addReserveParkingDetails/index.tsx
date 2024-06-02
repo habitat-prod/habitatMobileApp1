@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFormik } from 'formik';
 
@@ -13,11 +13,18 @@ import IMButton from '../../../../components/IMButton';
 import IMTextInput from '../../../../components/IMInput/IMTextInput';
 import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
 import { addReserveParkingDetailsSchema } from './helper';
+import { ParkingAreaList } from '../../navigation';
 import useStyles from './styles';
 
-const AddReserveParkingDetails: React.FC = () => {
+interface IAddReserveParkingDetails {
+  navigation: StackNavigationProp<ParkingAreaList>;
+  route: RouteProp<ParkingAreaList, MaintainanceAreasScreens.AddReserveParkingDetails>;
+}
+
+const AddReserveParkingDetails: React.FC<IAddReserveParkingDetails> = (props) => {
   const theme = useTheme();
   const styles = useStyles(theme);
+  const routeParams = props.route.params;
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   const formikData = useFormik({
@@ -35,7 +42,9 @@ const AddReserveParkingDetails: React.FC = () => {
   const handleSaveBtn = () => {
     defaultNavigation.navigate(NAVIGATION.ParkingAreaStackNav, {
       screen: MaintainanceAreasScreens.ReservedConfirmation,
-      params: {},
+      params: {
+        selectedSlot: routeParams.selectedSlot,
+      },
     })
   };
 
@@ -80,7 +89,8 @@ const AddReserveParkingDetails: React.FC = () => {
           label=""
           name="parkingSpot"
           type="non-masked"
-          value={formikData.values.parkingSpot}
+          disabled
+          value={routeParams.selectedSlot}
           onFocus={formikData.setFieldTouched}
           onChange={formikData.setFieldValue}
           errorText={formikData.touched.parkingSpot ? formikData.errors.parkingSpot : ''}

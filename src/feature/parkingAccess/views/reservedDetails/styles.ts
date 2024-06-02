@@ -32,6 +32,9 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       fontSize: 15,
       fontWeight: '600',
       color: 'white',
+    },
+    text: {
+      textAlign: 'center',
     }
   });
 
