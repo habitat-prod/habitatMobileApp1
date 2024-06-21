@@ -14,7 +14,7 @@ const useStyle = (theme: ReactNativePaper.Theme, isFocused: boolean, isDisabled:
       ...(variant === 'outlined' && { borderWidth: wp('0.27%') }),
       ...(variant === 'standard' && { borderBottomWidth: wp('0.27%') }),
       borderColor: theme.Palette.IMOther.stroke,
-      ...(isFocused && { borderColor: theme.Palette.IMPrimary.main }),
+      ...(isFocused && { borderColor: theme.Palette.IMInfo.main }),
       borderRadius: wp('1.11%'),
       ...(isDisabled && { opacity: 0.5 }),
     },
@@ -38,7 +38,7 @@ const useStyle = (theme: ReactNativePaper.Theme, isFocused: boolean, isDisabled:
       ...theme.typography.paragraph.p4,
       paddingHorizontal: wp('1.11%'),
       backgroundColor: theme.Palette.background,
-      color: isFocused ? theme.Palette.IMPrimary.main : theme.Palette.text.secondary,
+      color: isFocused ? theme.Palette.IMInfo.main : theme.Palette.text.secondary,
     },
     helpTitleStyle: {
       ...theme.typography.paragraph.p4,

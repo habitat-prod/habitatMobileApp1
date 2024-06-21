@@ -1,4 +1,5 @@
 export enum NAVIGATION {
+  BootstrapStackNav = 'BootstrapStackNav',
   HomeProfileNav = 'HomeProfileNav',
   MaintainaceAreaStackNav = 'MaintainaceAreaStackNav',
   ParkingAreaStackNav = 'ParkingAreaStackNav',
@@ -24,4 +25,9 @@ export enum MaintainanceAreasScreens {
   ReserveDetailsArea = 'ReserveDetailsArea',
   AddReserveParkingDetails = 'AddReserveParkingDetails',
   ReservedConfirmation = 'ReservedConfirmation'
+}
+
+export enum BootstrapNavigationScreens {
+  Login = 'Login',
+  VerifyOTP = 'VerifyOTP',
 }

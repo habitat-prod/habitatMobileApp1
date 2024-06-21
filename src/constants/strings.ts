@@ -25,3 +25,5 @@ export const defaultPageNumber = 0;
 export const defaultCursorValue = '0';
 export const maxPageSize = 1000;
 export const pinCodeDigits = 6;
+
+export const defaultOTPTimeout = 30000;
