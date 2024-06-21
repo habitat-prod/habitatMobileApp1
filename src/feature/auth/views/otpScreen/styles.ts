@@ -25,7 +25,7 @@ const useStyles = (theme: any) =>
         paddingTop: hp('15%'),
     },
     labelTextStyle: {
-        fontSize: wp('11.67%'),
+        fontSize: wp('10.67%'),
         textAlign: 'left',
         paddingTop: wp('1.11%'),
         color: theme.Palette.text.primary,

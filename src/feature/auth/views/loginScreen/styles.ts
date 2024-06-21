@@ -18,8 +18,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
             gap: wp('0.55%'),
         },
         btnContainer: {
-            width: 'auto', 
-            backgroundColor: '#3266AE', 
+            width: 'auto',
+            backgroundColor: '#3266AE',
             height: hp('7%'),
         },
         callingPhone: {
@@ -32,16 +32,16 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
             marginBottom: hp('3%'),
         },
         labelTextStyle: {
-            fontSize: wp('11.67%'),
+            fontSize: wp('10.67%'),
             textAlign: 'left',
-            padding: wp('2.22%'),
+            paddingTop: wp('2.22%'),
             color: theme.Palette.text.primary,
             fontWeight: '700',
         },
         subLabelText: {
-            fontSize: wp('4.44%'),
+            fontSize: wp('5.2%'),
             // textAlign: 'left',
-            padding: wp('2.22%'),
+            paddingTop: wp('2.22%'),
             color: theme.Palette.text.primary,
             fontWeight: '400',
         },
