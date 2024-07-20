@@ -10,6 +10,15 @@ import { HBStackParamList } from '../../../../navigation/rootNavigation';
 import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
 import IMIcon from '../../../../components/IMIcon';
 import ArrowBackFilled from '../../../../assets/svg/ArrowBackFilled';
+import Clubhouse from '../../../../assets/svgv1/Clubhouse';
+import Garden from '../../../../assets/svgv1/Garden';
+import Stairs from '../../../../assets/svgv1/Stairs';
+import Elevator from '../../../../assets/svgv1/Elevator';
+import Pavement from '../../../../assets/svgv1/Pavement';
+import WaitingArea from '../../../../assets/svgv1/WaitingArea';
+import Log from '../../../../assets/svgv1/Log';
+import Parking from '../../../../assets/svgv1/Parking';
+import GuestParking from '../../../../assets/svgv1/GuestParking';
 import useStyles from './styles';
 
 const MaintainaceDetailsArea: React.FC = () => {
@@ -21,6 +30,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     {
       title: 'Clubhouse',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      iconSvg: <Clubhouse />,
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
         params: {
@@ -32,6 +42,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     {
       title: 'Parking',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+      iconSvg: <Parking />,
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
         params: {
@@ -42,6 +53,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Gardens',
+      iconSvg: <Garden />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
@@ -53,6 +65,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Stairs',
+      iconSvg: <Stairs />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
@@ -64,6 +77,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Elevators',
+      iconSvg: <Elevator />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
@@ -75,6 +89,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Pavements',
+      iconSvg: <Pavement />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
@@ -86,6 +101,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Waiting area',
+      iconSvg: <WaitingArea />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
@@ -97,6 +113,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Guest Parking',
+      iconSvg: <GuestParking />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
@@ -108,6 +125,7 @@ const MaintainaceDetailsArea: React.FC = () => {
     },
     {
       title: 'Log',
+      iconSvg: <Log />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.LogDetailsArea,
@@ -127,6 +145,7 @@ const MaintainaceDetailsArea: React.FC = () => {
           <MaintainanceListingCard
             key={index}
             title={item.title}
+            iconSvg={item.iconSvg}
             imageUri={item.imageUri}
             onClick={item.onClick}
           />
