@@ -84,8 +84,9 @@ const Login: React.FC = () => {
           onClick={() =>    bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
             phoneNumber: '',
           })}
+          disabled={loginData.mobileNumber.length !== 10}
           styles={{
-            container: styles.btnContainer,
+            container: [styles.btnContainer, loginData.mobileNumber.length !== 10 && styles.disableBtn],
           }}
         />
       </ScrollView>

@@ -19,6 +19,9 @@ const useStyles = (theme: any) =>
         backgroundColor: '#3266AE',
         marginTop: wp('5.55%'), 
     },
+    disableBtn: {
+      backgroundColor: '#ECECEC',
+  },
     phoneLogoContainer: {
         alignItems: 'center',
         justifyContent: 'center',

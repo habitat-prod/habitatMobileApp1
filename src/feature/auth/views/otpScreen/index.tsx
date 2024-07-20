@@ -76,8 +76,11 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
         id="verifyOtpFooter"
         variant='contained'
         title={t('Sign In')}
+        disabled={otp.length !== 6}
         onClick={verifyOTPCall}
-        styles={{ container: styles.btnContainer }}
+        styles={{
+          container: [styles.btnContainer, otp.length !== 6 && styles.disableBtn]
+        }}
       />
       <View style={styles.resendContainer}>
         <View style={styles.timerContainer}>
@@ -94,8 +97,8 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
             onStateChange={(val: TimerStates) => {
               setTimerState(val ?? '');
             }}
-            buttonStyle= {{ width: 'auto'}}
-            titleStyle = {{ color: '#3266AE' }}
+            buttonStyle={{ width: 'auto' }}
+            titleStyle={{ color: '#3266AE' }}
           />
         </View>
       </View>

@@ -22,6 +22,9 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
             backgroundColor: '#3266AE',
             height: hp('7%'),
         },
+        disableBtn: {
+            backgroundColor: '#ECECEC',
+        },
         callingPhone: {
             alignItems: 'center',
             justifyContent: 'center',
