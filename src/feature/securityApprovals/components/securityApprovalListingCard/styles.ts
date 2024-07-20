@@ -16,6 +16,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       width: wp('16.88%'),
       height: hp('4%'),
       borderRadius: wp('1.11%'),
+      paddingTop: wp('0.5%'),
     },
     textStyle: {
       paddingLeft: wp('2.22%'),

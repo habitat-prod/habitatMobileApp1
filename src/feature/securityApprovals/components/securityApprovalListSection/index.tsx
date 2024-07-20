@@ -6,78 +6,91 @@ import { RouteProp } from '@react-navigation/native';
 import SecurityApprovalListingCard from '../securityApprovalListingCard';
 import { MaintainanceAreasScreens } from '../../../../constants/screens';
 import { SecurityApprovalList } from '../../navigation';
+import Cab from '../../../../assets/svgv1/Cab';
 import useStyles from './styles';
 
 
 const securityApprovalListingCardData = [
   {
     title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Bus',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Bike',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Truck',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Scooty',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Auto',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Richsaw',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'BMW',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Horn',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Honda',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Gonda',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
   },
   {
-    title: 'Monda',
+    title: 'Cab',
+    iconSvg: <Cab />,
     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
     onReject: () => { },
     onAccept: () => { },
@@ -99,6 +112,7 @@ const SecurityApprovalListSection: React.FC<ISecurityApprovalListSection> = (pro
         <SecurityApprovalListingCard
           key={index}
           title={item.title}
+          iconSvg={item.iconSvg}
           imageUri={item.imageUri}
           onReject={item.onReject}
           onApprove={item.onAccept}

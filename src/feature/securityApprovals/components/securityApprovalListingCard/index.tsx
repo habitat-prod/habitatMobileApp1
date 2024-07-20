@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Image, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import Close from '../../../../assets/svgv1/Close';
-import IMIcon from '../../../../components/IMIcon';
+import IMIcon, { IconSvgProps } from '../../../../components/IMIcon';
 import Correct from '../../../../assets/svgv1/Correct';
 import useStyles from './styles';
 
 interface ISecurityApprovalListingCardProps {
   title: string;
   imageUri: string;
+  iconSvg: ReactElement<IconSvgProps>;
   onReject: () => void;
   onApprove: () => void;
   selectedTab: string;
@@ -21,9 +22,15 @@ const SecurityApprovalListingCard: React.FC<ISecurityApprovalListingCardProps> =
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
+      /> */}
+       <IMIcon
+        testId={''}
+        disabled
+        iconSvg={props.iconSvg}
+        containerStyle={styles.imageContainer}
       />
       <Text style={styles.textStyle}>{props.title}</Text>
       {props.selectedTab === 'Pending' && (
