@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import useStyles from './styles';
+
 import SimpleArrowRight from '../../../../assets/svgv1/SimpleArrowRight';
+import IMIcon, { IconSvgProps } from '../../../../components/IMIcon';
+import useStyles from './styles';
 
 export interface IReserveAreaListingCard{
   title: string;
   imageUri: string;
   onClick: () => void;
+  iconSvg: ReactElement<IconSvgProps>;
   cardStyle?: StyleProp<ViewStyle>;
 }
 
@@ -24,8 +27,14 @@ const ReserveAreaListingCard: React.FC<IReserveAreaListingCard> = (props) => {
         <Text style={styles.title}>{props.title}</Text>
         <SimpleArrowRight />
       </View>
-      <Image source={require('../../../../assets/png/basketball.png')}
+      {/* <Image source={require('../../../../assets/png/basketball.png')}
         style={styles.imageStyle}
+      /> */}
+      <IMIcon
+        testId={''}
+        disabled
+        iconSvg={props.iconSvg}
+        containerStyle={styles.imageStyle}
       />
     </TouchableOpacity>
   );

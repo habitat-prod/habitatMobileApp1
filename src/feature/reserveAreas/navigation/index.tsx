@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { MaintainanceAreasScreens } from '../../../constants/screens';
 import ReserveListingArea from '../views/reserveListingArea';
 import ReserveDetailsArea from '../views/reserveDetailsArea';
+import { IconSvgProps } from '../../../components/IMIcon';
 
 
 export type ReserveCommonAreaList = {
@@ -10,6 +12,8 @@ export type ReserveCommonAreaList = {
   ReserveDetailsArea: {
     title: string;
     imageUrl: string;
+    iconSvg: ReactElement<IconSvgProps>;
+
   };
 };
 
