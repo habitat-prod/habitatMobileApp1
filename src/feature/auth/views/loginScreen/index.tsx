@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -16,6 +16,20 @@ const Login: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
+
+  const mobileRegex = /^[6-9][0-9]{9}$/;
+
+  const [loginData, setLoginData] = useState({
+    mobileNumber: '',
+    isValid: true,
+  });
+
+  const handleNumberChange = (fieldName: string, value?: string) => {
+    setLoginData({
+      mobileNumber: value ?? '',
+      isValid: mobileRegex.test(value ?? ''),
+    });
+  };
 
   const renderStartAdorement = () => (
     <IMBadge
@@ -46,8 +60,8 @@ const Login: React.FC = () => {
           type={'non-masked'}
           placeholder='Phone number'
           maxLength={10}
-          value={''}
-          onChange={() => { }}
+          value={loginData.mobileNumber}
+          onChange={handleNumberChange}
           startAdornment={renderStartAdorement()}
           keyboardType="numeric"
           style={{
