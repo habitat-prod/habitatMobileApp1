@@ -12,9 +12,9 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       marginTop: hp('50%'),
     },
     cardContainerStyles: {
-      borderRadius: 8,
+      borderRadius: wp('2.22%'),
       backgroundColor: '#E3E3E7',
-      height: hp('31.75%'),
+      // height: hp('31.75%'),
       width: wp('45%'),
       paddingHorizontal: wp('4.44%'),
       paddingVertical: wp('3.33%'),
@@ -30,8 +30,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
     },
     imageStyle: {
       height: hp('21.25%'),
-      width: wp('36.11%'),
-      marginTop: wp('3.33%'),
+      width: wp('35.11%'),
+      marginTop: wp('4.44%'),
       borderRadius: wp('4.44%'),
     },
   });

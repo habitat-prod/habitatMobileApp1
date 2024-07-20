@@ -11,6 +11,12 @@ import { HBStackParamList } from '../../../../navigation/rootNavigation';
 import { MaintainanceAreasScreens, NAVIGATION } from '../../../../constants/screens';
 import BellOutlined from '../../../../assets/svgv1/BellOutlined';
 import IMIcon from '../../../../components/IMIcon';
+import MaintainanceAllAreas from '../../../../assets/svgv1/MaintainanceAllAreas';
+import SecurityApproval from '../../../../assets/svgv1/SecurityApprovals';
+import AccessYourParking from '../../../../assets/svgv1/AccessYourParking';
+import ReserveCommonAreas from '../../../../assets/svgv1/ReserveCommonAreas';
+import Hazard from '../../../../assets/svgv1/Hazard';
+import Ambulance from '../../../../assets/svgv1/Ambulance';
 import useStyles from './styles';
 
 const HomeProfile: React.FC = () => {
@@ -22,7 +28,8 @@ const HomeProfile: React.FC = () => {
   const homeProfileCardData = [
     {
       title: 'Maintainence of all areas',
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/asteroid_blue.png',
+      imageUri: '../../../../assets/png/reserveCommonAreas.png',
+      iconSvg: <MaintainanceAllAreas />,
       onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceAreas,
         params: {},
@@ -30,6 +37,7 @@ const HomeProfile: React.FC = () => {
     },
     {
       title: 'Security Approvals',
+      iconSvg: <SecurityApproval />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.SecurityApprovalsStackNav, {
         screen: MaintainanceAreasScreens.SecurityApprovals,
@@ -38,6 +46,7 @@ const HomeProfile: React.FC = () => {
     },
     {
       title: 'Access your parking',
+      iconSvg: <AccessYourParking />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/asteroid_brown.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.ParkingAreaStackNav, {
         screen: MaintainanceAreasScreens.ParkingAreas,
@@ -46,6 +55,7 @@ const HomeProfile: React.FC = () => {
     },
     {
       title: 'Reserve common areas',
+      iconSvg: <ReserveCommonAreas />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/debris4_brown.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav, {
         screen: MaintainanceAreasScreens.ReserveCommonAreas,
@@ -54,6 +64,7 @@ const HomeProfile: React.FC = () => {
     },
     {
       title: 'Hazard',
+      iconSvg: <Hazard />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/week5-triangle.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.HazardAreaStackNav, {
         screen: MaintainanceAreasScreens.HazardAreas,
@@ -62,6 +73,7 @@ const HomeProfile: React.FC = () => {
     },
     {
       title: 'Ambulance',
+      iconSvg: <Ambulance />,
       imageUri: 'http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_1_2.png',
       onClick: () => defaultNavigation.navigate(NAVIGATION.AmbulanceAreaStackNav, {
         screen: MaintainanceAreasScreens.AmbulanceArea,
@@ -86,6 +98,7 @@ const HomeProfile: React.FC = () => {
         {homeProfileCardData.map((item, index) => (
           <HomeProfileCard
             key={index}
+            iconSvg={item.iconSvg}
             title={item.title}
             imageUri={item.imageUri}
             onClick={item.onClick}
