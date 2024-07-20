@@ -20,6 +20,14 @@ import Log from '../../../../assets/svgv1/Log';
 import Parking from '../../../../assets/svgv1/Parking';
 import GuestParking from '../../../../assets/svgv1/GuestParking';
 import useStyles from './styles';
+import ClubhouseBig from '../../../../assets/svgv1/ClubhouseBig';
+import ParkingBig from '../../../../assets/svgv1/ParkingBig';
+import GardenBig from '../../../../assets/svgv1/GardenBig';
+import StairsBig from '../../../../assets/svgv1/StairsBig';
+import ElevatorBig from '../../../../assets/svgv1/ElevatorBig';
+import PavementBig from '../../../../assets/svgv1/PavementBig';
+import WaitingAreaBig from '../../../../assets/svgv1/WaitingAreaBig';
+import GuestParkingBig from '../../../../assets/svgv1/GuestParkingBig';
 
 const MaintainaceDetailsArea: React.FC = () => {
   const theme = useTheme();
@@ -36,6 +44,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Clubhouse',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <ClubhouseBig />
         },
       }),
     },
@@ -48,6 +57,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Parking',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <ParkingBig />
         },
       }),
     },
@@ -60,6 +70,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Gardens',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <GardenBig />,
         },
       }),
     },
@@ -72,6 +83,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Stairs',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <StairsBig />
         },
       }),
     },
@@ -84,6 +96,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Elevators',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <ElevatorBig />
         },
       }),
     },
@@ -96,6 +109,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Pavements',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <PavementBig />
         },
       }),
     },
@@ -108,6 +122,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Waiting area',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <WaitingAreaBig />
         },
       }),
     },
@@ -120,6 +135,7 @@ const MaintainaceDetailsArea: React.FC = () => {
         params: {
           title: 'Guest Parking',
           imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+          iconSvg: <GuestParkingBig />
         },
       }),
     },

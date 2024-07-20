@@ -84,9 +84,15 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         />
         <Text style={styles.titleContainer}>{props.route.params.title}</Text>
       </View>
-      <Image
+      {/* <Image
         source={require('../../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
+      /> */}
+      <IMIcon
+        testId={''}
+        disabled
+        iconSvg={props.route.params.iconSvg}
+        containerStyle={styles.imageContainer}
       />
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         {!showConditionalDropdownList() && (

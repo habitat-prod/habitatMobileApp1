@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaintainanceAreasScreens } from '../../../constants/screens';
 import MaintainaceDetailsArea from '../views/maintainaceDetailsArea';
 import LogDetailsArea from '../views/logDetailsArea';
 import MaintainanceCardDetails from '../views/maintainaceDetailsArea/maintainanceCardDetails';
 import MaintainanceListDetails from '../views/maintainaceDetailsArea/maintainanceListDetails';
+import { IconSvgProps } from '../../../components/IMIcon';
 
 
 export type MaintainaceAreaList = {
@@ -13,10 +14,12 @@ export type MaintainaceAreaList = {
     MaintainanceCardDetails: {
       title: string;
       imageUrl: string;
+      iconSvg: ReactElement<IconSvgProps>;
     };
     MaintainanceListDetails: {
       title: string;
       imageUrl: string;
+      iconSvg: ReactElement<IconSvgProps>;
     };
 };
 

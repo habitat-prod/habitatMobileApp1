@@ -24,7 +24,7 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       paddingLeft: 8,
     },
     imageStyle: {
-      height: hp('9%'),
+      height: hp('8.7%'),
       width: wp('29%'),
     },
   });
