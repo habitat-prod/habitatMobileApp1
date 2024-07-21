@@ -20,8 +20,8 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       width: wp('11.11%'),
     },
     imageContainer: {
-      width: '100%',
-      height: wp('68.05%'),
+      width: wp('100%'),
+      height: wp('55%'),
     },
     titleContainer: {
       fontSize: 14,
@@ -29,13 +29,54 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       color: 'black'
     },
     scrollviewContainer: {
-      paddingTop: wp('2%'),
+      gap: wp('2%'),
     },
     textStyle: {
       textAlign: 'center',
       fontSize: 15,
       fontWeight: '600',
       color: 'black'
+    },
+    timeText: {
+      minWidth: wp('25%'),
+      textAlign: 'center',
+      paddingTop: wp('3.33%'),
+      fontSize: 14,
+      fontWeight: '500',
+      marginBottom: 20,
+      color: 'black'
+    },
+    miniContainer: { 
+      display: 'flex', 
+      borderWidth: wp('0.27%'), 
+      borderColor:'#BABABA', 
+      padding: wp('3.33%'),
+    },
+    durationContainer: {
+      display: 'flex', 
+      flexDirection: 'row', 
+      alignSelf: 'center',
+    },
+    durationText: {
+      color: 'black', 
+      fontWeight: '500', 
+      fontSize: 18, 
+      alignSelf: 'center',
+    },
+    iconStyle: {
+      width: wp('4.16%'),
+      height: hp('1.90%'),
+    },
+    iconContainerStyle: {
+      borderWidth: wp('0.27%'),
+      borderRadius: wp('5.55%'),
+      padding: wp('1.11%'),
+    },
+    disabledIconContainerStyle: {
+      borderWidth: wp('0.27%'),
+      borderRadius: wp('5.55%'),
+      padding: wp('1.11%'),
+      borderColor: '#D3D3D3',
     },
   });
 

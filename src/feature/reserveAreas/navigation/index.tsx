@@ -13,7 +13,6 @@ export type ReserveCommonAreaList = {
     title: string;
     imageUrl: string;
     iconSvg: ReactElement<IconSvgProps>;
-
   };
 };
 

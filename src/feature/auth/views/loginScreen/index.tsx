@@ -84,7 +84,7 @@ const Login: React.FC = () => {
           onClick={() =>    bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
             phoneNumber: '',
           })}
-          disabled={loginData.mobileNumber.length !== 10}
+          // disabled={loginData.mobileNumber.length !== 10}
           styles={{
             container: [styles.btnContainer, loginData.mobileNumber.length !== 10 && styles.disableBtn],
           }}
