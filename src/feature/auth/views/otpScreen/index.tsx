@@ -76,7 +76,7 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
         id="verifyOtpFooter"
         variant='contained'
         title={t('Sign In')}
-        // disabled={otp.length !== 6}
+        disabled={otp.length !== 6}
         onClick={verifyOTPCall}
         styles={{
           container: [styles.btnContainer, otp.length !== 6 && styles.disableBtn]
