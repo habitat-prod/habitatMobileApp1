@@ -59,7 +59,6 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       color: 'black',
     },
     scrollviewContainer: {
-      paddingVertical: wp('11.88%'),
       backgroundColor: 'white',
       gap: wp('4.44%')
     },

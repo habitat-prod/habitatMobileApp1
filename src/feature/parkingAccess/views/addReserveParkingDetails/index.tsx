@@ -54,60 +54,64 @@ const AddReserveParkingDetails: React.FC<IAddReserveParkingDetails> = (props) =>
         <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
         <Text style={styles.textStyle}>My Parking</Text>
       </View>
-      <Image
-        source={require('../../../../assets/png/parking.png')}
-        style={styles.imageContainer}
-      />
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.miniContainer}>
-        <Text style={styles.textStyle}>Name</Text>
-        <IMTextInput
-          testId="name"
-          label=""
-          name="name"
-          type="non-masked"
-          value={formikData.values.name}
-          onFocus={formikData.setFieldTouched}
-          onChange={formikData.setFieldValue}
-          errorText={formikData.touched.name ? formikData.errors.name : ''}
-          style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Image
+          source={require('../../../../assets/png/parking.png')}
+          style={styles.imageContainer}
         />
-        <Text style={styles.paddingTextStyle}>Flat number</Text>
-        <IMTextInput
-          testId="flat number"
-          label=""
-          name="flatNumber"
-          type="non-masked"
-          value={formikData.values.flatNumber}
-          onFocus={formikData.setFieldTouched}
-          onChange={formikData.setFieldValue}
-          errorText={formikData.touched.flatNumber ? formikData.errors.flatNumber : ''}
-          style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
-        />
-        <Text style={styles.paddingTextStyle}>Parking spot</Text>
-        <IMTextInput
-          testId="parking spot"
-          label=""
-          name="parkingSpot"
-          type="non-masked"
-          disabled
-          value={routeParams.selectedSlot}
-          onFocus={formikData.setFieldTouched}
-          onChange={formikData.setFieldValue}
-          errorText={formikData.touched.parkingSpot ? formikData.errors.parkingSpot : ''}
-          style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
-        />
-        <Text style={styles.paddingTextStyle}>Vehicle number</Text>
-        <IMTextInput
-          testId="vehicle number"
-          label=""
-          name="vehicleNumber"
-          type="non-masked"
-          value={formikData.values.vehicleNumber}
-          onFocus={formikData.setFieldTouched}
-          onChange={formikData.setFieldValue}
-          errorText={formikData.touched.vehicleNumber ? formikData.errors.vehicleNumber : ''}
-          style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
-        />
+        <View style={styles.miniContainer}>
+
+          <Text style={styles.textStyle}>Name</Text>
+          <IMTextInput
+            testId="name"
+            label=""
+            name="name"
+            type="non-masked"
+            value={formikData.values.name}
+            onFocus={formikData.setFieldTouched}
+            onChange={formikData.setFieldValue}
+            errorText={formikData.touched.name ? formikData.errors.name : ''}
+            style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
+          />
+          <Text style={styles.paddingTextStyle}>Flat number</Text>
+          <IMTextInput
+            testId="flat number"
+            label=""
+            name="flatNumber"
+            type="non-masked"
+            value={formikData.values.flatNumber}
+            onFocus={formikData.setFieldTouched}
+            onChange={formikData.setFieldValue}
+            errorText={formikData.touched.flatNumber ? formikData.errors.flatNumber : ''}
+            style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
+          />
+          <Text style={styles.paddingTextStyle}>Parking spot</Text>
+          <IMTextInput
+            testId="parking spot"
+            label=""
+            name="parkingSpot"
+            type="non-masked"
+            disabled
+            value={routeParams.selectedSlot}
+            onFocus={formikData.setFieldTouched}
+            onChange={formikData.setFieldValue}
+            errorText={formikData.touched.parkingSpot ? formikData.errors.parkingSpot : ''}
+            style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
+          />
+          <Text style={styles.paddingTextStyle}>Vehicle number</Text>
+          <IMTextInput
+            testId="vehicle number"
+            label=""
+            name="vehicleNumber"
+            type="non-masked"
+            value={formikData.values.vehicleNumber}
+            onFocus={formikData.setFieldTouched}
+            onChange={formikData.setFieldValue}
+            errorText={formikData.touched.vehicleNumber ? formikData.errors.vehicleNumber : ''}
+            style={{ container: styles.inputStyle, labelContainer: styles.labelContainer }}
+          />
+        </View>
+
       </ScrollView>
       <IMButton
         id="save"

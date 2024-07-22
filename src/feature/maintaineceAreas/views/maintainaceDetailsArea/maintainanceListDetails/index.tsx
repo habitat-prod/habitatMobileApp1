@@ -62,7 +62,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
     },
     validationSchema: MaintainanceListDetailsValidationSchema,
     validateOnMount: true,
-    onSubmit: (values) => { 
+    onSubmit: (values) => {
       //TODO: will do the api call here
     },
   });
@@ -88,13 +88,13 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         source={require('../../../../../assets/png/reserveCommonAreas.png')}
         style={styles.imageContainer}
       /> */}
-      <IMIcon
-        testId={''}
-        disabled
-        iconSvg={props.route.params.iconSvg}
-        containerStyle={styles.imageContainer}
-      />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollviewContainer}>
+        <IMIcon
+          testId={''}
+          disabled
+          iconSvg={props.route.params.iconSvg}
+          containerStyle={styles.imageContainer}
+        />
         {!showConditionalDropdownList() && (
           <IMSinglePicker
             testId="singlePicker"

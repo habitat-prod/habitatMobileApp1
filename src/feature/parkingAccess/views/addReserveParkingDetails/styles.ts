@@ -8,7 +8,6 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       backgroundColor: 'white',
     },
     miniContainer: {
-      display: 'flex', 
       padding: wp('4.44%'), 
       gap: wp('2.77%'),
     },
