@@ -58,7 +58,7 @@ const AddReserveParkingDetails: React.FC<IAddReserveParkingDetails> = (props) =>
         source={require('../../../../assets/png/parking.png')}
         style={styles.imageContainer}
       />
-      <ScrollView contentContainerStyle={{ display: 'flex', padding: 16, gap: 10 }}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.miniContainer}>
         <Text style={styles.textStyle}>Name</Text>
         <IMTextInput
           testId="name"

@@ -137,7 +137,7 @@ const MaintainanceLogArea: React.FC = () => {
   ];
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
       {maintainanceLogCardData.map((item, index) =>
         <MaintainanceLogCard
           key={index}

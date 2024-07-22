@@ -82,7 +82,7 @@ const Login: React.FC = () => {
           id='btn'
           title='Get Verification Code'
           onClick={() =>    bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-            phoneNumber: '',
+            phoneNumber: loginData.mobileNumber,
           })}
           disabled={loginData.mobileNumber.length !== 10}
           styles={{

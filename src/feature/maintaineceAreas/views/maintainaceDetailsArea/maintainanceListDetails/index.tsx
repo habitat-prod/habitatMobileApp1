@@ -94,7 +94,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         iconSvg={props.route.params.iconSvg}
         containerStyle={styles.imageContainer}
       />
-      <ScrollView contentContainerStyle={styles.scrollviewContainer}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollviewContainer}>
         {!showConditionalDropdownList() && (
           <IMSinglePicker
             testId="singlePicker"

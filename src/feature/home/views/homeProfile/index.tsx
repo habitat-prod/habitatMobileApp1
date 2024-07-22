@@ -94,7 +94,7 @@ const HomeProfile: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <IMIcon testId='Bell' iconSvg={<BellOutlined />} onClick={handleBellIcon} containerStyle={styles.subContainer} />
       <Text style={styles.textStyle}>Property Management Services</Text>
-      <ScrollView contentContainerStyle={styles.cardsContainer}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardsContainer}>
         {homeProfileCardData.map((item, index) => (
           <HomeProfileCard
             key={index}

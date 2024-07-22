@@ -161,7 +161,7 @@ const ReserveListingArea: React.FC = () => {
         <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
         <Text style={styles.textStyle}> Clubhouse Management </Text>
       </View>
-      <ScrollView contentContainerStyle={styles.cardsContainer}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardsContainer}>
         {reserveListingCardData.map((item, index) => (
           <ReserveAreaListingCard
             key={index}

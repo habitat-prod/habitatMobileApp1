@@ -62,7 +62,7 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.phoneLogoContainer}>
         <Text style={styles.labelTextStyle}>Verify your phone number</Text>
-        <Text style={styles.subLabelText}>{`We’ve sent you a one time verification code to +91 ${8899122450}`}</Text>
+        <Text style={styles.subLabelText}>{`We’ve sent you a one time verification code to +91 ${props.route.params.phoneNumber}`}</Text>
       </View>
       <IMOtpInput
         testEventId="login-otpDigits-tf"

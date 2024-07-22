@@ -107,7 +107,7 @@ const SecurityApprovalListSection: React.FC<ISecurityApprovalListSection> = (pro
   const selectedTab = props.route.params.selectedTab;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
       {securityApprovalListingCardData.map((item, index) =>
         <SecurityApprovalListingCard
           key={index}

@@ -7,6 +7,11 @@ const useStyles = (theme: ReactNativePaper.Theme) =>
       flex: 1,
       backgroundColor: 'white',
     },
+    miniContainer: {
+      display: 'flex', 
+      padding: wp('4.44%'), 
+      gap: wp('2.77%'),
+    },
     textStyle: {
       fontSize: 15,
       fontWeight: '700',

@@ -50,7 +50,7 @@ const MaintainanceCardDetails: React.FC<IMaintainanceCardDetails> = (props) => {
         iconSvg={props.route.params.iconSvg}
         containerStyle={styles.imageContainer}
       />
-      <ScrollView contentContainerStyle={styles.scrollviewContainer}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollviewContainer}>
         {renderLabelPair()}
         {renderLabelPair()}
         {renderLabelPair()}
