@@ -17,6 +17,7 @@ import AccessYourParking from '../../../../assets/svgv1/AccessYourParking';
 import ReserveCommonAreas from '../../../../assets/svgv1/ReserveCommonAreas';
 import Hazard from '../../../../assets/svgv1/Hazard';
 import Ambulance from '../../../../assets/svgv1/Ambulance';
+import { Toaster } from '../../../../constants/common';
 import useStyles from './styles';
 
 const HomeProfile: React.FC = () => {
@@ -66,19 +67,13 @@ const HomeProfile: React.FC = () => {
       title: 'Hazard',
       iconSvg: <Hazard />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/week5-triangle.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.HazardAreaStackNav, {
-        screen: MaintainanceAreasScreens.HazardAreas,
-        params: {},
-      }),
+      onClick: () => Toaster('Don`t Worry, Coming soon...'),
     },
     {
       title: 'Ambulance',
       iconSvg: <Ambulance />,
       imageUri: 'http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_1_2.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.AmbulanceAreaStackNav, {
-        screen: MaintainanceAreasScreens.AmbulanceArea,
-        params: {},
-      }),
+      onClick: () => Toaster('Ambulance is on the way, please calm down'),
     },
   ];
 
