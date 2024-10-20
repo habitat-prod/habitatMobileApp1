@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
 
-import { URL } from '../constants/Url';
+import { URL } from '../constants/URL';
 import { Toaster } from './common';
 import { getNetworkIP } from './device';
 import { IErrorActionData } from './error';
@@ -12,7 +12,7 @@ import { getUserLoginData } from './device';
 import { isNetworkAvailable } from './networkUtil';
 
 const axios = Axios.create({
-  baseURL: 'baseUrl',
+  baseURL: 'https://backend-dev.habitatautomations.com',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
