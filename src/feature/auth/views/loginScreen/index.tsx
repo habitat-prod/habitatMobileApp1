@@ -37,27 +37,10 @@ const Login: React.FC = () => {
     });
   };
 
-  // const handlePhoneNumberSubmit = async () => {
-  //   try {
-  //     // const response = await axios.post('https://backend-dev.habitatautomations.com/login/sendOtp?phoneNumber=${loginData.mobileNumber}');
-  //     const response = await axios.post(`https://backend-dev.habitatautomations.com/login/sendOtp?phoneNumber=${loginData.mobileNumber}`);
-
-  //     // Assuming the backend returns a message like "OTP sent"
-  //     setMessage(response.data.message);
-  //     // setMessage(response.data.message);
-  //     console.warn(response.data.message);
-      
-  //     console.warn(message);
-  //   } catch (error) {
-  //     // console.warn('error catching while sentOtp: ${error}');
-  //     console.warn(`error catching while sendOtp: ${error}`);
-  //   }
-  // };
-
   // this is working code.
   const handlePhoneNumberSubmit = async () => {
     try {
-      const response = await axios.post(`https://backend-dev.habitatautomations.com/login/sendOtp?phoneNumber=${loginData.mobileNumber}`);
+      const response = await axios.post(`https://backend-dev.habitatautomations.com/login/sendOtp?phoneNumber=${loginData.mobileNumber}&userType=internal_user`);
       setMessage(response.data.message);
       console.warn(response.data.message);
       await AsyncStorage.setItem('phone',loginData.mobileNumber)

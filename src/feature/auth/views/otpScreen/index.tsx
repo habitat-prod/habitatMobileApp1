@@ -28,7 +28,7 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   const defaultNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
 
   const [phoneNumber,setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState(0);
   const [clearOtp, setClearOtp] = useState(false);
   const [timerState, setTimerState] = useState(TimerStates.running);
   const [resendCount, setResendCount] = useState(0);
@@ -68,8 +68,10 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
       console.log(`otp is: ${otp}`)
       const payload = {
         phoneNumber: phoneNumber, // phone number from async storage
-        OTP: otp,      // otp from user
+        otp: otp,      // otp from user
+        userType: "internal_user",
       };
+      console.log(payload)
       const response = await axios.post('https://backend-dev.habitatautomations.com/login/validateOTP', payload);
       console.log(`data from server: ${response.data}`);
       const { token } = response.data;
