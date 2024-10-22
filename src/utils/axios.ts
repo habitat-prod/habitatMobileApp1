@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
 
-import { URL } from '../constants/Url';
+import { URL } from '../constants/common';
 import { Toaster } from './common';
 import { getNetworkIP } from './device';
 import { IErrorActionData } from './error';

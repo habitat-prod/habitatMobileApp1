@@ -11,11 +11,15 @@ import HandPhone from '../../../../assets/svg/HandPhone';
 import IMBadge from '../../../../components/IMBadge';
 import IndiaFlag from '../../../../assets/svg/IndiaFlag';
 import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+import { sendOTP } from '../../../../redux/actions/login';
 
 const Login: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
+
+  const dispatch = useDispatch();
 
   const mobileRegex = /^[6-9][0-9]{9}$/;
 
@@ -44,6 +48,21 @@ const Login: React.FC = () => {
       }}
     />
   )
+
+  const handleSendOtp = () => {
+    if (loginData.mobileNumber.length === 10) {
+      // Dispatch OTP action
+      dispatch(sendOTP({
+        phoneNumber: Number(loginData.mobileNumber),
+        userType: 'user', 
+      }));
+      
+      // Navigate to OTP verification page
+      bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
+        phoneNumber: loginData.mobileNumber,
+      });
+    }
+  };
 
   const renderLoginView = () => (
     <>
@@ -81,9 +100,12 @@ const Login: React.FC = () => {
         <IMButton
           id='btn'
           title='Get Verification Code'
-          onClick={() =>    bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-            phoneNumber: loginData.mobileNumber,
-          })}
+          onClick={() =>   
+            //  bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
+            // phoneNumber: loginData.mobileNumber,
+          // })
+          handleSendOtp
+        }
           disabled={loginData.mobileNumber.length !== 10}
           styles={{
             container: [styles.btnContainer, loginData.mobileNumber.length !== 10 && styles.disableBtn],
