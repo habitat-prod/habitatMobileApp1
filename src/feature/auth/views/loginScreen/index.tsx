@@ -50,7 +50,9 @@ const Login: React.FC = () => {
   )
 
   const handleSendOtp = () => {
+    console.log('inside the handleSendOtp fun.')
     if (loginData.mobileNumber.length === 10) {
+      console.log('number digits are perfect.')
       // Dispatch OTP action
       dispatch(sendOTP({
         phoneNumber: Number(loginData.mobileNumber),
@@ -104,7 +106,7 @@ const Login: React.FC = () => {
             //  bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
             // phoneNumber: loginData.mobileNumber,
           // })
-          handleSendOtp
+          handleSendOtp()
         }
           disabled={loginData.mobileNumber.length !== 10}
           styles={{

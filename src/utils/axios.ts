@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
 import { isEmpty } from 'lodash';
 
-import { URL } from '../constants/common';
+// import { URL } from '../constants/Url';
 import { Toaster } from './common';
 import { getNetworkIP } from './device';
 import { IErrorActionData } from './error';
@@ -90,7 +90,7 @@ axios.interceptors.response.use(
       newError.errorMessage =
         error?.response?.data['error_message'] == undefined ? error?.code : error?.response?.data['error_message'];
     }
-    if (newError.errorCode == 410 || (newError.errorCode == 401 && error?.response?.config?.url != URL.login)) {
+    if (newError.errorCode == 410 || (newError.errorCode == 401 && error?.response?.config?.url != 'URL.login')) {
       //triggering logout and restart
       Toaster('You need to re-authenticate again, Restarting!');
       setTimeout(() => {
@@ -101,6 +101,7 @@ axios.interceptors.response.use(
         });
       }, 1000);
     } else {
+      console.log('inside else condn of axios.')
       // For Timeout
       if (newError.errorMessage == 'ECONNABORTED') {
         newError.errorMessage = 'requestTimeOut';

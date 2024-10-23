@@ -17,7 +17,7 @@ const sendOtpEpic = (action$: ActionsObservable<ISendOtpActionData>, state$: Sta
       return from(
         OTPService(
           action.payload.phoneNumber,
-          'USER'
+          'INTERNAL_USER'
         ),
       ).pipe(
         map((response) => {
