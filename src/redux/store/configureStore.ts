@@ -7,11 +7,15 @@ import { rootAction } from './rootAction';
 import rootEpic from './rootEpic';
 import { rootReducer } from './rootReducer';
 import { rootState } from './rootState';
-// import sendOtpEpic from '../epics/login';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
 const epicMiddleware = createEpicMiddleware<rootAction, rootAction, rootState>();
+
+// const { isSuccess, isLoading } = useSelector(state => {
+//   console.log(state); // Debugging line to check structure
+//   return state.userReducer || {}; // Default empty object to avoid undefined error
+// });
 
 const configureStore = () => {
   const middlewares = [epicMiddleware];

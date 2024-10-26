@@ -13,6 +13,7 @@ import IndiaFlag from '../../../../assets/svg/IndiaFlag';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
 import { sendOTP } from '../../../../redux/actions/login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login: React.FC = () => {
   const theme = useTheme();
@@ -53,6 +54,7 @@ const Login: React.FC = () => {
     console.log('inside the handleSendOtp fun.')
     if (loginData.mobileNumber.length === 10) {
       console.log('number digits are perfect.')
+      AsyncStorage.setItem('phoneNumber',loginData.mobileNumber);
       // Dispatch OTP action
       dispatch(sendOTP({
         phoneNumber: Number(loginData.mobileNumber),

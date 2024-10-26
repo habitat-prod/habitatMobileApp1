@@ -12,20 +12,34 @@ import { BootstrapParamsList } from '../../navigation';
 import IMOtpInput from './IMOtp';
 import IMTimer, { TimerStates } from './IMTimer';
 import useStyles from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { number } from 'yup';
+import { verifyOtp } from '../../../../redux/actions/verifyOtp';
 
 interface IVerifyOTPProps {
   navigation: StackNavigationProp<BootstrapParamsList>;
   route: RouteProp<BootstrapParamsList, BootstrapNavigationScreens.VerifyOTP>;
 }
 
-const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
+const verifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const { t } = useTranslation('auth');
   const routeParams = props.route.params;
   const defaultNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
 
+  const dispatch = useDispatch();
+
+  const { isSuccess, isLoading } = useSelector(state => {
+    console.log('state is: ',state); 
+    return state.otpVerification || {}; // Default empty object to avoid undefined error
+});
   const [otp, setOtp] = useState('');
+  const [verifyOtpData,setVerifyOtpData] = useState({
+    mobileNumber: '',
+    isValid: true,
+  })
   const [clearOtp, setClearOtp] = useState(false);
   const [timerState, setTimerState] = useState(TimerStates.running);
   const [resendCount, setResendCount] = useState(0);
@@ -37,9 +51,28 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     defaultNavigation.goBack();
   };
 
-  const verifyOTPCall = () => {
+  //   useEffect(() => {
+  //     console.log('isSuccess: ',isSuccess)
+  //   if (isSuccess) {
+  //     defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
+  //       screen: MaintainanceAreasScreens.HomeProfile,
+  //     });
+  //   }
+  // }, [isSuccess, defaultNavigation]);
+
+  
+
+  const verifyOTPCall = async () => {
+    console.log('inside verifyOtp call');
+    const phoneNumber = await AsyncStorage.getItem('phoneNumber');
+    if (!phoneNumber) {
+      setErrorText('Phone number not found. Please try again.');
+      return;
+    }
+    dispatch(verifyOtp({ otp: Number(otp), phoneNumber: Number(phoneNumber), userType: 'internal_user' }));
+    console.log('api has been called.');
     setClearOtp(false);
-    defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
+    defaultNavigation.navigate(NAVIGATION.HomeProfileNav,{
       screen: MaintainanceAreasScreens.HomeProfile,
     })
   };
@@ -105,4 +138,4 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     </SafeAreaView>
   );
 };
-export default VerifyOTPScreen;
+export default verifyOTPScreen;

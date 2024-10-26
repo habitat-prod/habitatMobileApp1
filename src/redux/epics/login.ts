@@ -5,8 +5,9 @@ import { isOfType } from 'typesafe-actions';
 
 import { rootState } from '../store/rootState';
 import { IErrorActionData } from '../../utils/error';
-import { AuthActionTypes, ISendOtpActionData, sendOTPAction, sendOtpFailure, sendOtpSuccess } from '../actions/login';
+import { ISendOtpActionData, sendOTPAction, sendOtpFailure, sendOtpSuccess } from '../actions/login';
 import { OTPService } from '../service/OTPService';
+import { AuthActionTypes } from '../../utils/constants';
 
 const sendOtpEpic = (action$: ActionsObservable<ISendOtpActionData>, state$: StateObservable<rootState>) =>
   action$.pipe(
