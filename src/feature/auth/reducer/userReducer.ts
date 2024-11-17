@@ -28,6 +28,7 @@ const userReducer: Reducer<OtpState, loginActions> = (
 ): OtpState => {
   switch (action.type) {
     case AuthActionTypes.SEND_OTP_ACTION:
+      console.log(`inside sendOtpAction ${action.payload.sendOTP}`)
       return {
         ...state,
         isSuccess: false,
@@ -44,6 +45,7 @@ const userReducer: Reducer<OtpState, loginActions> = (
         error: undefined,
       };
     case AuthActionTypes.SEND_OTP_FAILURE_ACTION:
+      console.log(`inside failure action:${action.payload.sentOtp}`)
       return {
         ...state,
         isSuccess: false,
