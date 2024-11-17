@@ -3,11 +3,11 @@ import { from, of } from 'rxjs';
 import { filter, map, catchError, mergeMap } from 'rxjs/operators';
 import { isOfType } from 'typesafe-actions';
 
-import { rootState } from '../store/rootState';
-import { IErrorActionData } from '../../utils/error';
+import { rootState } from '../../../redux/store/rootState';
+import { IErrorActionData } from '../../../utils/error';
 import { ISendOtpActionData, sendOTPAction, sendOtpFailure, sendOtpSuccess } from '../actions/login';
 import { OTPService } from '../service/OTPService';
-import { AuthActionTypes } from '../../utils/constants';
+import { AuthActionTypes } from '../../../utils/constants';
 
 const sendOtpEpic = (action$: ActionsObservable<ISendOtpActionData>, state$: StateObservable<rootState>) =>
   action$.pipe(
@@ -18,7 +18,7 @@ const sendOtpEpic = (action$: ActionsObservable<ISendOtpActionData>, state$: Sta
       return from(
         OTPService(
           action.payload.phoneNumber,
-          'INTERNAL_USER'
+          'USER'
         ),
       ).pipe(
         map((response) => {

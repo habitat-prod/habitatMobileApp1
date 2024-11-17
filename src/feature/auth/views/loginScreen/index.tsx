@@ -12,7 +12,7 @@ import IMBadge from '../../../../components/IMBadge';
 import IndiaFlag from '../../../../assets/svg/IndiaFlag';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
-import { sendOTP } from '../../../../redux/actions/login';
+import { sendOTP } from '../../actions/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login: React.FC = () => {
@@ -105,9 +105,6 @@ const Login: React.FC = () => {
           id='btn'
           title='Get Verification Code'
           onClick={() =>   
-            //  bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-            // phoneNumber: loginData.mobileNumber,
-          // })
           handleSendOtp()
         }
           disabled={loginData.mobileNumber.length !== 10}

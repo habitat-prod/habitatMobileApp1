@@ -1,6 +1,6 @@
 import { combineEpics } from "redux-observable";
-import sendOtpEpic from "../epics/login";
-import verifyOtpEpic from "../epics/verifyOtpEpic";
+import sendOtpEpic from "../../feature/auth/epic/login";
+import verifyOtpEpic from "../../feature/auth/epic/verifyOtpEpic";
 
 const rootEpic = combineEpics(
     sendOtpEpic,

@@ -3,11 +3,12 @@ import { from, of } from 'rxjs';
 import { filter, map, catchError, mergeMap } from 'rxjs/operators';
 import { isOfType } from 'typesafe-actions';
 
-import { rootState } from '../store/rootState';
-import { IErrorActionData } from '../../utils/error';
+import { rootState } from '../../../redux/store/rootState';
+import { IErrorActionData } from '../../../utils/error';
 import { IVerifyOtpActionData, verifyOtpAction, verifyOtpFailure, verifyOtpSuccess } from '../actions/verifyOtp';
 import { VerifyOTPService } from '../service/verifyOtpService';
-import {AuthActionTypes} from '../../utils/constants'
+import {AuthActionTypes} from '../../../utils/constants'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$: StateObservable<rootState>) =>{
     console.log('inside verifyOtp epic:');
@@ -20,14 +21,24 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
         VerifyOTPService(
             action.payload.otp,
           action.payload.phoneNumber,
-          'INTERNAL_USER'
+          'USER'
         ),
       ).pipe(
         map((response) => {
-          console.log('OTP verified Successfully: ', response);
+          console.log('Raw response inside epic: ', JSON.stringify(response.data.data.flatDetailsList));
+          console.log('response keys: ',Object.keys(response))
+          const tempToken = JSON.stringify(response.data.tempToken);
+          let userDetail = response.data.data.flatDetailsList;
+          console.log('OTP verified Successfully: ', userDetail);
+
+          userDetail = JSON.stringify(userDetail);
+          console.log(`Stringify user details: ${userDetail}`)
+          
+          AsyncStorage.setItem('token',response.data.tempToken);
+
+          console.log(`tokenn is HERE:= ${tempToken}`)
 
           const {token,userDetails} = response;
-          
           // case success:
               return verifyOtpSuccess({
                 token,

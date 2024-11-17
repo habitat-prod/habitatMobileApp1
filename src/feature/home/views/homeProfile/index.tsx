@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text, ScrollView } from 'react-native';
@@ -19,12 +19,43 @@ import Hazard from '../../../../assets/svgv1/Hazard';
 import Ambulance from '../../../../assets/svgv1/Ambulance';
 import { Toaster } from '../../../../constants/common';
 import useStyles from './styles';
+import CustomBottom from '../../../auth/views/dialoug/CustomBottom';
+import axios from '../../../../utils/axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTypedSelector } from '../../../../redux/store/configureStore';
 
 const HomeProfile: React.FC = () => {
+  const [showDialog, setShowDialog] = useState(false);
+  const route = useRoute<RouteProp<HBStackParamList, 'HomeProfile'>>(); // Specify the type here
+
   const theme = useTheme();
   const styles = useStyles(theme);
   const { t } = useTranslation('customer');
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+
+  const [data, setData] = useState([]);
+  const { flatDetailsList } = route.params || {};
+
+  useEffect(() => {
+    console.log(`inside homeProfile flatDetailsList is: ${flatDetailsList}`)
+    if (route.params?.showModal) {
+      setShowDialog(true);
+    }
+  }, [route.params?.showModal])
+
+  const verifyOTPScreen = useTypedSelector((state) =>(
+    state.otpVerification // Default empty object to avoid undefined error
+ )
+);
+console.log(`inside verifyOTPScreen: ${JSON.stringify(verifyOTPScreen)}`)
+
+  // const getApiData = async () => {
+  //   const societyId = Number(await AsyncStorage.getItem('societyId'));
+  //   const url = `https://backend-dev.habitatautomations.com/pmsSocietyMapping/bySociety?societyId=${societyId}`;
+  //   let result = await axios.get(url);
+  //   result = result.json;
+  //   setData(data);
+  // }
 
   const homeProfileCardData = [
     {
@@ -77,6 +108,13 @@ const HomeProfile: React.FC = () => {
     },
   ];
 
+  // useEffect(() => {
+  //   // Show the dialog if the route has the showModal param set to true
+  //   if (route.params?.showModal) {
+  //     setShowDialog(true);
+  //   }
+  // }, [route.params?.showModal]);
+
 
   const handleBellIcon = () => (
     defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
@@ -87,6 +125,14 @@ const HomeProfile: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* {showDialog && <CustomBottom visible={showDialog} onClose={() => setShowDialog(false)} />} */}
+      {showDialog && (
+        <CustomBottom
+          visible={showDialog}
+          onClose={() => setShowDialog(false)}
+          flatDetailsList={flatDetailsList} // Pass the data here
+        />
+      )}
       <IMIcon testId='Bell' iconSvg={<BellOutlined />} onClick={handleBellIcon} containerStyle={styles.subContainer} />
       <Text style={styles.textStyle}>Property Management Services</Text>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardsContainer}>

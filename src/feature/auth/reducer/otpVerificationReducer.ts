@@ -1,10 +1,11 @@
 import { Reducer } from 'redux';
-import { IErrorActionData } from '../../utils/error';
+import { IErrorActionData } from '../../../utils/error';
 import { loginActions } from '../actions/login';
 import { IUserData } from '../models/login';
-import { AuthActionTypes } from '../../utils/constants';
+import { AuthActionTypes } from '../../../utils/constants';
 
 export interface OtpVerificationState {
+  flatDetailsList: [];
   isLoading: boolean;
   isSuccess: boolean;       
   token?: string;           
@@ -13,6 +14,7 @@ export interface OtpVerificationState {
 }
 
 const initialVerificationState: OtpVerificationState = {
+  flatDetailsList: [],
   isLoading: false,
   isSuccess: false,        
   token: undefined,       
@@ -38,7 +40,7 @@ const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
         isLoading: false,
         isSuccess: true,
         token: action.payload.token, // Store token
-        userDetails: action.payload.userDetails, // Store user details
+        flatDetailsList: action.payload.userDetails,
         error: undefined,
       };
     case AuthActionTypes.VERIFY_OTP_FAILURE_ACTION:

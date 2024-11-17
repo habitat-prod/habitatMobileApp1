@@ -15,7 +15,9 @@ import useStyles from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { number } from 'yup';
-import { verifyOtp } from '../../../../redux/actions/verifyOtp';
+import { verifyOtp } from '../../actions/verifyOtp';
+import CustomBottom from '../dialoug/CustomBottom';
+import { useTypedSelector } from '../../../../redux/store/configureStore';
 
 interface IVerifyOTPProps {
   navigation: StackNavigationProp<BootstrapParamsList>;
@@ -31,10 +33,11 @@ const verifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
 
   const dispatch = useDispatch();
 
-  const { isSuccess, isLoading } = useSelector(state => {
-    console.log('state is: ',state); 
-    return state.otpVerification || {}; // Default empty object to avoid undefined error
-});
+  const verifyOTPScreen = useTypedSelector((state) =>(
+     state.otpState // Default empty object to avoid undefined error
+  )
+);
+console.log(`inside verifyOTPScreen: ${verifyOTPScreen}`)
   const [otp, setOtp] = useState('');
   const [verifyOtpData,setVerifyOtpData] = useState({
     mobileNumber: '',
@@ -46,10 +49,15 @@ const verifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   const [timer, setTimer] = useState<number>(defaultOTPTimeout);
   const [errorText, setErrorText] = useState<string>('');
 
+  
+  // const { flatDetailsList, isSucceed } = useSelector((state) => state.otpVerification);
+
   const handleChangeNumber = () => {
     Keyboard.dismiss();
     defaultNavigation.goBack();
   };
+
+  // console.log(`flatDetailsList from useSelector is: ${flatDetailsList} and isSuccess: ${isSucceed}`)
 
   //   useEffect(() => {
   //     console.log('isSuccess: ',isSuccess)
@@ -60,6 +68,15 @@ const verifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   //   }
   // }, [isSuccess, defaultNavigation]);
 
+//   useEffect(() => {
+//     if (isSucceed && flatDetailsList.length > 0) {
+//         defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
+//             screen: MaintainanceAreasScreens.HomeProfile,
+//             params: { showModal: true, flatDetailsList },
+//         });
+//     }
+// }, [isSucceed, flatDetailsList, defaultNavigation]);
+
   
 
   const verifyOTPCall = async () => {
@@ -69,13 +86,25 @@ const verifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
       setErrorText('Phone number not found. Please try again.');
       return;
     }
-    dispatch(verifyOtp({ otp: Number(otp), phoneNumber: Number(phoneNumber), userType: 'internal_user' }));
+    // try {
+
+    const response = dispatch(verifyOtp({ otp: Number(otp), phoneNumber: Number(phoneNumber), userType: 'user' }));
+    // try {
+    //   verifyOtpService(Number(otp), Number(phoneNumber), defaultNavigation);
+    // } catch (error) {
+    //   console.log('Error verifying OTP:', error);
+    //   setErrorText('Failed to verify OTP. Please try again.');
+    // }
+    console.log('inside otp screen: ',JSON.stringify(response))
     console.log('api has been called.');
+    // console.log(`response in otpScreen: ${response}`)
     setClearOtp(false);
     defaultNavigation.navigate(NAVIGATION.HomeProfileNav,{
       screen: MaintainanceAreasScreens.HomeProfile,
+      params: { showModal: true },
     })
-  };
+  // };
+    }
 
   const handleValidOtp = (val: string) => {
     setOtp(val);

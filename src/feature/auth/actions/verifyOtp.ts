@@ -1,6 +1,6 @@
 import { ActionType, createAction } from "typesafe-actions";
 import { IUserData } from "../models/login";
-import { AuthActionTypes } from "../../utils/constants";
+import { AuthActionTypes } from "../../../utils/constants";
 
 export interface IVerifyOtpActionData {
     otp: number;

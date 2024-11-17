@@ -1,5 +1,5 @@
-import { boolean } from 'yup';
-import axios from '../../utils/axios';
+import { boolean, number, string } from 'yup';
+import axios from '../../../utils/axios';
 
 export const OTPService = (
     phoneNumber:number,
