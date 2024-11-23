@@ -17,6 +17,7 @@ import EditProfileScreen from '../feature/settings/EditProfileScreen';
 import PaymentDuesScreen from '../feature/settings/PaymentDuesScreen';
 import ActiveBookings from '../feature/settings/ActiveBookings';
 import CoResidents from '../feature/settings/CoResidents';
+import HomeScreen from '../feature/home/HomeScreen';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -48,6 +49,7 @@ const RootNavigation: React.FunctionComponent = () => {
         <StackNav.Screen name={NAVIGATION.PaymentDuesScreenNav} component={PaymentDuesScreen} />
         <StackNav.Screen name={NAVIGATION.ActiveBookingsNav} component={ActiveBookings}/>
         <StackNav.Screen name={NAVIGATION.CoResidentsNav} component = {CoResidents} />
+        <StackNav.Screen name={NAVIGATION.HomeScreenNav} component = {HomeScreen}/>
       </StackNav.Navigator>
     </NavigationContainer>
   );

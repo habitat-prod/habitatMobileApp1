@@ -83,8 +83,8 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   
       // setClearOtp(false);
       // Redirect to the authenticated section
-      defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
-        screen: MaintainanceAreasScreens.HomeProfile,
+      defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
+        screen: MaintainanceAreasScreens.HomeScreen,
       })
     } catch (error) {
       console.error(error);

@@ -59,7 +59,7 @@ const Setting: React.FC = () => {
           title="Terms and conditions"
           onPress={() => console.log('Terms and conditions')}
         />
-        <SettingsOption title="Contact us" onPress={() => console.log('Contact us')} />
+        <SettingsOption title="Contact us" onPress={() => Toaster("We'll call u soon.")} />
         <SettingsOption title="Logout" onPress={() => Toaster('Logged out successfully.')} />
       </View>
       </View>

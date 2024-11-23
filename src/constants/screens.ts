@@ -12,6 +12,7 @@ export enum NAVIGATION {
   PaymentDuesScreenNav = 'PaymentDuesScreenNav',
   ActiveBookingsNav = 'ActiveBookingsNav',
   CoResidentsNav = 'CoResidentsNav',
+  HomeScreenNav = 'HomeScreenNav'
 
 }
 
@@ -35,6 +36,7 @@ export enum MaintainanceAreasScreens {
   PaymentDuesScreen = 'PaymentDuesScreen',
   ActiveBookings = 'ActiveBookings',
   CoResidents = 'CoResidents',
+  HomeScreen = 'HomeScreen'
 }
 
 export enum BootstrapNavigationScreens {
