@@ -66,21 +66,22 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     try {
       console.log(`phoneNumber is: ${phoneNumber}`)
       console.log(`otp is: ${otp}`)
-      const payload = {
-        phoneNumber: phoneNumber, // phone number from async storage
-        otp: otp,      // otp from user
-        userType: "internal_user",
-      };
-      console.log(payload)
-      const response = await axios.post('https://backend-dev.habitatautomations.com/login/validateOTP', payload);
-      console.log(`data from server: ${response.data}`);
-      const { token } = response.data;
+      await AsyncStorage.setItem('isFirstTimeUser','true')
+      // const payload = {
+      //   phoneNumber: phoneNumber, // phone number from async storage
+      //   otp: otp,      // otp from user
+      //   userType: "internal_user",
+      // };
+      // console.log(payload)
+      // const response = await axios.post('https://backend-dev.habitatautomations.com/login/validateOTP', payload);
+      // console.log(`data from server: ${response.data}`);
+      // const { token } = response.data;
   
-      console.log(`token is: ${token}`);
+      // console.log(`token is: ${token}`);
       // Store the JWT token in AsyncStorage
-      await AsyncStorage.setItem('token', token);
+      // await AsyncStorage.setItem('token', token);
   
-      setClearOtp(false);
+      // setClearOtp(false);
       // Redirect to the authenticated section
       defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
         screen: MaintainanceAreasScreens.HomeProfile,

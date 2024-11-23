@@ -75,7 +75,7 @@ const Login: React.FC = () => {
     <>
       <View style={styles.callingPhone} testID="login-info-container">
         <HandPhone />
-        <Text style={styles.labelTextStyle} >What’s your phone number ? ${message}</Text>
+        <Text style={styles.labelTextStyle} >What’s your phone number ?</Text>
         <Text style={styles.subLabelText} >We’ll use it to get your flat number and deliver our services at your door step.</Text>
       </View>
       <View style={styles.inputRootContainer}>
