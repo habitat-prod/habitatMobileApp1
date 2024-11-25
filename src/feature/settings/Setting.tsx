@@ -42,7 +42,7 @@ const Setting: React.FC = () => {
           onPress={() => console.log('Add payment method')}
           icon="+"
         />
-        <SettingsOption title="Permanent Passes" onPress={() => console.log('Permanent Passes')} />
+        <SettingsOption title="Permanent Passes" onPress={() => defaultNavigation.navigate(NAVIGATION.PermanentPassesNav)} />
         <SettingsOption title="Active Bookings" onPress={() => defaultNavigation.navigate(NAVIGATION.ActiveBookingsNav)} />
         <SettingsOption
           title="Co-Residents"

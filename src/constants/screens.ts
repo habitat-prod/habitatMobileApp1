@@ -16,7 +16,9 @@ export enum NAVIGATION {
   AddCoResidentsNav = 'AddCoResidentsNav',
   TermsConditionsNav = 'TermsConditionsNav',
   ContactScreenNav = 'ContactScreenNav',
-  FeedbackScreenNav = 'FeedbackScreenNav'
+  FeedbackScreenNav = 'FeedbackScreenNav',
+  PermanentPassesNav = 'PermanentPassesNav',
+  AddPermanentPassNav = 'AddPermanentPassNav',
 }
 
 export enum MaintainanceAreasScreens {
@@ -44,6 +46,8 @@ export enum MaintainanceAreasScreens {
   TermsConditions = 'TermsConditions',
   ContactScreen = 'ContactScreen',
   FeedbackScreen = 'FeedbackScreen',
+  PermanentPasses = 'PermanentPasses',
+  AddPermanentPass = 'AddPermanentPass',
 }
 
 export enum BootstrapNavigationScreens {

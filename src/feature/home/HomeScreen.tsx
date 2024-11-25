@@ -201,10 +201,10 @@ const HomeScreen: React.FC = () => {
             source={{ uri: "https://t3.ftcdn.net/jpg/02/71/71/82/360_F_271718267_7B2jXwEGv1dZYdPC4ZNSQSDTuHAhWbsU.jpg" }}
             style={styles.postImage}
           />
-          <View style={{backgroundColor:'#06B8C3', width:'100%',paddingVertical:8, borderRadius:4, marginTop:5, flexDirection:'row', justifyContent:'space-between'}}>
+          <TouchableOpacity style={{backgroundColor:'#06B8C3', width:'100%',paddingVertical:8, borderRadius:4, marginTop:5, flexDirection:'row', justifyContent:'space-between'}}>
             <Text style={{fontSize:14, color:'#fff', marginStart:9}}>Purchase This Service</Text>
             <Text style={{fontSize:14, color:'#fff', marginEnd:9}}>Rs. 5,299/-</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

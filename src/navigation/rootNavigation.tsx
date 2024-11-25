@@ -22,6 +22,8 @@ import AddCoResidents from '../feature/settings/AddCoResidents';
 import TermsConditions from '../feature/settings/TermsConditions';
 import ContactScreen from '../feature/settings/ContactScreen';
 import FeedbackScreen from '../feature/settings/FeedbackScreen';
+import PermanentPasses from '../feature/settings/PermanentPasses';
+import AddPermanentPass from '../feature/settings/AddPermanentPass';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -58,6 +60,8 @@ const RootNavigation: React.FunctionComponent = () => {
         <StackNav.Screen name={NAVIGATION.TermsConditionsNav} component = {TermsConditions}/>
         <StackNav.Screen name={NAVIGATION.ContactScreenNav} component = {ContactScreen} />
         <StackNav.Screen name={NAVIGATION.FeedbackScreenNav} component = {FeedbackScreen}/>
+        <StackNav.Screen name={NAVIGATION.PermanentPassesNav} component = {PermanentPasses}/>
+        <StackNav.Screen name={NAVIGATION.AddPermanentPassNav} component = {AddPermanentPass}/>
       </StackNav.Navigator>
     </NavigationContainer>
   );
