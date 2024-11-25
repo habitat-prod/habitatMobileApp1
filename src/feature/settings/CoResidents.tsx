@@ -9,6 +9,9 @@ import {
   Image
 } from "react-native";
 import {useNavigation} from '@react-navigation/native'
+import { StackNavigationProp } from "@react-navigation/stack";
+import { HBStackParamList } from "../../navigation/rootNavigation";
+import { NAVIGATION } from "../../constants/screens";
 // import { Image } from "react-native-svg";
 
 interface Resident {
@@ -50,6 +53,7 @@ const CoResidents: React.FC = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
+  const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   
   const renderResident = ({ item }: { item: Resident }) => (
@@ -73,14 +77,6 @@ const CoResidents: React.FC = () => {
           ) : (
             <Image source={require('../../assets/png/approved_icon.png')} />
           )}
-            {/* <Text
-              style={[
-                styles.statusText,
-                item.status === "Pending" ? styles.pendingText : styles.approvedText,
-              ]}
-            >
-              {item.status}
-            </Text> */}
           </View>
         </View>
       </View>
@@ -96,20 +92,6 @@ const CoResidents: React.FC = () => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      {/* <View style={styles.header}>
-        <TouchableOpacity>
-          <Text style={styles.backButton}>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Co-residents</Text>
-        <View style={styles.headerIcons}>
-          <TouchableOpacity style={styles.iconButton}>
-            <Text style={styles.filterIcon}>⚙</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton}>
-            <Text style={styles.addIcon}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View> */}
             <View style={styles.header} >
         <TouchableOpacity style={styles.header} onPress={()=> navigation.goBack()}>
         <Text style={{fontSize:24, fontWeight:'normal',color:'white', marginTop:34, marginStart:16, marginEnd:9}}>{'<'}</Text>
@@ -119,7 +101,7 @@ const CoResidents: React.FC = () => {
           <TouchableOpacity style={styles.iconButton}>
             <Image source={require('../../assets/png/filter_icon.png')}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton}>
+          <TouchableOpacity style={styles.iconButton} onPress={()=> defaultNavigation.navigate(NAVIGATION.AddCoResidentsNav)}>
             <Image style={{marginEnd:12}} source = {require('../../assets/png/plus_icon.png')}/>
           </TouchableOpacity>
         </View>
@@ -172,17 +154,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-//   header: {
-//     flexDirection: "row",
-//     padding: 16,
-//     backgroundColor: "#00A8E8",
-//   },
   header: {
     backgroundColor: '#06B8C3',
-    // paddingVertical: 15,
-    // alignItems: 'center',
     flexDirection:'row',
-    // alignItems: "center",
     justifyContent: "space-between",
     // elevation:-9,
     height:200,
@@ -251,11 +225,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop:5,
     alignItems: "center",
-    // justifyContent:'space-around',
-    // alignContent:'center',
-    // alignSelf:'center',
-    // textAlign:'center',
-    // marginHorizontal:60,
   },
   fileName: {
     fontSize: 14,

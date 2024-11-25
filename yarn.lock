@@ -4671,7 +4671,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.10, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1, prop-types@15.8.1:
+prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1, prop-types@15.8.1:
   version "15.8.1"
   dependencies:
     loose-envify "^1.4.0"
@@ -4784,6 +4784,13 @@ react-native-calendars@^1.1305.0:
     xdate "^0.8.0"
   optionalDependencies:
     moment "^2.29.4"
+
+react-native-check-box@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.npmjs.org/react-native-check-box/-/react-native-check-box-2.1.7.tgz"
+  integrity sha512-dPVOoz4jKs2je2HSHp7+XJXNyZFq8Kij7IHutigrQKzB550Dko6ZAQu/1mG1FzdUMFxxkZ2nX59KmbR0Co0T8Q==
+  dependencies:
+    prop-types "^15.5.7"
 
 react-native-config@^1.5.3:
   version "1.5.3"
@@ -4924,14 +4931,14 @@ react-native-swipe-gestures@^1.0.5:
     use-latest-callback "^0.1.5"
 
 react-native-vector-icons@*, react-native-vector-icons@>7.0.0:
-  version "10.1.0"
-  resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-10.1.0.tgz"
-  integrity sha512-fdQjCHIdoXmRoTZ5gvN1FmT4sGLQ2wmQiNZHKJQUYnE2tkIwjGnxNch+6Nd4lHAACvMWO7LOzBNot2u/zlOmkw==
+  version "10.2.0"
+  resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-10.2.0.tgz"
+  integrity sha512-n5HGcxUuVaTf9QJPs/W22xQpC2Z9u0nb0KgLPnVltP8vdUvOp6+R26gF55kilP/fV4eL4vsAHUqUjewppJMBOQ==
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native@*, "react-native@^0.0.0-0 || >=0.65 <1.0", "react-native@>= 0.30.0", "react-native@>= 0.62", react-native@>=0.35, react-native@>=0.42.0, react-native@>=0.46, react-native@>=0.50.0, react-native@>=0.57, react-native@>=0.59, react-native@>=0.65.0, react-native@0.74.1:
+react-native@*, "react-native@^0.0.0-0 || >=0.65 <1.0", "react-native@>= 0.30.0", "react-native@>= 0.62", react-native@>=0.20.0, react-native@>=0.35, react-native@>=0.42.0, react-native@>=0.46, react-native@>=0.50.0, react-native@>=0.57, react-native@>=0.59, react-native@>=0.65.0, react-native@0.74.1:
   version "0.74.1"
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"

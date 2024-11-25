@@ -48,7 +48,7 @@ const Setting: React.FC = () => {
           title="Co-Residents"
           onPress={() => defaultNavigation.navigate(NAVIGATION.CoResidentsNav)}
         />
-        <SettingsOption title="Feedback" onPress={() => console.log('Feedback')} />
+        <SettingsOption title="Feedback" onPress={() => defaultNavigation.navigate(NAVIGATION.FeedbackScreenNav)} />
       </View>
 
       <View style={styles.section}>
@@ -57,9 +57,9 @@ const Setting: React.FC = () => {
         <SettingsOption title="Privacy policy" onPress={() => console.log('Privacy policy')} />
         <SettingsOption
           title="Terms and conditions"
-          onPress={() => console.log('Terms and conditions')}
+          onPress={() => defaultNavigation.navigate(NAVIGATION.TermsConditionsNav)}
         />
-        <SettingsOption title="Contact us" onPress={() => Toaster("We'll call u soon.")} />
+        <SettingsOption title="Contact us" onPress={() => defaultNavigation.navigate(NAVIGATION.ContactScreenNav)} />
         <SettingsOption title="Logout" onPress={() => Toaster('Logged out successfully.')} />
       </View>
       </View>

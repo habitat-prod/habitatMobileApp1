@@ -18,6 +18,10 @@ import PaymentDuesScreen from '../feature/settings/PaymentDuesScreen';
 import ActiveBookings from '../feature/settings/ActiveBookings';
 import CoResidents from '../feature/settings/CoResidents';
 import HomeScreen from '../feature/home/HomeScreen';
+import AddCoResidents from '../feature/settings/AddCoResidents';
+import TermsConditions from '../feature/settings/TermsConditions';
+import ContactScreen from '../feature/settings/ContactScreen';
+import FeedbackScreen from '../feature/settings/FeedbackScreen';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -50,6 +54,10 @@ const RootNavigation: React.FunctionComponent = () => {
         <StackNav.Screen name={NAVIGATION.ActiveBookingsNav} component={ActiveBookings}/>
         <StackNav.Screen name={NAVIGATION.CoResidentsNav} component = {CoResidents} />
         <StackNav.Screen name={NAVIGATION.HomeScreenNav} component = {HomeScreen}/>
+        <StackNav.Screen name={NAVIGATION.AddCoResidentsNav} component = {AddCoResidents}/>
+        <StackNav.Screen name={NAVIGATION.TermsConditionsNav} component = {TermsConditions}/>
+        <StackNav.Screen name={NAVIGATION.ContactScreenNav} component = {ContactScreen} />
+        <StackNav.Screen name={NAVIGATION.FeedbackScreenNav} component = {FeedbackScreen}/>
       </StackNav.Navigator>
     </NavigationContainer>
   );

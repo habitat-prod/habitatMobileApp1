@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { Icon } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import { Modal } from "react-native-paper";
@@ -74,7 +73,7 @@ const HomeScreen: React.FC = () => {
       const firstTime = await AsyncStorage.getItem('isFirstTimeUser');
       if (firstTime) {
         setIsFirstTime(true);
-        setVisible(true); // Show bottom sheet if user is entering first time
+        setVisible(true); // Show choose flat dialog if user is entering first time
       }
     };
     checkFirstTimeUser();
@@ -91,6 +90,38 @@ const HomeScreen: React.FC = () => {
       </View>
     </TouchableOpacity>
   );
+
+  const handleServiceClick = (service: { id: string; title: string; icon: string }) => {
+    switch (service.id) {
+      case "1":
+        console.log("Navigate to Maintenance screen");
+        defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav); 
+        break;
+      case "2":
+        console.log("Navigate to Security screen");
+        defaultNavigation.navigate(NAVIGATION.SecurityApprovalsStackNav); 
+        break;
+      case "3":
+        console.log("Navigate to Parking screen");
+        defaultNavigation.navigate(NAVIGATION.ParkingAreaStackNav);
+        break;
+      case "4":
+        console.log("Navigate to Club House screen");
+        defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav);
+        break;
+      case "5":
+        console.log("Navigate to Hazard Safety screen");
+        defaultNavigation.navigate(NAVIGATION.HazardAreaStackNav);
+        break;
+      case "6":
+        console.log("Navigate to Emergency screen");
+        defaultNavigation.navigate(NAVIGATION.AmbulanceAreaStackNav);
+        break;
+      default:
+        console.log(`Unknown service: ${service.title}`);
+    }
+  };
+  
 
   return (
     <SafeAreaView style={styles.container2}>
@@ -134,7 +165,7 @@ const HomeScreen: React.FC = () => {
 
         <View style={styles.servicesGrid}>
           {services.map((service) => (
-            <TouchableOpacity key={service.id} style={styles.serviceItem}>
+            <TouchableOpacity key={service.id} style={styles.serviceItem} onPress={()=>handleServiceClick(service)}>
               <Image
                 source={{ uri: service.icon }}
                 style={styles.serviceIcon}
