@@ -139,7 +139,8 @@ console.log(`inside verifyOTPScreen: ${verifyOTPScreen}`)
         variant='contained'
         title={t('Sign In')}
         disabled={otp.length !== 6}
-        onClick={verifyOTPCall}
+        // onClick={verifyOTPCall}
+        onClick={handleOtpSubmit}
         styles={{
           container: [styles.btnContainer, otp.length !== 6 && styles.disableBtn]
         }}

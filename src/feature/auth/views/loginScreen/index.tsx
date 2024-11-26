@@ -14,8 +14,11 @@ import useStyles from './styles';
 import { useDispatch } from 'react-redux';
 import { sendOTP } from '../../actions/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { log, warn } from 'console';
 
 const Login: React.FC = () => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [message, setMessage] = useState('');
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
@@ -35,6 +38,26 @@ const Login: React.FC = () => {
       isValid: mobileRegex.test(value ?? ''),
     });
   };
+
+  // this is working code.
+  const handlePhoneNumberSubmit = async () => {
+    try {
+      // const response = await axios.post(`/login/sendOtp?phoneNumber=${loginData.mobileNumber}&userType=internal_user`);
+      // setMessage(response.data.message);
+      // console.warn(response.data.message);
+      await AsyncStorage.setItem('phone',loginData.mobileNumber)
+      const phone = await AsyncStorage.getItem('phone');
+      console.log(`saved number from async storage: ${phone}`)
+  
+      // Navigate after OTP is successfully sent
+      bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
+        phoneNumber: loginData.mobileNumber,
+      });
+    } catch (error) {
+      console.warn(`Error catching while sendOtp: ${error}`);
+    }
+  };
+
 
   const renderStartAdorement = () => (
     <IMBadge
@@ -85,6 +108,7 @@ const Login: React.FC = () => {
           maxLength={10}
           value={loginData.mobileNumber}
           onChange={handleNumberChange}
+          // onChange={(value) => handleNumberChange('mobile-vala', value)}
           startAdornment={renderStartAdorement()}
           keyboardType="numeric"
           style={{
