@@ -12,6 +12,8 @@ import { BootstrapParamsList } from '../../navigation';
 import IMOtpInput from './IMOtp';
 import IMTimer, { TimerStates } from './IMTimer';
 import useStyles from './styles';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IVerifyOTPProps {
   navigation: StackNavigationProp<BootstrapParamsList>;
@@ -25,7 +27,8 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   const routeParams = props.route.params;
   const defaultNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
 
-  const [otp, setOtp] = useState('');
+  const [phoneNumber,setPhoneNumber] = useState('');
+  const [otp, setOtp] = useState(0);
   const [clearOtp, setClearOtp] = useState(false);
   const [timerState, setTimerState] = useState(TimerStates.running);
   const [resendCount, setResendCount] = useState(0);
@@ -37,11 +40,55 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     defaultNavigation.goBack();
   };
 
-  const verifyOTPCall = () => {
-    setClearOtp(false);
-    defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
-      screen: MaintainanceAreasScreens.HomeProfile,
-    })
+  // const verifyOTPCall = () => {
+  //   setClearOtp(false);
+  //   defaultNavigation.navigate(NAVIGATION.HomeProfileNav, {
+  //     screen: MaintainanceAreasScreens.HomeProfile,
+  //   })
+  // };
+
+  useEffect(() => {
+    const fetchPhoneNumber = async () => {
+      try {
+        const storedPhoneNumber = await AsyncStorage.getItem('phone');
+        console.log(`storedPhoneNumber is: ${storedPhoneNumber}`)
+        if (storedPhoneNumber) {
+          setPhoneNumber(storedPhoneNumber);
+        }
+      } catch (error) {
+        console.warn('Error fetching phone number from AsyncStorage:', error);
+      }
+    };
+    fetchPhoneNumber();
+  }, []);
+
+  const handleOtpSubmit = async () => {
+    try {
+      console.log(`phoneNumber is: ${phoneNumber}`)
+      console.log(`otp is: ${otp}`)
+      await AsyncStorage.setItem('isFirstTimeUser','true')
+      // const payload = {
+      //   phoneNumber: phoneNumber, // phone number from async storage
+      //   otp: otp,      // otp from user
+      //   userType: "internal_user",
+      // };
+      // console.log(payload)
+      // const response = await axios.post('https://backend-dev.habitatautomations.com/login/validateOTP', payload);
+      // console.log(`data from server: ${response.data}`);
+      // const { token } = response.data;
+  
+      // console.log(`token is: ${token}`);
+      // Store the JWT token in AsyncStorage
+      // await AsyncStorage.setItem('token', token);
+  
+      // setClearOtp(false);
+      // Redirect to the authenticated section
+      defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
+        screen: MaintainanceAreasScreens.HomeScreen,
+      })
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleValidOtp = (val: string) => {
@@ -77,7 +124,8 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
         variant='contained'
         title={t('Sign In')}
         disabled={otp.length !== 6}
-        onClick={verifyOTPCall}
+        // onClick={verifyOTPCall}
+        onClick={handleOtpSubmit}
         styles={{
           container: [styles.btnContainer, otp.length !== 6 && styles.disableBtn]
         }}

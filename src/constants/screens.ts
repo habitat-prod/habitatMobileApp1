@@ -7,7 +7,18 @@ export enum NAVIGATION {
   SecurityApprovalsStackNav = 'SecurityApprovalsStackNav',
   HazardAreaStackNav = 'HazardAreaStackNav',
   AmbulanceAreaStackNav = 'AmbulanceAreaStackNav',
-
+  SettingNav = 'SettingNav',
+  EditProfileNav = 'EditProfileNav',
+  PaymentDuesScreenNav = 'PaymentDuesScreenNav',
+  ActiveBookingsNav = 'ActiveBookingsNav',
+  CoResidentsNav = 'CoResidentsNav',
+  HomeScreenNav = 'HomeScreenNav',
+  AddCoResidentsNav = 'AddCoResidentsNav',
+  TermsConditionsNav = 'TermsConditionsNav',
+  ContactScreenNav = 'ContactScreenNav',
+  FeedbackScreenNav = 'FeedbackScreenNav',
+  PermanentPassesNav = 'PermanentPassesNav',
+  AddPermanentPassNav = 'AddPermanentPassNav',
 }
 
 export enum MaintainanceAreasScreens {
@@ -24,7 +35,19 @@ export enum MaintainanceAreasScreens {
   NotificationDetails = 'NotificationDetails',
   ReserveDetailsArea = 'ReserveDetailsArea',
   AddReserveParkingDetails = 'AddReserveParkingDetails',
-  ReservedConfirmation = 'ReservedConfirmation'
+  ReservedConfirmation = 'ReservedConfirmation',
+  Setting = 'Setting',
+  EditProfile = 'EditProfile',
+  PaymentDuesScreen = 'PaymentDuesScreen',
+  ActiveBookings = 'ActiveBookings',
+  CoResidents = 'CoResidents',
+  HomeScreen = 'HomeScreen',
+  AddCoResidents = 'AddCoResidents',
+  TermsConditions = 'TermsConditions',
+  ContactScreen = 'ContactScreen',
+  FeedbackScreen = 'FeedbackScreen',
+  PermanentPasses = 'PermanentPasses',
+  AddPermanentPass = 'AddPermanentPass',
 }
 
 export enum BootstrapNavigationScreens {
