@@ -14,6 +14,8 @@ import useStyles from './styles';
 import axios from '../../../../utils/axios';
 import { log, warn } from 'console';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
+import { sendOTP } from '../../action/login';
 
 const Login: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -21,6 +23,26 @@ const Login: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
+
+  const dispatch = useDispatch();
+
+  const handleSentOtp = () =>{
+    console.log('inside the handleSendOtp fun.')
+    if (loginData.mobileNumber.length === 10) {
+      console.log('number digits are perfect.')
+      AsyncStorage.setItem('phoneNumber',loginData.mobileNumber);
+      // Dispatch OTP action
+      dispatch(sendOTP({
+        phoneNumber: Number(loginData.mobileNumber),
+        userType: 'user', 
+      }));
+      
+      // Navigate to OTP verification page
+      bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
+        phoneNumber: loginData.mobileNumber,
+      });
+    }
+  }
 
 
   const mobileRegex = /^[6-9][0-9]{9}$/;
@@ -111,7 +133,7 @@ const Login: React.FC = () => {
           // onClick={() =>    bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
           //   phoneNumber: loginData.mobileNumber,
           // })}
-          onClick={handlePhoneNumberSubmit}
+          onClick={()=> handleSentOtp()}
           disabled={loginData.mobileNumber.length !== 10}
           styles={{
             container: [styles.btnContainer, loginData.mobileNumber.length !== 10 && styles.disableBtn],

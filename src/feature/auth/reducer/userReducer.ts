@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { IErrorActionData } from '../../../utils/error';
-import { loginActions } from '../actions/login';
+import { loginActions } from '../action/login';
 import { AuthActionTypes } from '../../../utils/constants';
 
 
