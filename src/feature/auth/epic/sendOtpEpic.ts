@@ -8,6 +8,7 @@ import { IErrorActionData } from '../../../utils/error';
 import { ISendOtpActionData, sendOTPAction, sendOtpFailure, sendOtpSuccess } from '../action/login';
 import { OTPService } from '../service/sentOtpService';
 import { AuthActionTypes } from '../../../utils/constants';
+import { createContext } from 'react';
 
 const sendOtpEpic = (action$: ActionsObservable<ISendOtpActionData>, state$: StateObservable<rootState>) =>
   action$.pipe(
@@ -23,6 +24,7 @@ const sendOtpEpic = (action$: ActionsObservable<ISendOtpActionData>, state$: Sta
       ).pipe(
         map((response) => {
           console.log('OTP sent Successfully: ', response);
+          const otpSaved = createContext(true);
           
           // case success:
               return sendOtpSuccess({

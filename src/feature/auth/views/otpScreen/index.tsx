@@ -13,7 +13,7 @@ import IMOtpInput from './IMOtp';
 import IMTimer, { TimerStates } from './IMTimer';
 import useStyles from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { verifyOtp } from '../../action/verifyOtp';
 
 interface IVerifyOTPProps {
@@ -37,6 +37,16 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   const [errorText, setErrorText] = useState<string>('');
 
   const dispatch = useDispatch();
+  const otpVerified = useSelector((state)=> state.otpVerification.isSuccess);
+
+  useEffect(()=>{
+    console.log(`isOtpVerified: ${otpVerified}`)
+    if(otpVerified){
+    defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
+      screen: MaintainanceAreasScreens.HomeScreen,
+    })
+  }
+  },[otpVerified]); // it triggers when otpVerified updates.
 
   const handleVerifyOtp = async() => {
     try{
@@ -53,9 +63,9 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     console.log('api has been called.');
     setClearOtp(false);
     // if(response?.data?.success) {
-    defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
-      screen: MaintainanceAreasScreens.HomeScreen,
-    })
+    // defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
+    //   screen: MaintainanceAreasScreens.HomeScreen,
+    // })
     // }
     // else{
     //   setErrorText(response?.data.message || "invalid otp, please try again..")
@@ -76,7 +86,7 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   useEffect(() => {
     const fetchPhoneNumber = async () => {
       try {
-        const storedPhoneNumber = await AsyncStorage.getItem('phone');
+        const storedPhoneNumber = await AsyncStorage.getItem('phoneNumber');
         console.log(`storedPhoneNumber is: ${storedPhoneNumber}`)
         if (storedPhoneNumber) {
           setPhoneNumber(storedPhoneNumber);
@@ -87,34 +97,6 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     };
     fetchPhoneNumber();
   }, []);
-
-  const handleOtpSubmit = async () => {
-    try {
-      console.log(`phoneNumber is: ${phoneNumber}`)
-      console.log(`otp is: ${otp}`)
-      await AsyncStorage.setItem('isFirstTimeUser','true')
-      // const payload = {
-      //   phoneNumber: phoneNumber, // phone number from async storage
-      //   otp: otp,      // otp from user
-      //   userType: "internal_user",
-      // };
-      // console.log(payload)
-      // const response = await axios.post('https://backend-dev.habitatautomations.com/login/validateOTP', payload);
-      // console.log(`data from server: ${response.data}`);
-      // const { token } = response.data;
-  
-      // console.log(`token is: ${token}`);
-      // Store the JWT token in AsyncStorage
-      // await AsyncStorage.setItem('token', token);
-  
-      // setClearOtp(false);
-      defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
-        screen: MaintainanceAreasScreens.HomeScreen,
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleValidOtp = (val: string) => {
     setOtp(val);

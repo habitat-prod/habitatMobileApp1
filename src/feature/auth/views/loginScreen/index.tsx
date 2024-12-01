@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -14,7 +14,7 @@ import useStyles from './styles';
 import axios from '../../../../utils/axios';
 import { log, warn } from 'console';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sendOTP } from '../../action/login';
 
 const Login: React.FC = () => {
@@ -25,23 +25,43 @@ const Login: React.FC = () => {
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
 
   const dispatch = useDispatch();
+  const otpSent = useSelector((state)=> state.otp.sentOtp);
 
-  const handleSentOtp = () =>{
+    useEffect(() => {
+      console.log(`otpSent is: ${otpSent}`);
+      if (otpSent) {
+        bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
+          phoneNumber: loginData.mobileNumber,
+        });
+      }
+  }, [otpSent]); // Trigger only when otpSent changes
+
+  const handleSentOtp = async() =>{
+    if (!mobileRegex.test(loginData.mobileNumber)) {
+      setMessage("Invalid mobile number.");
+      return;
+    }
+    try{
     console.log('inside the handleSendOtp fun.')
     if (loginData.mobileNumber.length === 10) {
       console.log('number digits are perfect.')
-      AsyncStorage.setItem('phoneNumber',loginData.mobileNumber);
+      await AsyncStorage.setItem('phoneNumber',loginData.mobileNumber);
       // Dispatch OTP action
       dispatch(sendOTP({
         phoneNumber: Number(loginData.mobileNumber),
         userType: 'user', 
       }));
       
-      // Navigate to OTP verification page
-      bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-        phoneNumber: loginData.mobileNumber,
-      });
-    }
+    //   if(otpSent){// Navigate to OTP verification page
+    //   bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
+    //     phoneNumber: loginData.mobileNumber,
+    //   });
+    // }
+  }
+}
+  catch(error) {
+    console.error(`Error in handleSendOtp: ${error}`);
+  }
   }
 
 

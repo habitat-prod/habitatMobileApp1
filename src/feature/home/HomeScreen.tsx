@@ -17,6 +17,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HBStackParamList } from "../../navigation/rootNavigation";
 import {useNavigation} from "@react-navigation/native"
 import { NAVIGATION } from "../../constants/screens";
+import { useSelector } from "react-redux";
 
 const HomeScreen: React.FC = () => {
   const services = [
@@ -29,9 +30,12 @@ const HomeScreen: React.FC = () => {
   ];
 
   
-  const [isFirstTime, setIsFirstTime] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  const [visible, setVisible] = useState(true);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+  const otpVerification = useSelector((state) => state.otpVerification)
+
+  console.log(`listSize from the redux Store is: ${otpVerification.listSize}`)
 
   const postUri = 'https://media-del1-2.cdn.whatsapp.net/v/t61.24694-24/310465591_111619854962689_2603035308081784076_n.jpg?ccb=11-4&oh=01_Q5AaIOeNlhokc812B_b9ZEATDZear2IhKgCxfhTJQz9Tivo6&oe=674D2520&_nc_sid=5e03e0&_nc_cat=104';
 

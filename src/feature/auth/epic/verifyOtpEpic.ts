@@ -26,17 +26,26 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
       ).pipe(
         map((response) => {
           console.log('Raw response inside epic: ', JSON.stringify(response.data.data.flatDetailsList));
-          console.log('response keys: ',Object.keys(response))
+          console.log('response keys: ',Object.keys(response));
+          // const dispatch = useDispatch();
           const tempToken = JSON.stringify(response.data.data.tempToken);
-          let userDetail = response.data.data.flatDetailsList;
-          console.log('OTP verified Successfully: ', userDetail);
+          let flatDetailsList = response.data.data.flatDetailsList;
+          console.log('OTP verified Successfully: ', flatDetailsList);
 
-          userDetail = JSON.stringify(userDetail);
-          console.log(`Stringify user details: ${userDetail}`)
+          const listSize = flatDetailsList.length;
+          
+          console.log(`flatListSize is: ${listSize}`);
+
+          console.log(`flatList Type is: ${typeof flatDetailsList}`);
+
+          flatDetailsList = JSON.stringify(flatDetailsList);
+          console.log(`Stringify user details: ${flatDetailsList}`);
           
           AsyncStorage.setItem('token',tempToken);
 
-          console.log(`tokenn is HERE:= ${tempToken}`)
+          console.log(`tokenn is HERE:= ${tempToken}`);
+
+          // dispatch(updateListSize({listSize}));
 
           const {token,userDetails} = response;
           // case success:

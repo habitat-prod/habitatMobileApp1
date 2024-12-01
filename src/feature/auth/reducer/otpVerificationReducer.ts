@@ -9,17 +9,17 @@ export interface OtpVerificationState {
   isLoading: boolean;
   isSuccess: boolean;       
   token?: string;           
-  userDetails?: IUserData;   
+  userDetails?: IUserData;
   error?: IErrorActionData; 
 }
 
 const initialVerificationState: OtpVerificationState = {
   flatDetailsList: [],
   isLoading: false,
-  isSuccess: false,        
-  token: undefined,       
-  userDetails: undefined,  
-  error: undefined,        
+  isSuccess: false,
+  token: undefined,
+  userDetails: undefined,
+  error: undefined,
 };
 
 const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
@@ -53,6 +53,11 @@ const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
           errorMessage: action.payload.message,
         },
       };
+    // case AuthActionTypes.UPDATE_LIST_SIZE:
+    //   return {
+    //     ...state,
+    //     listSize: action.payload.listSize,
+    //   };
     default:
       return state;
   }
