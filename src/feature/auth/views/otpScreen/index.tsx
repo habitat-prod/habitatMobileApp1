@@ -38,9 +38,12 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
 
   const dispatch = useDispatch();
   const otpVerified = useSelector((state)=> state.otpVerification.isSuccess);
+  const flatDetailsList = useSelector((state)=> state.otpVerification.flatDetailsList);
+  
 
   useEffect(()=>{
-    console.log(`isOtpVerified: ${otpVerified}`)
+    console.log(`flatDetailsList in otpScreen: ${flatDetailsList}`);
+    console.log(`isOtpVerified: ${otpVerified}`);
     if(otpVerified){
     defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
       screen: MaintainanceAreasScreens.HomeScreen,

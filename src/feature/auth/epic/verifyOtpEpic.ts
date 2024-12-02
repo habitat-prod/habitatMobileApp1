@@ -27,31 +27,39 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
         map((response) => {
           console.log('Raw response inside epic: ', JSON.stringify(response.data.data.flatDetailsList));
           console.log('response keys: ',Object.keys(response));
-          // const dispatch = useDispatch();
-          const tempToken = JSON.stringify(response.data.data.tempToken);
-          let flatDetailsList = response.data.data.flatDetailsList;
-          console.log('OTP verified Successfully: ', flatDetailsList);
+          const tempToken = response.data.data.tempToken;
+          const flatDetailsList = response.data.data.flatDetailsList;
+          const flatListSize = response.data.data.flatListSize;
+
+          const fullResponse = response.data;
+          const fullResponse2 = response.data.data;
+          console.log('OTP verified Successfully: ', JSON.stringify(flatDetailsList));
+
+          console.log(`full response is: ${JSON.stringify(fullResponse)}`);
+          console.log(`fullResponse2 is: ${JSON.stringify(fullResponse2)}`);
 
           const listSize = flatDetailsList.length;
+
+          console.log(`flatListSize directly from response: ${flatListSize}`)
           
           console.log(`flatListSize is: ${listSize}`);
 
           console.log(`flatList Type is: ${typeof flatDetailsList}`);
 
-          flatDetailsList = JSON.stringify(flatDetailsList);
-          console.log(`Stringify user details: ${flatDetailsList}`);
+          // flatDetailsList = JSON.stringify(flatDetailsList);
+          console.log(`Stringify user details: ${JSON.stringify(flatDetailsList)}`);
           
-          AsyncStorage.setItem('token',tempToken);
+          AsyncStorage.setItem('token',JSON.stringify(tempToken));
 
-          console.log(`tokenn is HERE:= ${tempToken}`);
+          console.log(`tokenn is HERE:= ${JSON.stringify(tempToken)}`);
 
-          // dispatch(updateListSize({listSize}));
 
-          const {token,userDetails} = response;
+          // const {token,userDetails} = response;
           // case success:
               return verifyOtpSuccess({
-                token,
-                userDetails,
+                token: tempToken,
+                userDetails: flatDetailsList,
+                flatListSize: flatListSize,
               });
         }),
 

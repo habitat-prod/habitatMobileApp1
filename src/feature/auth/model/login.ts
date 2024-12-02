@@ -1,5 +1,4 @@
 export interface IUserData {
-    userName:string;
     flatNo:number;
     flatId:number;
     flatName:string;

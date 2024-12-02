@@ -18,6 +18,7 @@ import { HBStackParamList } from "../../navigation/rootNavigation";
 import {useNavigation} from "@react-navigation/native"
 import { NAVIGATION } from "../../constants/screens";
 import { useSelector } from "react-redux";
+import { Toaster } from "../../../src/utils/common";
 
 const HomeScreen: React.FC = () => {
   const services = [
@@ -33,9 +34,16 @@ const HomeScreen: React.FC = () => {
   const [isFirstTime, setIsFirstTime] = useState(true);
   const [visible, setVisible] = useState(true);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
-  const otpVerification = useSelector((state) => state.otpVerification)
+  const flatDetailsList = useSelector((state) => state.otpVerification.userDetails);
+  const flatListSize = useSelector((state)=> state.otpVerification.flatListSize);
+  const tempToken = useSelector((state)=> state.otpVerification.token);
 
-  console.log(`listSize from the redux Store is: ${otpVerification.listSize}`)
+  console.log(`the list in HomeScreen from redux store is: ${JSON.stringify(flatDetailsList)}`);
+  console.log(`the listSize in HomeScreen from redux store is: ${JSON.stringify(flatListSize)}`);
+  console.log(`the tempToken in HomeScreen from redux store is: ${JSON.stringify(tempToken)}`);
+  // console.log(`the listSize is: ${flatDetailsList.length}`);
+
+  // console.log(`listSize from the redux Store is: ${otpVerification.listSize}`)
 
   const postUri = 'https://media-del1-2.cdn.whatsapp.net/v/t61.24694-24/310465591_111619854962689_2603035308081784076_n.jpg?ccb=11-4&oh=01_Q5AaIOeNlhokc812B_b9ZEATDZear2IhKgCxfhTJQz9Tivo6&oe=674D2520&_nc_sid=5e03e0&_nc_cat=104';
 
@@ -83,17 +91,24 @@ const HomeScreen: React.FC = () => {
     checkFirstTimeUser();
   }, []);
 
-  const renderAddressItem = ({ item }: { item: typeof addressData[0] }) => (
-    <TouchableOpacity style={styles.addressOption} onPress={handleSelectHome}>
+  const renderAddressItem = ({ item }: { item: typeof flatDetailsList[0] }) => (
+    <TouchableOpacity style={styles.addressOption} onPress={()=>handleFlatItemClick(item)}>
       <View style={{ flexDirection: 'row', marginTop: 5, padding: 5 }}>
-        <Image source={item.icon} style={styles.iconStyle} />
+        <Image source={require('../../assets/png/habitaticon.png')} style={styles.iconStyle} />
         <View style={{ flexDirection: 'column' }}>
-          <Text style={styles.txt}>{item.title}</Text>
-          <Text style={{ color: 'grey', fontSize: 12 }}>{item.description}</Text>
+          <Text style={styles.txt}>{item.flatName}</Text>
+          <Text style={{ color: 'grey', fontSize: 12 }}>{item.flatAddress}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
+
+  const handleFlatItemClick = async(item: any) => {
+    Toaster(`flatId is: ${item.flatId.toString()} flatName is: ${item.flatName}`);
+    await AsyncStorage.setItem('isFirstTimeUser', 'false');
+    setIsFirstTime(false);
+    setVisible(false); // Close the modal after selection
+  }
 
   const handleServiceClick = (service: { id: string; title: string; icon: string }) => {
     switch (service.id) {
@@ -213,8 +228,8 @@ const HomeScreen: React.FC = () => {
       </View>
     </ScrollView>
 
-    {isFirstTime && (
-          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: -49 }} onDismiss={() => { }}>
+    {(flatListSize>1) && isFirstTime && (
+          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: 19}} onDismiss={() => { Toaster('Please Select any flat to Access incredible features of APP :)') }}>
             <View
               style={{
                 backgroundColor: '#fff',
@@ -230,8 +245,8 @@ const HomeScreen: React.FC = () => {
 
               {/* Address List */}
               <FlatList
-                data={addressData}
-                keyExtractor={(item) => item.id.toString()}
+                data={flatDetailsList}
+                keyExtractor={(item) => item.id}
                 renderItem={renderAddressItem}
                 contentContainerStyle={{ paddingBottom: 10 }}
               />

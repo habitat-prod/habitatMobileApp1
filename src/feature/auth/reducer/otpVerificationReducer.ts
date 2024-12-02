@@ -5,21 +5,23 @@ import { IUserData } from '../model/login';
 import { AuthActionTypes } from '../../../utils/constants';
 
 export interface OtpVerificationState {
-  flatDetailsList: [];
+  // flatDetailsList: [];
   isLoading: boolean;
   isSuccess: boolean;       
   token?: string;           
-  userDetails?: IUserData;
+  userDetails?: IUserData[];
   error?: IErrorActionData; 
+  flatListSize: Number;
 }
 
 const initialVerificationState: OtpVerificationState = {
-  flatDetailsList: [],
+  // flatDetailsList: [],
   isLoading: false,
   isSuccess: false,
   token: undefined,
-  userDetails: undefined,
+  userDetails: [],
   error: undefined,
+  flatListSize: 0,
 };
 
 const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
@@ -35,12 +37,17 @@ const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
         isSuccess: false,
       };
     case AuthActionTypes.VERIFY_OTP_SUCCESS_ACTION:
+      console.log(`reducer FDL update: ${JSON.stringify(action.payload.flatDetailsList)}`);
+      console.log(`reducer userDetails update: ${JSON.stringify(action.payload.userDetails)}`);
+      console.log(`reducer token update: ${JSON.stringify(action.payload.tempToken)}`);
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
         token: action.payload.token, // Store token
-        flatDetailsList: action.payload.userDetails,
+        // flatDetailsList: action.payload.flatDetailsList,
+        userDetails: action.payload.userDetails,
+        flatListSize: action.payload.flatListSize,
         error: undefined,
       };
     case AuthActionTypes.VERIFY_OTP_FAILURE_ACTION:
@@ -53,11 +60,6 @@ const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
           errorMessage: action.payload.message,
         },
       };
-    // case AuthActionTypes.UPDATE_LIST_SIZE:
-    //   return {
-    //     ...state,
-    //     listSize: action.payload.listSize,
-    //   };
     default:
       return state;
   }
