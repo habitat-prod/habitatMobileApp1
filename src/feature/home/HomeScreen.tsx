@@ -17,8 +17,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HBStackParamList } from "../../navigation/rootNavigation";
 import {useNavigation} from "@react-navigation/native"
 import { NAVIGATION } from "../../constants/screens";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "../../../src/utils/common";
+import { generateToken } from "./action/tokenGenAction";
+import { property } from "lodash";
 
 const HomeScreen: React.FC = () => {
   const services = [
@@ -37,6 +39,11 @@ const HomeScreen: React.FC = () => {
   const flatDetailsList = useSelector((state) => state.otpVerification.userDetails);
   const flatListSize = useSelector((state)=> state.otpVerification.flatListSize);
   const tempToken = useSelector((state)=> state.otpVerification.token);
+  const dispatch = useDispatch();
+  const flatNo = useSelector((state)=> state.tokenReducer.flatNo);
+  const buildingName = useSelector((state)=> state.tokenReducer.buildingName);
+  const societyName = useSelector((state)=> state.tokenReducer.societyName);
+  const societyAddress = useSelector((state)=> state.tokenReducer.societyAddress);
 
   console.log(`the list in HomeScreen from redux store is: ${JSON.stringify(flatDetailsList)}`);
   console.log(`the listSize in HomeScreen from redux store is: ${JSON.stringify(flatListSize)}`);
@@ -105,6 +112,8 @@ const HomeScreen: React.FC = () => {
 
   const handleFlatItemClick = async(item: any) => {
     Toaster(`flatId is: ${item.flatId.toString()} flatName is: ${item.flatName}`);
+    const response = await dispatch(generateToken({propertyId: Number(item.flatId), userType: 'USER'}));
+    console.log(JSON.stringify(response));
     await AsyncStorage.setItem('isFirstTimeUser', 'false');
     setIsFirstTime(false);
     setVisible(false); // Close the modal after selection

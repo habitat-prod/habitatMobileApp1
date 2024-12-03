@@ -19,7 +19,7 @@ const homeProfileReducer: Reducer<HomeProfileState, HomeProfileActions> = (state
     case ActionTypes.FETCH_HOME_PROFILE_DATA:
       return { ...state, isLoading: true, error: undefined };
     case ActionTypes.FETCH_HOME_PROFILE_DATA_SUCCESS:
-      return { ...state, isLoading: false, data: action.payload };
+      return { ...state, isLoading: false, data: action.payload, error: undefined };
     case ActionTypes.FETCH_HOME_PROFILE_DATA_FAILURE:
       return { ...state, isLoading: false, error: action.payload.error };
     default:

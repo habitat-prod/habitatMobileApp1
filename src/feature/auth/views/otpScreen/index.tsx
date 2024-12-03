@@ -38,7 +38,8 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
 
   const dispatch = useDispatch();
   const otpVerified = useSelector((state)=> state.otpVerification.isSuccess);
-  const flatDetailsList = useSelector((state)=> state.otpVerification.flatDetailsList);
+  const flatDetailsList = useSelector((state)=> state.otpVerification.userDetails);
+  const flatListSize = useSelector((state) => state.otpVerification.flatListSize);
   
 
   useEffect(()=>{
