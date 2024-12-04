@@ -7,6 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Alert,
+  BackHandler,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
@@ -21,71 +23,101 @@ import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "../../../src/utils/common";
 import { generateToken } from "./action/tokenGenAction";
 import { property } from "lodash";
+import { fetchHomeProfileData } from "./action/homeProfileAction";
 
 const HomeScreen: React.FC = () => {
-  const services = [
-    { id: "1", title: "Maintenance", icon: "https://images.ctfassets.net/grb5fvwhwnyo/3etjlp73QMlp08bqO9TrTt/4bb2d839897bf3a02832268e7923ec6e/card-the-importance-of-maintenance-management.jpg" },
-    { id: "2", title: "Security", icon: "https://mpg-egy.com/wp-content/uploads/2024/05/Top-Five-Security-Guard-Tasks.jpg" },
-    { id: "3", title: "Parking", icon: "https://circontrol.com/wp-content/uploads/2023/10/180125-Circontrol-BAIXA-80-1.jpg" },
-    { id: "4", title: "Club House", icon: "https://media.bluentcad.com/images/clubhouse-design.webp" },
-    { id: "5", title: "Hazard Safety", icon: "https://plus.unsplash.com/premium_photo-1677529102407-0d075eb2cbb9?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya3BsYWNlJTIwc2FmZXR5fGVufDB8fDB8fHww" },
-    { id: "6", title: "Emergency", icon: "https://img.freepik.com/premium-vector/poster-emergency_188544-7066.jpg" },
-  ];
+  // const services = [
+  //   { id: "1", title: "Maintenance", icon: "https://images.ctfassets.net/grb5fvwhwnyo/3etjlp73QMlp08bqO9TrTt/4bb2d839897bf3a02832268e7923ec6e/card-the-importance-of-maintenance-management.jpg" },
+  //   { id: "2", title: "Security", icon: "https://mpg-egy.com/wp-content/uploads/2024/05/Top-Five-Security-Guard-Tasks.jpg" },
+  //   { id: "3", title: "Parking", icon: "https://circontrol.com/wp-content/uploads/2023/10/180125-Circontrol-BAIXA-80-1.jpg" },
+  //   { id: "4", title: "Club House", icon: "https://media.bluentcad.com/images/clubhouse-design.webp" },
+  //   { id: "5", title: "Hazard Safety", icon: "https://plus.unsplash.com/premium_photo-1677529102407-0d075eb2cbb9?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya3BsYWNlJTIwc2FmZXR5fGVufDB8fDB8fHww" },
+  //   { id: "6", title: "Emergency", icon: "https://img.freepik.com/premium-vector/poster-emergency_188544-7066.jpg" },
+  // ];
 
   
-  const [isFirstTime, setIsFirstTime] = useState(true);
+  const [isFirstTime, setIsFirstTime] = useState(false);
   const [visible, setVisible] = useState(true);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
   const flatDetailsList = useSelector((state) => state.otpVerification.userDetails);
   const flatListSize = useSelector((state)=> state.otpVerification.flatListSize);
-  const tempToken = useSelector((state)=> state.otpVerification.token);
   const dispatch = useDispatch();
-  const flatNo = useSelector((state)=> state.tokenReducer.flatNo);
-  const buildingName = useSelector((state)=> state.tokenReducer.buildingName);
-  const societyName = useSelector((state)=> state.tokenReducer.societyName);
-  const societyAddress = useSelector((state)=> state.tokenReducer.societyAddress);
+  let flatNo = useSelector((state)=> state.tokenReducer.flatNo);
+  let buildingName = useSelector((state)=> state.tokenReducer.buildingName);
+  let societyName = useSelector((state)=> state.tokenReducer.societyName);
+  let societyAddress = useSelector((state)=> state.tokenReducer.societyAddress);
+  let token = useSelector((state)=> state.tokenReducer.token);
+  let societyId = useSelector((state)=> state.tokenReducer.societyId);
+  const serviceList = useSelector((state)=> state.pmsReducer.data.data);
 
-  console.log(`the list in HomeScreen from redux store is: ${JSON.stringify(flatDetailsList)}`);
-  console.log(`the listSize in HomeScreen from redux store is: ${JSON.stringify(flatListSize)}`);
-  console.log(`the tempToken in HomeScreen from redux store is: ${JSON.stringify(tempToken)}`);
-  // console.log(`the listSize is: ${flatDetailsList.length}`);
+  console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
 
-  // console.log(`listSize from the redux Store is: ${otpVerification.listSize}`)
+    const [userDetails, setUserDetail] = useState({
+    flatNo: '',
+    buildingName: '',
+    societyName: '',
+    societyAddress: ''
+    });
+
+  console.log(`serviceList from redux pipelines is: ${JSON.stringify(serviceList)}`);
+
+  console.log(`the token after flat selection in HomeScreen from redux store is: ${JSON.stringify(token)}`);
+
+  useEffect(()=>{
+  const setUserDetails = async () => {
+    flatNo = await AsyncStorage.getItem('flatNo');
+    buildingName = await AsyncStorage.getItem('buildingName');
+    societyName = await AsyncStorage.getItem('societyName');
+    societyAddress = await AsyncStorage.getItem('societyAddress');
+    console.log({flatNo}, {buildingName}, {societyName}, {societyAddress});
+    
+    setUserDetail({
+      flatNo:flatNo,
+      buildingName:buildingName,
+      societyName:societyName,
+      societyAddress:societyAddress,
+    });
+
+
+    console.log('going to call pms response API');
+    const pmsResponse = dispatch(fetchHomeProfileData());
+    console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
+  } 
+  setUserDetails();
+  },[]);
+
+  console.log(`the flatNo in HomeScreen from redux store is: ${JSON.stringify(flatNo)}`);
+  console.log(`the BuildingName in HomeScreen from redux store is: ${JSON.stringify(buildingName)}`);
+  console.log(`the societyName in HomeScreen from redux store is: ${JSON.stringify(societyName)}`);
+  console.log(`the societyAddress in HomeScreen from redux store is: ${JSON.stringify(societyAddress)}`);
 
   const postUri = 'https://media-del1-2.cdn.whatsapp.net/v/t61.24694-24/310465591_111619854962689_2603035308081784076_n.jpg?ccb=11-4&oh=01_Q5AaIOeNlhokc812B_b9ZEATDZear2IhKgCxfhTJQz9Tivo6&oe=674D2520&_nc_sid=5e03e0&_nc_cat=104';
 
-  const addressData = [
-    {
-      id: 1,
-      title: 'Home',
-      description: 'House Number 4, First Floor, Khatipura, Jaipur',
-      icon: require('../../assets/png/habitaticon.png'),
-    },
-    {
-      id: 2,
-      title: 'Office',
-      description: '2nd Floor, IT Tower, Tech Park, Indore',
-      icon: require('../../assets/png/habitaticon.png'),
-    },
-    {
-      id: 3,
-      title: 'Warehouse',
-      description: 'Ground Floor, Industrial Area, Banglore',
-      icon: require('../../assets/png/habitaticon.png'),
-    },
-    {
-      id: 4,
-      title: 'Home',
-      description: 'Ground Floor, Industrial Area, Kanpur',
-      icon: require('../../assets/png/habitaticon.png'),
-    },
-  ];
+  // useEffect(() => {
+    // Back button press handler
+    // const backAction = () => {
+      // Alert.alert(
+      //   'Exit App', 
+      //   'Are you sure you want to exit the app?', 
+      //   [
+      //     { text: 'Cancel', onPress: () => null, style: 'cancel' },
+      //     { text: 'Yes', onPress: () => BackHandler.exitApp() },
+      //   ]
+      // );
+  //     BackHandler.exitApp();
+  //     return true;
+  //   };
 
-  const handleSelectHome = async () => {
-    await AsyncStorage.setItem('isFirstTimeUser', 'false');
-    setIsFirstTime(false);
-    setVisible(false); // Close the modal after selection
-  };
+  //   // Add event listener
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     backAction
+  //   );
+
+  //   // Cleanup the listener on unmount
+  //   return () => backHandler.remove();
+  // }, []);
+
 
   useEffect(() => {
     const checkFirstTimeUser = async () => {
@@ -111,37 +143,47 @@ const HomeScreen: React.FC = () => {
   );
 
   const handleFlatItemClick = async(item: any) => {
+    try{
     Toaster(`flatId is: ${item.flatId.toString()} flatName is: ${item.flatName}`);
     const response = await dispatch(generateToken({propertyId: Number(item.flatId), userType: 'USER'}));
+    // const token = await AsyncStorage.getItem('token');
+    // const societyId = await AsyncStorage.getItem('societyId');
+    console.log('going to call pms response API');
+    const pmsResponse = await dispatch(fetchHomeProfileData({societyId: Number(societyId),token:token}));
+    console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
     console.log(JSON.stringify(response));
     await AsyncStorage.setItem('isFirstTimeUser', 'false');
     setIsFirstTime(false);
     setVisible(false); // Close the modal after selection
+    }
+    catch(error) {
+      console.error(`error in handleFlatItemClick: ${error}`);
+    }
   }
 
-  const handleServiceClick = (service: { id: string; title: string; icon: string }) => {
+  const handleServiceClick = (service) => {
     switch (service.id) {
-      case "1":
+      case 1:
         console.log("Navigate to Maintenance screen");
         defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav); 
         break;
-      case "2":
+      case 2:
         console.log("Navigate to Security screen");
         defaultNavigation.navigate(NAVIGATION.SecurityApprovalsStackNav); 
         break;
-      case "3":
+      case 3:
         console.log("Navigate to Parking screen");
         defaultNavigation.navigate(NAVIGATION.ParkingAreaStackNav);
         break;
-      case "4":
+      case 4:
         console.log("Navigate to Club House screen");
         defaultNavigation.navigate(NAVIGATION.ReserveCommonAreaStackNav);
         break;
-      case "5":
+      case 5:
         console.log("Navigate to Hazard Safety screen");
         defaultNavigation.navigate(NAVIGATION.HazardAreaStackNav);
         break;
-      case "6":
+      case 6:
         console.log("Navigate to Emergency screen");
         defaultNavigation.navigate(NAVIGATION.AmbulanceAreaStackNav);
         break;
@@ -159,11 +201,11 @@ const HomeScreen: React.FC = () => {
       <View style={styles.header}>
         <View style={{flexDirection:'column', width:180}}>
         <View style={{flexDirection:'row'}}>
-          <Text style={styles.headerTitle}>235, Block C</Text>
+          <Text style={styles.headerTitle}>{flatNo || userDetails.flatNo}, {buildingName || userDetails.buildingName}</Text>
         <Image source={require('../../assets/png/arrow_down.png')} style={{ marginTop:3}}/>
         </View>
           <Text style={styles.headerSubtitle}>
-            Eshwar Heights, Indira Nagar
+            {societyName || userDetails.societyName}, {societyAddress || userDetails.societyAddress}
           </Text>
         </View>
         <TouchableOpacity  onPress={()=> defaultNavigation.navigate(NAVIGATION.SettingNav)}>
@@ -192,15 +234,17 @@ const HomeScreen: React.FC = () => {
         </View>
 
         <View style={styles.servicesGrid}>
-          {services.map((service) => (
-            <TouchableOpacity key={service.id} style={styles.serviceItem} onPress={()=>handleServiceClick(service)}>
+          {Array.isArray(serviceList)? serviceList.map((service) => (
+            <TouchableOpacity key={service.pmsId} style={styles.serviceItem} onPress={()=>{handleServiceClick(service); console.log(service.pmsId)}}>
               <Image
-                source={{ uri: service.icon }}
+                source={{ uri: service.s3Path }}
                 style={styles.serviceIcon}
               />
-              <Text style={styles.serviceText}>{service.title}</Text>
+              <Text style={styles.serviceText}>{service.pmsName}</Text>
             </TouchableOpacity>
-          ))}
+          ))
+          : <Text>No Services available yet!</Text>
+        }
         </View>
       </View>
 

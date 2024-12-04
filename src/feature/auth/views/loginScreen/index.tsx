@@ -6,16 +6,18 @@ import { useTheme } from 'react-native-paper';
 import IMTextInput from '../../../../components/IMInput/IMTextInput';
 import IMButton from '../../../../components/IMButton';
 import { BootstrapParamsList } from '../../navigation';
-import { BootstrapNavigationScreens } from '../../../../constants/screens';
+import { BootstrapNavigationScreens, NAVIGATION } from '../../../../constants/screens';
 import HandPhone from '../../../../assets/svg/HandPhone';
 import IMBadge from '../../../../components/IMBadge';
 import IndiaFlag from '../../../../assets/svg/IndiaFlag';
 import useStyles from './styles';
-import axios from '../../../../utils/axios';
 import { log, warn } from 'console';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendOTP } from '../../action/login';
+import { HBStackParamList } from 'src/navigation/rootNavigation';
+import {StackNavigationProp} from '@react-navigation/stack';
+
 
 const Login: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -23,9 +25,25 @@ const Login: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
+
+  const navigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   const dispatch = useDispatch();
   const otpSent = useSelector((state)=> state.otp.sentOtp);
+
+    useEffect( ()=>{
+      const checkLoginState = async () => {
+    // const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+    const token = await AsyncStorage.getItem('token');
+    console.log(`isLogged in: ${isLoggedIn} & token is: ${token}`);
+      if(token){
+        console.log('inside is condition :)');
+        navigation.navigate(NAVIGATION.HomeScreenNav);
+      }
+      };
+      checkLoginState();
+    },[]);
 
     useEffect(() => {
       console.log(`otpSent is: ${otpSent}`);
@@ -51,12 +69,6 @@ const Login: React.FC = () => {
         phoneNumber: Number(loginData.mobileNumber),
         userType: 'user', 
       }));
-      
-    //   if(otpSent){// Navigate to OTP verification page
-    //   bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-    //     phoneNumber: loginData.mobileNumber,
-    //   });
-    // }
   }
 }
   catch(error) {
@@ -85,7 +97,7 @@ const Login: React.FC = () => {
       // const response = await axios.post(`/login/sendOtp?phoneNumber=${loginData.mobileNumber}&userType=internal_user`);
       // setMessage(response.data.message);
       // console.warn(response.data.message);
-      await AsyncStorage.setItem('phone',loginData.mobileNumber)
+      await AsyncStorage.setItem('phone',loginData.mobileNumber);
       const phone = await AsyncStorage.getItem('phone');
       console.log(`saved number from async storage: ${phone}`)
   

@@ -9,6 +9,7 @@ export interface TokenState {
   flatNo:string;
   flatName:string;
   buildingName:string;
+  societyId:number;
   societyName:string;
   societyAddress:string;
   error?: string;
@@ -19,12 +20,13 @@ const initialState: TokenState = {
     isLoading: false,
     token: undefined,
     error: undefined,
-    userName: "Binod",
-    flatNo: "420",
+    societyId:0,
+    userName: "",
+    flatNo: "",
     flatName: "",
-    buildingName: "Block-D",
-    societyName: "NRI City",
-    societyAddress: "Kanpur."
+    buildingName: "",
+    societyName: "",
+    societyAddress: ""
 };
 
 

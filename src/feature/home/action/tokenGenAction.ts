@@ -6,8 +6,15 @@ export interface IGenerateTokenActionData {
     userType: string;
   }
 
-export interface IGenerateTokenSuccessActionData { // here, i'll add more fields to store from response.
+export interface IGenerateTokenSuccessActionData {
 token:string;
+userName:string;
+flatNo:string;
+flatName:string;
+buildingName:string;
+societyId:number;
+societyName:string;
+societyAddress:string;
 }
 
 

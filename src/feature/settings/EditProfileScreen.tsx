@@ -53,7 +53,7 @@ const EditProfileScreen: React.FC = () => {
         <View style={styles.imageContainer}>
           <Image
             source={{
-              uri: "https://media-del1-2.cdn.whatsapp.net/v/t61.24694-24/437192839_460374373491729_8117494488611041816_n.jpg?ccb=11-4&oh=01_Q5AaILwJuKJtVGS_eeVV18Qpvx5rqSdhFm2W3VNjIVCWa18B&oe=674D2611&_nc_sid=5e03e0&_nc_cat=106", 
+              uri: "https://instagram.fknu1-4.fna.fbcdn.net/v/t51.2885-19/431802314_1890866504709275_3040778590036686043_n.jpg?_nc_ht=instagram.fknu1-4.fna.fbcdn.net&_nc_cat=111&_nc_ohc=qBOh77eMxQcQ7kNvgEyB24r&_nc_gid=aa426296eaeb42248126d8dae6b2e9ba&edm=APoiHPcBAAAA&ccb=7-5&oh=00_AYAEwaFegtSjaZQl1-jAx8NdcYHV0B851T8Fhw2yBEqhHQ&oe=67564E61&_nc_sid=22de04", 
             }}
             style={styles.profileImage}
           />

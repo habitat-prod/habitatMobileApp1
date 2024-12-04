@@ -44,6 +44,9 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
 
   useEffect(()=>{
     console.log(`flatDetailsList in otpScreen: ${flatDetailsList}`);
+    if(flatDetailsList.length>1) {
+      openDialog();
+    }
     console.log(`isOtpVerified: ${otpVerified}`);
     if(otpVerified){
     defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
@@ -51,6 +54,10 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     })
   }
   },[otpVerified]); // it triggers when otpVerified updates.
+
+  const openDialog = async()=>{
+    await AsyncStorage.setItem('isFirstTimeUser', JSON.stringify(true));
+  }
 
   const handleVerifyOtp = async() => {
     try{

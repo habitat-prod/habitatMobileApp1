@@ -46,27 +46,30 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         const newToken = response.data?.token;
         await AsyncStorage.setItem('token', newToken);
 
+        const userName = response.data.userName;
+        const flatNo = response.data.flatNo;
+        const flatName = response.data.flatName;
+        const buildingName = response.data.buildingName;
+        const societyName = response.data.societyName;
+        const societyAddress = response.data.societyAddress;
+
         // const userId = response.data?.userId;
-        // const userName = response.data?.userName;
-        // const flatId = response.data?.flatId;
-        // const flatNo = response.data?.flatNo;
-        // const flatName = response.data?.flatName;
+        const flatId = response.data?.flatId;
         // const buildingId = response.data?.buildingId;
-        // const buildingName = response.data?.buildingName;
-        // const societyId = response.data?.societyId;
-        // const societyName = response.data?.societyName;
-        // const societyAddress = response.data?.societyAddress;
+        const societyId = response.data?.societyId;
+
+        await AsyncStorage.setItem('societyId',`${societyId}`);
 
         // await AsyncStorage.setItem('userId',userId);
         // await AsyncStorage.setItem('userName',userName);
-        // await AsyncStorage.setItem('flatId',flatId);
-        // await AsyncStorage.setItem('flatNo',flatNo);
-        // await AsyncStorage.setItem('flatName',flatName);
+        await AsyncStorage.setItem('flatId',`${flatId}`);
+        await AsyncStorage.setItem('flatNo',flatNo);
+        await AsyncStorage.setItem('flatName',flatName);
         // await AsyncStorage.setItem('buildingId',buildingId);
-        // await AsyncStorage.setItem('buildingName',buildingName);
+        await AsyncStorage.setItem('buildingName',buildingName);
         // await AsyncStorage.setItem('societyId',societyId);
-        // await AsyncStorage.setItem('societyName',societyName);
-        // await AsyncStorage.setItem('societyAddress',societyAddress);
+        await AsyncStorage.setItem('societyName',societyName);
+        await AsyncStorage.setItem('societyAddress',societyAddress);
 
 
         console.log(`the new token is: ${JSON.stringify(newToken)}`);
@@ -80,7 +83,11 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
           throw new Error("Token not found in response!");
         }
 
-        return generateTokenSuccess({ token: newToken });
+        return generateTokenSuccess({ 
+            token: newToken, userName:userName, 
+            flatNo:flatNo,flatName:flatName,
+            buildingName:buildingName, societyId: societyId,
+            societyName:societyName,societyAddress:societyAddress });
       } catch (error: any) {
         console.error("Token generation error:", error);
         return generateTokenFailure({ error: error.message || "Token generation failed" });
