@@ -37,7 +37,7 @@ const tokenReducer: Reducer<TokenState, TokenActions> = (state = initialState, a
       return { ...state, isLoading: true, error: undefined };
     case ActionTypes.GENERATE_TOKEN_SUCCESS:
         console.log('GenerateTokenSucces is called in reducer :)');
-      return { ...state, isLoading: false, token: action.payload.token, userName: action.payload.userName, flatNo: action.payload.flatNo, flatName: action.payload.flatName, buildingName: action.payload.buildingName, societyName:action.payload.societyName ,societyAddress: action.payload.societyAddress };
+      return { ...state, isLoading: false, token: action.payload.token, userName: action.payload.userName, flatNo: action.payload.flatNo, flatName: action.payload.flatName, buildingName: action.payload.buildingName, societyId:action.payload.societyId, societyName:action.payload.societyName ,societyAddress: action.payload.societyAddress };
     case ActionTypes.GENERATE_TOKEN_FAILURE:
         console.log('Generate token failure is called in reducer :(');
       return { ...state, isLoading: false, error: action.payload.error };

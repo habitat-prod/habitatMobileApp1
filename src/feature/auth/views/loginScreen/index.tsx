@@ -25,7 +25,7 @@ const Login: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  // const [isLoggedIn,setIsLoggedIn] = useState(false);
 
   const navigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
@@ -36,9 +36,9 @@ const Login: React.FC = () => {
       const checkLoginState = async () => {
     // const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
     const token = await AsyncStorage.getItem('token');
-    console.log(`isLogged in: ${isLoggedIn} & token is: ${token}`);
+    // console.log(`isLogged in: ${isLoggedIn} & token is: ${token}`);
       if(token){
-        console.log('inside is condition :)');
+        console.log('inside isLoggedIn condition :)');
         navigation.navigate(NAVIGATION.HomeScreenNav);
       }
       };
@@ -89,25 +89,6 @@ const Login: React.FC = () => {
       mobileNumber: value ?? '',
       isValid: mobileRegex.test(value ?? ''),
     });
-  };
-
-  // this is working code.
-  const handlePhoneNumberSubmit = async () => {
-    try {
-      // const response = await axios.post(`/login/sendOtp?phoneNumber=${loginData.mobileNumber}&userType=internal_user`);
-      // setMessage(response.data.message);
-      // console.warn(response.data.message);
-      await AsyncStorage.setItem('phone',loginData.mobileNumber);
-      const phone = await AsyncStorage.getItem('phone');
-      console.log(`saved number from async storage: ${phone}`)
-  
-      // Navigate after OTP is successfully sent
-      bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-        phoneNumber: loginData.mobileNumber,
-      });
-    } catch (error) {
-      console.warn(`Error catching while sendOtp: ${error}`);
-    }
   };
 
 

@@ -17,10 +17,10 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         // const propertyId = await AsyncStorage.getItem("propertyId");
         const token = await AsyncStorage.getItem("token");
 
-        console.log(`phone is ${phone}`);
-        console.log(`token is: ${token}`);
-        console.log(`payload propertyId is: ${action.payload.propertyId}`);
-        console.log(`payload userType is: ${action.payload.userType}`);
+        // console.log(`phone is ${phone}`);
+        // console.log(`token is: ${token}`);
+        // console.log(`payload propertyId is: ${action.payload.propertyId}`);
+        // console.log(`payload userType is: ${action.payload.userType}`);
 
         if (!phone || !action.payload.propertyId || !action.payload.userType || !token) {
             console.error('Missing required data!');
@@ -30,14 +30,14 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         // Service call
         const response = await tokenService(Number(phone), Number(action.payload.propertyId), action.payload.userType, token);
 
-        console.log("Service called with:", {
-            phone: Number(phone),
-            propertyId: Number(action.payload.propertyId),
-            action: action.payload.userType,
-            token,
-          });
+        // console.log("Token Service called with:", {
+        //     phone: Number(phone),
+        //     propertyId: Number(action.payload.propertyId),
+        //     action: action.payload.userType,
+        //     token,
+        //   });
 
-        console.log(`the full response of tokenGen is: ${JSON.stringify(response)}`);
+        // console.log(`the full response of tokenGen is: ${JSON.stringify(response)}`);
 
         console.log(`so, the old stored token was: ${token}`);
 
@@ -58,12 +58,14 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         // const buildingId = response.data?.buildingId;
         const societyId = response.data?.societyId;
 
+        console.log(`societyId in TOKENGENEPIC is: => ${societyId}`);
+
         await AsyncStorage.setItem('societyId',`${societyId}`);
 
         // await AsyncStorage.setItem('userId',userId);
         // await AsyncStorage.setItem('userName',userName);
         await AsyncStorage.setItem('flatId',`${flatId}`);
-        await AsyncStorage.setItem('flatNo',flatNo);
+        await AsyncStorage.setItem('flatNo',`${flatNo}`);
         await AsyncStorage.setItem('flatName',flatName);
         // await AsyncStorage.setItem('buildingId',buildingId);
         await AsyncStorage.setItem('buildingName',buildingName);
@@ -72,7 +74,7 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         await AsyncStorage.setItem('societyAddress',societyAddress);
 
 
-        console.log(`the new token is: ${JSON.stringify(newToken)}`);
+        // console.log(`the new token is: ${JSON.stringify(newToken)}`);
 
         const newStoredToken = await AsyncStorage.getItem('token');
 
