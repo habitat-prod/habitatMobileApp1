@@ -22,8 +22,9 @@ import { NAVIGATION } from "../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "../../../src/utils/common";
 import { generateToken } from "./action/tokenGenAction";
-import { property } from "lodash";
+import { property, set } from "lodash";
 import { fetchHomeProfileData } from "./action/homeProfileAction";
+import { RootState } from "src/redux/store/configureStore";
 
 const HomeScreen: React.FC = () => {
   // const services = [
@@ -39,16 +40,18 @@ const HomeScreen: React.FC = () => {
   const [isFirstTime, setIsFirstTime] = useState(false);
   const [visible, setVisible] = useState(true);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
-  const flatDetailsList = useSelector((state) => state.otpVerification.userDetails);
-  const flatListSize = useSelector((state)=> state.otpVerification.flatListSize);
+  const flatDetailsList = useSelector((state:RootState) => state.otpVerification.userDetails);
+  const flatListSize = useSelector((state:RootState)=> state.otpVerification.flatListSize);
   const dispatch = useDispatch();
-  let flatNo = useSelector((state)=> state.tokenReducer.flatNo);
-  let buildingName = useSelector((state)=> state.tokenReducer.buildingName);
-  let societyName = useSelector((state)=> state.tokenReducer.societyName);
-  let societyAddress = useSelector((state)=> state.tokenReducer.societyAddress);
-  let token = useSelector((state)=> state.tokenReducer.token);
-  let societyId = useSelector((state)=> state.tokenReducer.societyId);
-  const serviceList = useSelector((state)=> state.pmsReducer.data.data);
+  let flatNo = useSelector((state:RootState)=> state.tokenReducer.flatNo); // tried to define the type of state
+  let buildingName = useSelector((state:RootState)=> state.tokenReducer.buildingName);
+  let societyName = useSelector((state:RootState)=> state.tokenReducer.societyName);
+  let societyAddress = useSelector((state:RootState)=> state.tokenReducer.societyAddress);
+  let token = useSelector((state:RootState)=> state.tokenReducer.token);
+  let societyId = useSelector((state:RootState)=> state.tokenReducer.societyId);
+  const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
+
+  const [flatList, setFlatList] = useState(flatDetailsList);
 
   console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
 
@@ -69,23 +72,35 @@ const HomeScreen: React.FC = () => {
     buildingName = await AsyncStorage.getItem('buildingName');
     societyName = await AsyncStorage.getItem('societyName');
     societyAddress = await AsyncStorage.getItem('societyAddress');
+    societyId = await AsyncStorage.getItem('societyId');
+    token = await AsyncStorage.getItem('token');
     console.log({flatNo}, {buildingName}, {societyName}, {societyAddress});
     
+      if(flatDetailsList.length === 0) {
+        console.log('flatDetailsList has been end :((((((((((((((((((((((((((((((((((((((((((((((((((((');
+        const flats = await AsyncStorage.getItem('flatList');
+        const array = JSON.parse(flats);
+        setFlatList(array);
+        console.log(`SAVED list in Home Screen is: ${JSON.stringify(array)}`);
+      }
+      else{
+        console.log('flatDetailList is alive :)))))))))))))))))))))))))))))))))))))))');
+        console.log(flatDetailsList);
+      }
+
     setUserDetail({
       flatNo:flatNo,
       buildingName:buildingName,
       societyName:societyName,
       societyAddress:societyAddress,
     });
-
-
     // console.log('going to call pms response API');
     // const pmsResponse = dispatch(fetchHomeProfileData());
     // console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
   } 
   setUserDetails();
   },[]);
-  
+
   useEffect(() => {
     if (societyId && token) {
         console.log("Fetching PMS services...");
@@ -128,6 +143,7 @@ const HomeScreen: React.FC = () => {
 
 
   useEffect(() => {
+    dispatch(fetchHomeProfileData({ societyId: Number(societyId), token }));
     const checkFirstTimeUser = async () => {
       const firstTime = await AsyncStorage.getItem('isFirstTimeUser');
       if (firstTime && flatListSize>1) {
@@ -143,8 +159,8 @@ const HomeScreen: React.FC = () => {
       <View style={{ flexDirection: 'row', marginTop: 5, padding: 5 }}>
         <Image source={require('../../assets/png/habitaticon.png')} style={styles.iconStyle} />
         <View style={{ flexDirection: 'column' }}>
-          <Text style={styles.txt}>{item.flatName}</Text>
-          <Text style={{ color: 'grey', fontSize: 12 }}>{item.flatAddress}</Text>
+          <Text style={styles.txt}>{item.flatNo} {item.flatName}</Text>
+          <Text style={{ color: 'grey', fontSize: 12 }}>{societyName || userDetails.societyName} {item.flatAddress}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -167,6 +183,11 @@ const HomeScreen: React.FC = () => {
     catch(error) {
       console.error(`error in handleFlatItemClick: ${error}`);
     }
+  }
+
+  const handleSwitchFlat =() =>{
+    setVisible(true); 
+    setIsFirstTime(true);
   }
 
   const handleServiceClick = (service) => {
@@ -210,7 +231,9 @@ const HomeScreen: React.FC = () => {
         <View style={{flexDirection:'column', width:180}}>
         <View style={{flexDirection:'row'}}>
           <Text style={styles.headerTitle}>{flatNo || userDetails.flatNo}, {buildingName || userDetails.buildingName}</Text>
+          <TouchableOpacity style={{marginTop:3}} onPress={()=> {handleSwitchFlat()}}>
         <Image source={require('../../assets/png/arrow_down.png')} style={{ marginTop:3}}/>
+          </TouchableOpacity>
         </View>
           <Text style={styles.headerSubtitle}>
             {societyName || userDetails.societyName}, {societyAddress || userDetails.societyAddress}
@@ -289,7 +312,7 @@ const HomeScreen: React.FC = () => {
       </View>
     </ScrollView>
 
-    {(flatListSize>1) && isFirstTime && (
+    { isFirstTime && (
           <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: 19}} onDismiss={() => { Toaster('Please Select any flat to Access incredible features of APP :)') }}>
             <View
               style={{
@@ -306,7 +329,7 @@ const HomeScreen: React.FC = () => {
 
               {/* Address List */}
               <FlatList
-                data={flatDetailsList}
+                data={flatList}
                 keyExtractor={(item) => item.id}
                 renderItem={renderAddressItem}
                 contentContainerStyle={{ paddingBottom: 10 }}

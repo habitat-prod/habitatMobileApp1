@@ -63,7 +63,7 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         await AsyncStorage.setItem('societyId',`${societyId}`);
 
         // await AsyncStorage.setItem('userId',userId);
-        // await AsyncStorage.setItem('userName',userName);
+        await AsyncStorage.setItem('userName',userName);
         await AsyncStorage.setItem('flatId',`${flatId}`);
         await AsyncStorage.setItem('flatNo',`${flatNo}`);
         await AsyncStorage.setItem('flatName',flatName);

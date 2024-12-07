@@ -31,25 +31,30 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
           const flatDetailsList = response.data.data.flatDetailsList;
           const flatListSize = response.data.data.flatListSize;
 
+          const jsonValue = JSON.stringify(flatDetailsList);
+
+          AsyncStorage.setItem('flatList',jsonValue);
+
           const fullResponse = response.data;
           const fullResponse2 = response.data.data;
-          console.log('OTP verified Successfully: ', JSON.stringify(flatDetailsList));
+          console.log('OTP verified Successfully: and flatDetailList is: ', JSON.stringify(flatDetailsList));
+
+          const saved = AsyncStorage.getItem('flatList');
+          console.log(`savedList is: =========== ${saved}`);
 
           console.log(`full response is: ${JSON.stringify(fullResponse)}`);
           console.log(`fullResponse2 is: ${JSON.stringify(fullResponse2)}`);
 
-          const listSize = flatDetailsList.length;
-
           console.log(`flatListSize directly from response: ${flatListSize}`)
-          
-          console.log(`flatListSize is: ${listSize}`);
 
           console.log(`flatList Type is: ${typeof flatDetailsList}`);
-
-          // flatDetailsList = JSON.stringify(flatDetailsList);
+          
           console.log(`Stringify user details: ${JSON.stringify(flatDetailsList)}`);
           
-          AsyncStorage.setItem('token',JSON.stringify(tempToken));
+          const a = AsyncStorage.setItem('token',JSON.stringify(tempToken));
+          const b = AsyncStorage.setItem('flatListSize',flatListSize);
+
+          console.log(`SAVED IN ASYNCSTORAGE flatListSize is: ${b} and token is: ${a}`)
 
           console.log(`tokenn is HERE:= ${JSON.stringify(tempToken)}`);
 

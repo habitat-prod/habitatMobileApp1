@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, BackHandler } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Toaster } from '../../constants/common';
@@ -13,8 +13,20 @@ const Setting: React.FC = () => {
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
-  const userName = 'Karan Gupta';
-  const userImage = 'https://instagram.fknu1-4.fna.fbcdn.net/v/t51.2885-19/431802314_1890866504709275_3040778590036686043_n.jpg?_nc_ht=instagram.fknu1-4.fna.fbcdn.net&_nc_cat=111&_nc_ohc=qBOh77eMxQcQ7kNvgEyB24r&_nc_gid=aa426296eaeb42248126d8dae6b2e9ba&edm=APoiHPcBAAAA&ccb=7-5&oh=00_AYAEwaFegtSjaZQl1-jAx8NdcYHV0B851T8Fhw2yBEqhHQ&oe=67564E61&_nc_sid=22de04';
+  const [userName,setUserName] = useState('Karan Gupta');
+  let userImage = 'https://instagram.fknu1-4.fna.fbcdn.net/v/t51.2885-19/431802314_1890866504709275_3040778590036686043_n.jpg?_nc_ht=instagram.fknu1-4.fna.fbcdn.net&_nc_cat=111&_nc_ohc=qBOh77eMxQcQ7kNvgEyB24r&_nc_gid=aa426296eaeb42248126d8dae6b2e9ba&edm=APoiHPcBAAAA&ccb=7-5&oh=00_AYAEwaFegtSjaZQl1-jAx8NdcYHV0B851T8Fhw2yBEqhHQ&oe=67564E61&_nc_sid=22de04';
+
+  useEffect(()=>{
+    const fecthuserDetails = async () =>{
+    console.log('==========================fetching the username===========================');
+    const name = await AsyncStorage.getItem('userName');
+    // const image = await AsyncStorage.getItem('userImage');
+    setUserName(String(name));
+    console.log(`username is ${name} and ${userName}`);
+    // console.log(`userImage is ${userImage}`);
+  }
+  fecthuserDetails();
+  },[]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
