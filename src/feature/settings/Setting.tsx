@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, BackHandler } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, BackHandler, Alert } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Toaster } from '../../constants/common';
 import { BootstrapNavigationScreens, NAVIGATION } from '../../constants/screens';
@@ -27,6 +27,41 @@ const Setting: React.FC = () => {
   }
   fecthuserDetails();
   },[]);
+
+  const openLogout = () => (
+    // <View style={styles.modal}>
+    //   <View style={styles.body}>
+    //     <Text>Are you really wants to Logout ?</Text>
+    //     <View style={{marginTop:12, alignContent:'space-between', flexDirection:'row'}}>
+    //       <TouchableOpacity onPress={()=>{setShow(false)}}>
+    //         <Text style={{color:'red'}}>No</Text>
+    //       </TouchableOpacity>
+    //       <TouchableOpacity onPress={()=> setShow(false)}>
+    //         <Text style={{color:'blue'}}>yes</Text>
+    //       </TouchableOpacity>
+    //     </View>
+    //   </View>
+    // </View>
+    Alert.alert("Logout","Are you sure you want to Logout?",[
+    {
+      text: 'Cancel',onPress: ()=> {Toaster('logging out cancelled.')}
+    },
+    {
+      text:'OK', onPress: async()=> {
+        await AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('userName');
+        await AsyncStorage.removeItem('flatNo');
+        await AsyncStorage.removeItem('buildingName');
+        await AsyncStorage.removeItem('societyName');
+        await AsyncStorage.removeItem('societyAddress');
+        await AsyncStorage.removeItem('societyId');
+
+        defaultNavigation.navigate(BootstrapNavigationScreens.Login);
+        Toaster('logged out successfully.');
+      }
+    },
+  ])
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -73,10 +108,8 @@ const Setting: React.FC = () => {
           onPress={() => defaultNavigation.navigate(NAVIGATION.TermsConditionsNav)}
         />
         <SettingsOption title="Contact us" onPress={() => defaultNavigation.navigate(NAVIGATION.ContactScreenNav)} />
-        <SettingsOption title="Logout" onPress={async() => {
-          await AsyncStorage.removeItem('token');
-          defaultNavigation.navigate(BootstrapNavigationScreens.Login);
-          Toaster('Logged out successfully.')
+        <SettingsOption title="Logout" onPress={() => {
+          openLogout();
           }} />
       </View>
       </View>
@@ -182,6 +215,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#999',
   },
+  modal: {
+    flex:1,
+    backgroundColor:'rgba(50,50,50,0.5)',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  body: {
+    backgroundColor:'#fff',
+    width:250,
+    height:200,
+    borderRadius:4,
+    borderColor:'#06B8C3',
+    justifyContent:'space-evenly',
+    padding:30,
+  }
 });
 
 export default Setting;
