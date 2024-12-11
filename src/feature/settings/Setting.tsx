@@ -14,7 +14,7 @@ const Setting: React.FC = () => {
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   const [userName,setUserName] = useState('Karan Gupta');
-  let userImage = 'https://instagram.fknu1-4.fna.fbcdn.net/v/t51.2885-19/431802314_1890866504709275_3040778590036686043_n.jpg?_nc_ht=instagram.fknu1-4.fna.fbcdn.net&_nc_cat=111&_nc_ohc=qBOh77eMxQcQ7kNvgEyB24r&_nc_gid=aa426296eaeb42248126d8dae6b2e9ba&edm=APoiHPcBAAAA&ccb=7-5&oh=00_AYAEwaFegtSjaZQl1-jAx8NdcYHV0B851T8Fhw2yBEqhHQ&oe=67564E61&_nc_sid=22de04';
+  let userImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYNphtDWjxGOpOsQmMnT1HOW8knK0ta_G3tQ&s';
 
   useEffect(()=>{
     const fecthuserDetails = async () =>{
@@ -48,13 +48,14 @@ const Setting: React.FC = () => {
     },
     {
       text:'OK', onPress: async()=> {
-        await AsyncStorage.removeItem('token');
-        await AsyncStorage.removeItem('userName');
-        await AsyncStorage.removeItem('flatNo');
-        await AsyncStorage.removeItem('buildingName');
-        await AsyncStorage.removeItem('societyName');
-        await AsyncStorage.removeItem('societyAddress');
-        await AsyncStorage.removeItem('societyId');
+        // await AsyncStorage.removeItem('token');
+        // await AsyncStorage.removeItem('userName');
+        // await AsyncStorage.removeItem('flatNo');
+        // await AsyncStorage.removeItem('buildingName');
+        // await AsyncStorage.removeItem('societyName');
+        // await AsyncStorage.removeItem('societyAddress');
+        // await AsyncStorage.removeItem('societyId');
+        await AsyncStorage.clear();
 
         defaultNavigation.navigate(BootstrapNavigationScreens.Login);
         Toaster('logged out successfully.');
@@ -164,6 +165,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     marginBottom: 10,
+    borderWidth:0.2,
+    borderColor:'#06B8C3',
   },
   settingItemCard:{
     backgroundColor:'#fff',

@@ -10,7 +10,7 @@ export const tokenService = (phone:Number,propertyId:Number, userType:String, to
       
       
 
-    return axios.post(`https://backend-dev.habitatautomations.com/generateToken?userType=${userType}&phone=${phone}&propertyId=${propertyId}`,
+    return axios.post(`/generateToken?userType=${userType}&phone=${phone}&propertyId=${propertyId}`,
         {},{headers}
     );
 

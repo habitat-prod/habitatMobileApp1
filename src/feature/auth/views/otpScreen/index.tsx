@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { NavigationProp, RouteProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTranslation } from 'react-i18next';
-import { Keyboard, SafeAreaView, Text, View } from 'react-native';
+import { Image, Keyboard, SafeAreaView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import IMButton from '../../../../components/IMButton';
@@ -15,6 +15,8 @@ import useStyles from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux'
 import { verifyOtp } from '../../action/verifyOtp';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { sendOTP } from '../../action/login';
 
 interface IVerifyOTPProps {
   navigation: StackNavigationProp<BootstrapParamsList>;
@@ -97,7 +99,8 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   useEffect(() => {
     const fetchPhoneNumber = async () => {
       try {
-        const storedPhoneNumber = await AsyncStorage.getItem('phoneNumber');
+        const storedPhoneNumber:any = await AsyncStorage.getItem('phoneNumber');
+        setPhoneNumber(storedPhoneNumber);
         console.log(`storedPhoneNumber is: ${storedPhoneNumber}`)
         if (storedPhoneNumber) {
           setPhoneNumber(storedPhoneNumber);
@@ -118,16 +121,28 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     !!val && setErrorText('');
   };
 
-  const resendOtp = () => {
+  const resendOtp = async() => {
     setClearOtp(true);
     setResendCount((val: any) => val + 1);
+    // Dispatch OTP action
+    dispatch(sendOTP({
+      phoneNumber: Number(phoneNumber),
+      userType: 'user', 
+    }));
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.phoneLogoContainer}>
         <Text style={styles.labelTextStyle}>Verify your phone number</Text>
-        <Text style={styles.subLabelText}>{`We’ve sent you a one time verification code to +91 ${props.route.params.phoneNumber}`}</Text>
+        <View style={styles.phoneNumberContainer}>
+        <Text style={{marginTop:9,fontSize:18,}}>We’ve sent you a one time verification code to{' '} 
+        <Text style={{textDecorationLine:'underline',textDecorationColor:'green', paddingHorizontal:9}}>+91 {props.route.params.phoneNumber}  </Text>
+        <TouchableOpacity onPress={()=> defaultNavigation.navigate(BootstrapNavigationScreens.Login)}>
+        <Image source={require('../../../../assets/png/edit.png')} style={{height:17,width:17, tintColor:'#3266AE',}}/>          
+        </TouchableOpacity></Text>
+        
+      </View>
       </View>
       <IMOtpInput
         testEventId="login-otpDigits-tf"

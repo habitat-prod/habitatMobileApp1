@@ -26,6 +26,13 @@ const useStyles = (theme: any) =>
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: hp('15%'),
+        // paddingHorizontal:3
+        // flexDirection:'row'
+    },
+    phoneNumberContainer: {
+      flexDirection: 'row',
+      alignItems: 'center', // Ensures the text and icon are vertically aligned
+      marginHorizontal:6
     },
     labelTextStyle: {
         fontSize: wp('10.67%'),
@@ -38,6 +45,7 @@ const useStyles = (theme: any) =>
           fontSize: wp('5%'),
           // textAlign: 'left',
           padding: wp('2.22%'),
+          marginHorizontal:7,
           color: '#1C1B1F',
           fontWeight: '400',
       },

@@ -25,6 +25,7 @@ import { generateToken } from "./action/tokenGenAction";
 import { property, set } from "lodash";
 import { fetchHomeProfileData } from "./action/homeProfileAction";
 import { RootState } from "src/redux/store/configureStore";
+import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
 
 const HomeScreen: React.FC = () => {
   // const services = [
@@ -50,6 +51,7 @@ const HomeScreen: React.FC = () => {
   let token = useSelector((state:RootState)=> state.tokenReducer.token);
   let societyId = useSelector((state:RootState)=> state.tokenReducer.societyId);
   const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
+  const [isSwitching, setIsSwitching] = useState(false);
 
   const [flatList, setFlatList] = useState(flatDetailsList);
 
@@ -104,15 +106,9 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     if (societyId && token) {
         console.log("Fetching PMS services...");
-        dispatch(fetchHomeProfileData({ societyId: Number(societyId), token }));
+        dispatch(fetchHomeProfileData());
     }
 }, [societyId, token, dispatch]);
-
-
-  // console.log(`the flatNo in HomeScreen from redux store is: ${JSON.stringify(flatNo)}`);
-  // console.log(`the BuildingName in HomeScreen from redux store is: ${JSON.stringify(buildingName)}`);
-  // console.log(`the societyName in HomeScreen from redux store is: ${JSON.stringify(societyName)}`);
-  // console.log(`the societyAddress in HomeScreen from redux store is: ${JSON.stringify(societyAddress)}`);
 
   const postUri = 'https://media-del1-2.cdn.whatsapp.net/v/t61.24694-24/310465591_111619854962689_2603035308081784076_n.jpg?ccb=11-4&oh=01_Q5AaIHV6lp_KN56MzILUeC_w2rrZkm2TmsnsqytFqM3BxdwZ&oe=675E80E0&_nc_sid=5e03e0&_nc_cat=104';
 
@@ -143,7 +139,7 @@ const HomeScreen: React.FC = () => {
 
 
   useEffect(() => {
-    dispatch(fetchHomeProfileData({ societyId: Number(societyId), token }));
+    dispatch(fetchHomeProfileData());
     const checkFirstTimeUser = async () => {
       const firstTime = await AsyncStorage.getItem('isFirstTimeUser');
       if (firstTime && flatListSize>1) {
@@ -173,7 +169,7 @@ const HomeScreen: React.FC = () => {
     // const token = await AsyncStorage.getItem('token');
     // const societyId = await AsyncStorage.getItem('societyId');
     console.log('going to call pms response API');
-    const pmsResponse = await dispatch(fetchHomeProfileData({societyId: Number(societyId),token:token}));
+    const pmsResponse = await dispatch(fetchHomeProfileData());
     console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
     console.log(JSON.stringify(response));
     await AsyncStorage.setItem('isFirstTimeUser', 'false');
@@ -186,14 +182,20 @@ const HomeScreen: React.FC = () => {
   }
 
   const handleSwitchFlat =() =>{
+    setIsSwitching(true);
     setVisible(true); 
     setIsFirstTime(true);
+  }
+
+  const handleMaintenanceData = async()=> {
+    await dispatch(fetchMaintenanceData());
   }
 
   const handleServiceClick = (service) => {
     switch (service.id) {
       case 1:
         console.log("Navigate to Maintenance screen");
+        handleMaintenanceData();
         defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav); 
         break;
       case 2:
@@ -313,7 +315,7 @@ const HomeScreen: React.FC = () => {
     </ScrollView>
 
     { isFirstTime && (
-          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: 19}} onDismiss={() => { Toaster('Please Select any flat to Access incredible features of APP :)') }}>
+          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: 19}} onDismiss={() => { isSwitching? setVisible(false): Toaster('Please Select any flat to Access incredible features of APP :)') }}>
             <View
               style={{
                 backgroundColor: '#fff',

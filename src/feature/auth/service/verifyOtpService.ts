@@ -7,7 +7,7 @@ export const VerifyOTPService = async (
 ) => {
   try {
     console.log('inside verify service..')
-        const response = await axios.post(`https://backend-dev.habitatautomations.com/login/validateOTP`, {
+        const response = await axios.post(`/login/validateOTP`, {
             otp:otp,
             phoneNumber:phoneNumber,
             userType:userType

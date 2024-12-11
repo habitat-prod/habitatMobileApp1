@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -14,6 +14,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { HBStackParamList } from "../../navigation/rootNavigation";
 import { NAVIGATION } from "../../constants/screens";
 import { Toaster } from "../../constants/common";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EditProfileScreen: React.FC = () => {
   const [name, setName] = useState("Karan Gupta");
@@ -21,7 +22,7 @@ const EditProfileScreen: React.FC = () => {
   const [flatNumber, setFlatNumber] = useState("A1679");
   const [vehicleNumber, setVehicleNumber] = useState("UP-78 ED");
   const [parkingSpot, setParkingSpot] = useState("A01");
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
@@ -35,6 +36,18 @@ const EditProfileScreen: React.FC = () => {
     });
     alert("Profile updated successfully!");
   };
+
+  useEffect(()=>{
+    const fetchUserDetails = async()=>{
+    const a: any = await AsyncStorage.getItem('userName');
+    const b: any = await AsyncStorage.getItem('flatNo');
+    const c: any = await AsyncStorage.getItem('buildingName');
+    setName(a);
+    setFlatNumber(b);
+    setBlock(c);
+    }
+    fetchUserDetails();
+  },[]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -53,7 +66,7 @@ const EditProfileScreen: React.FC = () => {
         <View style={styles.imageContainer}>
           <Image
             source={{
-              uri: "https://instagram.fknu1-4.fna.fbcdn.net/v/t51.2885-19/431802314_1890866504709275_3040778590036686043_n.jpg?_nc_ht=instagram.fknu1-4.fna.fbcdn.net&_nc_cat=111&_nc_ohc=qBOh77eMxQcQ7kNvgEyB24r&_nc_gid=aa426296eaeb42248126d8dae6b2e9ba&edm=APoiHPcBAAAA&ccb=7-5&oh=00_AYAEwaFegtSjaZQl1-jAx8NdcYHV0B851T8Fhw2yBEqhHQ&oe=67564E61&_nc_sid=22de04", 
+              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYNphtDWjxGOpOsQmMnT1HOW8knK0ta_G3tQ&s", 
             }}
             style={styles.profileImage}
           />

@@ -6,11 +6,12 @@ import { generateToken, generateTokenSuccess, generateTokenFailure } from "../ac
 import { tokenService } from "../service/tokenGenService";
 import { rootState } from "../../../redux/store/rootState";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import env  from "react-native-config";
 
 const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObservable<rootState>) =>
   action$.pipe(
     filter(isOfType(ActionTypes.GENERATE_TOKEN)),
-    mergeMap(async (action) => {
+    mergeMap(async (action: any) => {
       try {
         console.log('inside generateTokenEpic');
         const phone = await AsyncStorage.getItem("phoneNumber");
@@ -53,6 +54,14 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         const societyName = response.data.societyName;
         const societyAddress = response.data.societyAddress;
 
+        await AsyncStorage.setItem(
+          env.ENV + '|' +'userLoginData',
+          JSON.stringify({
+            userId: response.data.userId,
+            userName: userName,
+            authorisationToken: newToken,
+          }),
+        );
         // const userId = response.data?.userId;
         const flatId = response.data?.flatId;
         // const buildingId = response.data?.buildingId;

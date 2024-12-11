@@ -9,6 +9,7 @@ import { IVerifyOtpActionData, verifyOtpAction, verifyOtpFailure, verifyOtpSucce
 import { VerifyOTPService } from '../service/verifyOtpService';
 import {AuthActionTypes} from '../../../utils/constants'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import env from 'react-native-config'
 
 const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$: StateObservable<rootState>) =>{
     console.log('inside verifyOtp epic:');
@@ -24,7 +25,7 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
           'USER'
         ),
       ).pipe(
-        map((response) => {
+        map((response:any) => {
           console.log('Raw response inside epic: ', JSON.stringify(response.data.data.flatDetailsList));
           console.log('response keys: ',Object.keys(response));
           const tempToken = response.data.data.tempToken;
@@ -58,6 +59,14 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
 
           console.log(`tokenn is HERE:= ${JSON.stringify(tempToken)}`);
 
+          // AsyncStorage.setItem(
+          //   env.ENV + '|' +'userLoginData',
+          //   JSON.stringify({
+          //     userId: "null",
+          //     userName: "null",
+          //     authorisationToken: tempToken,
+          //   }),
+          // );
 
           // const {token,userDetails} = response;
           // case success:

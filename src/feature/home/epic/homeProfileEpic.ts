@@ -20,15 +20,15 @@ const fetchHomeProfileDataEpic = (
     mergeMap(() =>
       defer(async () => {
         // Fetch token and societyId from AsyncStorage
-        const token = await AsyncStorage.getItem("token");
+        // const token = await AsyncStorage.getItem("token");
         const societyId = await AsyncStorage.getItem("societyId");
 
-        if (!token || !societyId) {
-          throw new Error("Missing token or societyId");
+        if (!societyId) {
+          throw new Error("Missing societyId");
         }
 
         // API call
-        const response = await homeProfileService(Number(societyId), token);
+        const response = await homeProfileService(Number(societyId));
 
         console.log(
           `Home Profile Service Response: ${JSON.stringify(response.data)}`
