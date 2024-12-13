@@ -19,6 +19,7 @@ export enum NAVIGATION {
   FeedbackScreenNav = 'FeedbackScreenNav',
   PermanentPassesNav = 'PermanentPassesNav',
   AddPermanentPassNav = 'AddPermanentPassNav',
+  GenerateEntryNav = 'GenerateEntryNav',
 }
 
 export enum MaintainanceAreasScreens {
@@ -48,6 +49,7 @@ export enum MaintainanceAreasScreens {
   FeedbackScreen = 'FeedbackScreen',
   PermanentPasses = 'PermanentPasses',
   AddPermanentPass = 'AddPermanentPass',
+  GenerateEntry = 'GenerateEntry',
 }
 
 export enum BootstrapNavigationScreens {

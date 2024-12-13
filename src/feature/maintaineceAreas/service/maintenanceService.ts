@@ -1,4 +1,5 @@
 import axios from "../../../../src/utils/axios"
+// import axios from "Axios";
 
 export const maintenanceService = (societyId: Number) =>{
     try {
@@ -10,7 +11,7 @@ export const maintenanceService = (societyId: Number) =>{
     console.log("URL being called:", url);
 
     console.log('========================BEFORE API CALL INSIDE SERVICE========================');
-    const res = axios.get(`/society/amenities?societyId=${Number(societyId)}`);
+    const res = axios.get(`/society/amenities?societyId=${societyId}`);
     console.log('========================AFTER API CALL INSIDE SERVICE========================');
     return res;
     }

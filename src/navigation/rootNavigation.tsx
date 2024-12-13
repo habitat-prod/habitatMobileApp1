@@ -24,6 +24,7 @@ import ContactScreen from '../feature/settings/ContactScreen';
 import FeedbackScreen from '../feature/settings/FeedbackScreen';
 import PermanentPasses from '../feature/settings/PermanentPasses';
 import AddPermanentPass from '../feature/settings/AddPermanentPass';
+import GenerateEntry from '../feature/securityApprovals/views/securityApprovalDetails/GenerateEntry';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -62,6 +63,8 @@ const RootNavigation: React.FunctionComponent = () => {
         <StackNav.Screen name={NAVIGATION.FeedbackScreenNav} component = {FeedbackScreen}/>
         <StackNav.Screen name={NAVIGATION.PermanentPassesNav} component = {PermanentPasses}/>
         <StackNav.Screen name={NAVIGATION.AddPermanentPassNav} component = {AddPermanentPass}/>
+        <StackNav.Screen name={NAVIGATION.GenerateEntryNav} component = {GenerateEntry}/>
+
       </StackNav.Navigator>
     </NavigationContainer>
   );

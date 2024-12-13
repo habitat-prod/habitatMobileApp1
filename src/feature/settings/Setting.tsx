@@ -12,6 +12,7 @@ const Setting: React.FC = () => {
   const theme = useTheme();
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+  const navigation = useNavigation();
 
   const [userName,setUserName] = useState('Karan Gupta');
   let userImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYNphtDWjxGOpOsQmMnT1HOW8knK0ta_G3tQ&s';
@@ -66,13 +67,19 @@ const Setting: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-        
       <View style={styles.header} >
 
+      <View style={{flexDirection:'row', marginTop:36, justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row',marginStart:16}}>
       <Image source={require('../../assets/png/setting.png')}
-                  style={{ marginStart: 16, marginEnd:9, marginTop:36 }}
+                  style={{ marginEnd:9 }}
                 />
         <Text style={styles.headerText}>Settings</Text>
+        </View>
+        <TouchableOpacity style={{marginStart:175}} onPress={()=>navigation.goBack()}>
+        <Image source={require('../../assets/png/cross.png')} style={{width:24,height:24, marginTop:4, tintColor:'#fff'}}/>
+      </TouchableOpacity>
+      </View>
       </View>
 
       <View style = {styles.settingItemCard}>
@@ -149,7 +156,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 22,
     fontWeight: 'bold',
-    marginTop:36,
   },
   profileContainer: {
     backgroundColor: '#fff',

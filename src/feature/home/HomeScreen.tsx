@@ -54,6 +54,8 @@ const HomeScreen: React.FC = () => {
   const [isSwitching, setIsSwitching] = useState(false);
 
   const [flatList, setFlatList] = useState(flatDetailsList);
+  const [isServicesVisible,setIsServiceVisible] = useState(false);
+  const [rotation, setRotation] = useState(0);  
 
   console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
 
@@ -174,7 +176,7 @@ const HomeScreen: React.FC = () => {
     console.log(JSON.stringify(response));
     await AsyncStorage.setItem('isFirstTimeUser', 'false');
     setIsFirstTime(false);
-    setVisible(false); // Close the modal after selection
+    setVisible(false); // Close dialog after selection
     }
     catch(error) {
       console.error(`error in handleFlatItemClick: ${error}`);
@@ -223,6 +225,10 @@ const HomeScreen: React.FC = () => {
     }
   };
   
+  const togleServiceVisibility =()=>{
+    setIsServiceVisible(!isServicesVisible);
+    setRotation((prevRotation) => (prevRotation === 0 ? 180 : 0));
+  }
 
   return (
     <SafeAreaView style={styles.container2}>
@@ -246,7 +252,7 @@ const HomeScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.searchContainer}>
+      {/* <View style={styles.searchContainer}>
         <Image source={require('../../assets/png/icon_search.png')} />
         <TextInput
           style={styles.searchInput}
@@ -256,16 +262,21 @@ const HomeScreen: React.FC = () => {
         <TouchableOpacity>
             <Image source={require('../../assets/png/mic.png')} style={{alignSelf:'flex-end', alignContent:'center',alignItems:'center',justifyContent:'center', marginEnd:5}}/>
         </TouchableOpacity>
-        </View>
+        </View> */}
 
       <View style={styles.servicesContainer}>
         <View style={styles.servicesHeader}>
           <Text style={styles.servicesTitle}>Habitat's Services</Text>
-          <TouchableOpacity>
-            <Image source={require('../../assets/png/arrow_up.png')} />
+          <TouchableOpacity  onPress={()=> togleServiceVisibility()}>
+            <Image source={require('../../assets/png/arrow_down.png')} style={[
+            {width:30,height:32, marginTop:3},
+          {
+            transform: [{ rotate: `${rotation}deg` }], // apply rotation
+          },
+        ]}/>
           </TouchableOpacity>
         </View>
-
+        {isServicesVisible && (
         <View style={styles.servicesGrid}>
           {Array.isArray(serviceList)? serviceList.map((service) => (
             <TouchableOpacity key={service.pmsId} style={styles.serviceItem} onPress={()=>{handleServiceClick(service); console.log(service.pmsId)}}>
@@ -278,7 +289,8 @@ const HomeScreen: React.FC = () => {
           ))
           : <Text>No Services available yet!</Text>
         }
-        </View>
+        </View>)
+        }
       </View>
 
       <View style={styles.happeningsContainer}>
@@ -315,7 +327,7 @@ const HomeScreen: React.FC = () => {
     </ScrollView>
 
     { isFirstTime && (
-          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: 19}} onDismiss={() => { isSwitching? setVisible(false): Toaster('Please Select any flat to Access incredible features of APP :)') }}>
+          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: -45}} onDismiss={() => { isSwitching? setVisible(false): Toaster('Please Select any flat to Access incredible features of APP :)') }}>
             <View
               style={{
                 backgroundColor: '#fff',
@@ -337,10 +349,10 @@ const HomeScreen: React.FC = () => {
                 contentContainerStyle={{ paddingBottom: 10 }}
               />
 
-              <View style={styles.manualInputContainer}>
+              {/* <View style={styles.manualInputContainer}>
                 <Image source={require('../../assets/png/icon_search.png')} style={styles.iconStyle} />
                 <TextInput style={styles.textInput} placeholder="Select Location Manually" />
-              </View>
+              </View> */}
             </View>
           </Modal>
         )}
