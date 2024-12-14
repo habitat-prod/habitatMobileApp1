@@ -17,6 +17,9 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { Picker } from '@react-native-picker/picker';
 
 const GenerateEntry = () => {
+
+  const [people,setPeople] = useState(0);
+
   const [formData, setFormData] = useState({
     name: '',
     mobileNumber: '',
@@ -24,7 +27,7 @@ const GenerateEntry = () => {
     flatNumber: '',
     vehicleType: '',
     numberPlate: '',
-    numberOfPeople: '',
+    numberOfPeople: `${people}`,
     visitorType: '',
     purpose: '',
     inComingDate: '- -/- -/- - - -',
@@ -125,7 +128,7 @@ const GenerateEntry = () => {
     <SafeAreaView style={{flex:1}}>
       <View style={{backgroundColor:'#06B8C3',height:50,width:'100%',}}>
       <TouchableOpacity style={styles.header} onPress={()=> navigation.goBack()}>
-        <Text style={{fontSize:24, fontWeight:'normal',color:'white', alignSelf:'center', marginStart:16, marginEnd:7}}>{'<'}</Text>
+        <Text style={{fontSize:22, fontWeight:'normal',color:'white', alignSelf:'center', marginStart:16, marginEnd:7}}>{'<'}</Text>
             <Text style={[styles.headerText,{alignSelf:'center'}]}>Generate an entry</Text>
                 </TouchableOpacity>
       </View>
@@ -163,6 +166,7 @@ const GenerateEntry = () => {
         style={styles.input}
         placeholder="Mobile number"
         keyboardType="numeric"
+        maxLength={10}
         value={formData.mobileNumber}
         onChangeText={(value) => handleInputChange('mobileNumber', value)}
       />
@@ -172,7 +176,7 @@ const GenerateEntry = () => {
           <Text style={{fontSize:18, flex:1, textAlignVertical:'center'}}>{formData.inComingDate}</Text>
         </View>
         <TouchableOpacity style={{flex:1, justifyContent:'center'}} onPress={()=>showDatePicker()}>
-        <Image source={require('../../../../assets/png/calendar.png')} style={{height:32,width:32, marginHorizontal:12,alignSelf:'center'}}/>
+        <Image source={require('../../../../assets/png/calendar.png')} style={{height:30,width:30, marginHorizontal:12,alignSelf:'center'}}/>
         </TouchableOpacity>
         <View style={{width:'40%', height:50, alignItems:'center', backgroundColor:'#fff',borderRadius:8, marginBottom: 15, borderColor: '#DDD', borderWidth: 1,}}>
           <Text style={{fontSize:18,flex:1,textAlignVertical:'center'}}>{formData.inComingTime}</Text>
@@ -206,13 +210,21 @@ const GenerateEntry = () => {
         onChangeText={(value) => handleInputChange('numberPlate', value)}
       />
 
+      <View style={[styles.input,{flexDirection:'row', justifyContent:'space-evenly'}]}>
+        <TouchableOpacity style={{ justifyContent:'center'}} onPress={()=>handleInputChange('numberOfPeople', String(Math.max((parseInt(formData.numberOfPeople || '0') - 1), 0)))}>
+        <Image source={require('../../../../assets/png/minuss.png')} style={{height:29, width:29}}/>
+        </TouchableOpacity>
       <TextInput
-        style={styles.input}
+        style={{backgroundColor: '#FFF',paddingHorizontal: 15,}} // i wanna show placeholder when formData.numberOfPeople's value is 0
         placeholder="Number of people"
         keyboardType="numeric"
-        value={formData.numberOfPeople}
+        value={formData.numberOfPeople === '0' || formData.numberOfPeople === 0 ? null : String(formData.numberOfPeople)}
         onChangeText={(value) => handleInputChange('numberOfPeople', value)}
       />
+      <TouchableOpacity style={{justifyContent:'center'}} onPress={()=>handleInputChange('numberOfPeople', String(Math.max((parseInt(formData.numberOfPeople || '0') + 1))))}>
+      <Image source={require('../../../../assets/png/plus_icon.png')} style={{height:26, width:26, tintColor:'#000'}}/>
+      </TouchableOpacity>
+      </View>
 
 
     <View style={{height:36,backgroundColor:'#fff',borderRadius:8,justifyContent:'flex-start', width:'50%', marginBottom:12,borderColor:'#DDD', borderWidth:1}}>
@@ -427,7 +439,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#fff',
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'normal',
   },
 });

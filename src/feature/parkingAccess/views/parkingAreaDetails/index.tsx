@@ -127,7 +127,7 @@ const ParkingAreaDetails: React.FC = () => {
       <View style={styles.subContainer}>
         <View style={styles.iconTitleContainer}>
           <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
-          <Text style={styles.textStyle}> Live guest parking</Text>
+          <Text style={{fontSize: 18, fontWeight: '700', color: 'black',marginStart:1}}> Live guest parking</Text>
         </View>
         <IMButton
           id='reserve'

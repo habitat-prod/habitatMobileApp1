@@ -240,7 +240,7 @@ const HomeScreen: React.FC = () => {
         <View style={{flexDirection:'row'}}>
           <Text style={styles.headerTitle}>{flatNo || userDetails.flatNo}, {buildingName || userDetails.buildingName}</Text>
           <TouchableOpacity style={{marginTop:3}} onPress={()=> {handleSwitchFlat()}}>
-        <Image source={require('../../assets/png/arrow_down.png')} style={{ marginTop:3}}/>
+        <Image source={require('../../assets/png/arrow_down.png')} style={{ marginTop:1, height:21, width:26}}/>
           </TouchableOpacity>
         </View>
           <Text style={styles.headerSubtitle}>
@@ -248,7 +248,7 @@ const HomeScreen: React.FC = () => {
           </Text>
         </View>
         <TouchableOpacity  onPress={()=> defaultNavigation.navigate(NAVIGATION.SettingNav)}>
-          <Image style={{width:30, height:30}} source={require('../../assets/png/account.png')}/>
+          <Image style={{width:34, height:34}} source={require('../../assets/png/account.png')}/>
         </TouchableOpacity>
       </View>
 

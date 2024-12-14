@@ -21,9 +21,9 @@ const SecurityApprovalDetails: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flexDirection:'row',alignContent:'flex-end',justifyContent:'space-between', marginTop:5}}>
-      <View style={styles.subContainer}>
+      <View style={[styles.subContainer,{marginStart:3}]}>
         <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
-        <Text style={styles.textStyle}>Security Approvals</Text>
+        <Text style={{fontSize: 18, fontWeight: '700', color: 'black',marginStart:2}}>Security Approvals</Text>
       </View>
       <TouchableOpacity onPress={()=> defaultNavigation.navigate(NAVIGATION.GenerateEntryNav)}>
       <Image source={require('../../../../assets/png/calendar.png')} style={{width:21,height:21, marginRight:9}}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -28,6 +28,7 @@ import ElevatorBig from '../../../../assets/svgv1/ElevatorBig';
 import PavementBig from '../../../../assets/svgv1/PavementBig';
 import WaitingAreaBig from '../../../../assets/svgv1/WaitingAreaBig';
 import GuestParkingBig from '../../../../assets/svgv1/GuestParkingBig';
+import { FlatList } from 'react-native-gesture-handler';
 
 const MaintainaceDetailsArea: React.FC = () => {
   const theme = useTheme();
@@ -150,25 +151,111 @@ const MaintainaceDetailsArea: React.FC = () => {
     }
   ];
 
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <View style={styles.subContainer}>
+//         <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
+//         <Text style={styles.textStyle}> All Spaces </Text>
+//       </View>
+//       {/* <View style={styles.cardsContainer}>
+//         {maintainanceListingCardData.map((item, index) => (
+//           <MaintainanceListingCard
+//             key={index}
+//             title={item.title}
+//             iconSvg={item.iconSvg}
+//             imageUri={item.imageUri}
+//             onClick={item.onClick}
+//           />
+//         ))}
+//       </View> */}
+
+//       <View style={{width:'100%',alignItems:'center', marginBottom:39}}>
+//         <FlatList
+//         data={maintainanceListingCardData}
+//         numColumns={2}
+//         renderItem={({item, index})=>{
+//           return <View style={{width:Dimensions.get('window').width/2-20, height:200, borderRadius:9,backgroundColor:'#000', margin:5}}>
+//             <Image source={{uri:item.imageUri}}/>
+//           </View>
+//         }}/>
+//       </View>
+
+//     </SafeAreaView>
+//   );
+// };
+
+// const SCREEN_WIDTH = Dimensions.get('window').width;
+// const ITEM_SPACING = 10;
+// const ITEM_WIDTH = (SCREEN_WIDTH - ITEM_SPACING * 4) / 3; // 3 columns, 4 spacings
+
+
+
+const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.subContainer}>
-        <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
-        <Text style={styles.textStyle}> All Spaces </Text>
+    <TouchableOpacity
+      style={{
+        width: Dimensions.get('window').width / 2 - 30,
+        height: 170,
+        borderRadius: 9,
+        backgroundColor: '#fff',
+        margin: 9,
+        overflow: 'hidden',
+        elevation: 5,
+        paddingVertical:16
+      }}
+      onPress={item.onClick}
+    >
+      {/* <Image
+        source={{ uri: item.imageUri }}
+        style={{
+          width: '100%',
+          height: '70%',
+          resizeMode: 'cover',
+        }}
+      /> */}
+      <View
+        style={{
+          height: '30%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex:1,
+          padding: 5,
+        }}
+      >
+        {item.iconSvg}
+        <Text style={{ fontSize: 16, fontWeight: 'bold', textAlign: 'center', marginTop:3 }}>
+          {item.title}
+        </Text>
       </View>
-      <View style={styles.cardsContainer}>
-        {maintainanceListingCardData.map((item, index) => (
-          <MaintainanceListingCard
-            key={index}
-            title={item.title}
-            iconSvg={item.iconSvg}
-            imageUri={item.imageUri}
-            onClick={item.onClick}
-          />
-        ))}
-      </View>
-    </SafeAreaView>
+    </TouchableOpacity>
   );
 };
+
+return (
+  <SafeAreaView style={{flex:1, marginHorizontal:3}}>
+    <View style={[styles.subContainer,{marginStart:12, marginTop:4}]}>
+      <IMIcon
+        testId="ArrowBackFilled"
+        iconSvg={<ArrowBackFilled />}
+        onClick={defaultNavigation.goBack}
+      />
+      <Text style={{fontSize: 18, fontWeight: '700', color: 'black',marginStart:3}}> All Spaces </Text>
+    </View>
+    <View style={{ flex: 1, }}>
+    <FlatList
+      data={maintainanceListingCardData}
+      numColumns={2}
+      renderItem={renderCard}
+      keyExtractor={(item) => item.id}
+      contentContainerStyle={{
+        // paddingHorizontal: 10,
+        paddingVertical: 4,
+      }}
+    />
+    </View>
+  </SafeAreaView>
+);
+};
+
 
 export default MaintainaceDetailsArea;
