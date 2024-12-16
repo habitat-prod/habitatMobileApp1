@@ -28,15 +28,6 @@ import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
 
 const HomeScreen: React.FC = () => {
-  // const services = [
-  //   { id: "1", title: "Maintenance", icon: "https://images.ctfassets.net/grb5fvwhwnyo/3etjlp73QMlp08bqO9TrTt/4bb2d839897bf3a02832268e7923ec6e/card-the-importance-of-maintenance-management.jpg" },
-  //   { id: "2", title: "Security", icon: "https://mpg-egy.com/wp-content/uploads/2024/05/Top-Five-Security-Guard-Tasks.jpg" },
-  //   { id: "3", title: "Parking", icon: "https://circontrol.com/wp-content/uploads/2023/10/180125-Circontrol-BAIXA-80-1.jpg" },
-  //   { id: "4", title: "Club House", icon: "https://media.bluentcad.com/images/clubhouse-design.webp" },
-  //   { id: "5", title: "Hazard Safety", icon: "https://plus.unsplash.com/premium_photo-1677529102407-0d075eb2cbb9?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya3BsYWNlJTIwc2FmZXR5fGVufDB8fDB8fHww" },
-  //   { id: "6", title: "Emergency", icon: "https://img.freepik.com/premium-vector/poster-emergency_188544-7066.jpg" },
-  // ];
-
   
   const [isFirstTime, setIsFirstTime] = useState(false);
   const [visible, setVisible] = useState(true);

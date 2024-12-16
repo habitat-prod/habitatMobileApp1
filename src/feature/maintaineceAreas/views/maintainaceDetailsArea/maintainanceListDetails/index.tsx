@@ -16,8 +16,10 @@ import IMTextInput from '../../../../../components/IMInput/IMTextInput';
 import IMButton from '../../../../../components/IMButton';
 import MaintainanceListDetailsValidationSchema from './helper';
 import useStyles from './styles';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux/store/configureStore';
 
-const locationDropdownList = [
+const locationDropdownList = [ // here i would need to replace it with dynamic locationList
   { label: 'Location', value: 'location1' },
   { label: 'Location 2', value: 'location2', },
   { label: 'Location 3', value: 'location3', },
@@ -36,10 +38,11 @@ const locationOfFloorDropdownList = [
   { label: 'Shreyas', value: 'location' },
 ];
 
-const problemDropdownList = [
-  { label: 'Problem', value: 'problem' },
-  { label: 'Vishwas', value: 'location' },
-];
+// const problemDropdownList = [// here i need to replace it with dynamic problemList by amenityId.
+//   { label: 'Problem', value: 'problem' },
+//   { label: 'Vishwas', value: 'location' },
+// ];
+  
 
 export interface IMaintainanceListDetails {
   navigation: StackNavigationProp<MaintainaceAreaList>;
@@ -51,6 +54,16 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   const styles = useStyles(theme);
   const routeParams = props.route.params.title;
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+  const response = useSelector((state:RootState)=>state.amenityProblemReducer);
+
+  // here i'm checking the valid list to map the data
+  const problemDropdownList = response?.data?.data?.length? response.data.data.map((item:any) => ({
+    label: item.problemName, 
+    value: item.id,
+  }))
+  :
+  [];
+  
 
   const formikData = useFormik({
     initialValues: {

@@ -23,11 +23,14 @@ import PavementSmall from '../../../../../assets/svgv1/PavementSmall';
 import WaitingAreaSmall from '../../../../../assets/svgv1/WaitingAreaSmall';
 import GardenSmall from '../../../../../assets/svgv1/GradenSmall';
 import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+import { fetchAmenityProblemData } from '../../../../../../src/feature/maintaineceAreas/actions/amenityProblemAction';
 
 const MaintainanceLogArea: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+  const dispatch = useDispatch();
 
   const maintainanceLogCardData = [
     {

@@ -1,7 +1,7 @@
 import RNRestart from 'react-native-restart';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Axios from 'Axios';
+import Axios from 'axios';
 import { isEmpty } from 'lodash';
 
 import { URL } from '../constants/URL';
@@ -43,7 +43,7 @@ axios.interceptors.request.use(
         const data = JSON.parse(dataStr);
         console.log(`data in axios file is = ${JSON.stringify(data)}`);
         config.headers.authorization = `Bearer ${data.authorisationToken}`;
-        console.log(`config.headers.authorisation is : ${config.headers.getAuthorization}`);
+        console.log(`config.headers.authorisation is : ${config.headers.authorization}`);
       }
     }
     console.log('request config: ', JSON.stringify(config));

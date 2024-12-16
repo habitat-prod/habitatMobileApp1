@@ -23,6 +23,7 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.12",
     "@types/react-dom": "^18.3.0",
+    "axios": "^1.7.9",
     "Axios": "npm:axios@^1.7.7",
     "dayjs": "^1.11.12",
     "formik": "^2.4.5",

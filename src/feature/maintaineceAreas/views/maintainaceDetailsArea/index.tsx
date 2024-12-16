@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -29,14 +29,25 @@ import PavementBig from '../../../../assets/svgv1/PavementBig';
 import WaitingAreaBig from '../../../../assets/svgv1/WaitingAreaBig';
 import GuestParkingBig from '../../../../assets/svgv1/GuestParkingBig';
 import { FlatList } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAmenityProblemData } from '../../actions/amenityProblemAction';
+import { RootState } from 'src/redux/store/configureStore';
+import { ActionTypes } from '../../../../../src/utils/constants';
 
 const MaintainaceDetailsArea: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+  const dispatch = useDispatch();
+  const response = useSelector((state:RootState)=>state.amenityProblemReducer);
+
+  useEffect(()=>{
+    
+  }, []);
 
   const maintainanceListingCardData = [
     {
+      id:1,
       title: 'Clubhouse',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       iconSvg: <Clubhouse />,
@@ -50,6 +61,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:2,
       title: 'Parking',
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
       iconSvg: <Parking />,
@@ -63,6 +75,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:3,
       title: 'Gardens',
       iconSvg: <Garden />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -76,10 +89,11 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:4,
       title: 'Stairs',
       iconSvg: <Stairs />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+      onClick: async() => await defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
         screen: MaintainanceAreasScreens.MaintainanceListDetails,
         params: {
           title: 'Stairs',
@@ -89,6 +103,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:4,
       title: 'Elevators',
       iconSvg: <Elevator />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -102,6 +117,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:5,
       title: 'Pavements',
       iconSvg: <Pavement />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -115,6 +131,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:6,
       title: 'Waiting area',
       iconSvg: <WaitingArea />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -128,6 +145,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:7,
       title: 'Guest Parking',
       iconSvg: <GuestParking />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -141,6 +159,7 @@ const MaintainaceDetailsArea: React.FC = () => {
       }),
     },
     {
+      id:8,
       title: 'Log',
       iconSvg: <Log />,
       imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
@@ -203,7 +222,15 @@ const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) =
         elevation: 5,
         paddingVertical:16
       }}
-      onPress={item.onClick}
+      onPress={async()=>{
+        await dispatch({
+          type:ActionTypes.FETCH_Amenity_Problem_DATA,
+          amenityId:item.id
+        });
+        console.log(`^^^^^^^^^^^^^^^^^^^^^^^^^Response from Reducer: ${JSON.stringify(response.data.data)}`);
+        item.onClick();
+      }
+      }
     >
       {/* <Image
         source={{ uri: item.imageUri }}
@@ -246,7 +273,7 @@ return (
       data={maintainanceListingCardData}
       numColumns={2}
       renderItem={renderCard}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item: typeof maintainanceListingCardData[0]) => item.id}
       contentContainerStyle={{
         // paddingHorizontal: 10,
         paddingVertical: 4,
