@@ -33,6 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAmenityProblemData } from '../../actions/amenityProblemAction';
 import { RootState } from 'src/redux/store/configureStore';
 import { ActionTypes } from '../../../../../src/utils/constants';
+import { Shadow } from 'react-native-shadow-2';
 
 const MaintainaceDetailsArea: React.FC = () => {
   const theme = useTheme();
@@ -211,23 +212,32 @@ const MaintainaceDetailsArea: React.FC = () => {
 
 const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) => {
   return (
+    <Shadow
+    style={{flex:1, alignContent:'center', }}
+    distance={5} // Shadow distance (blur)
+    startColor="rgba(0, 255, 255, 0.19)" // Blue shadow with opacity
+    offset={[12, 14]} // X and Y direction for shadow
+    containerStyle={{ margin: 9 }}
+    >
     <TouchableOpacity
       style={{
-        width: Dimensions.get('window').width / 2 - 30,
-        height: 170,
+        flex:1,
+        width: Dimensions.get('window').width / 2 - 45,
+        height: 150,
         borderRadius: 9,
         backgroundColor: '#fff',
-        margin: 9,
+        margin: 12,
         overflow: 'hidden',
-        elevation: 5,
-        paddingVertical:16
+        elevation: 2,
+        paddingVertical:12,
+        justifyContent:'center'
       }}
       onPress={async()=>{
         await dispatch({
           type:ActionTypes.FETCH_Amenity_Problem_DATA,
           amenityId:item.id
         });
-        console.log(`^^^^^^^^^^^^^^^^^^^^^^^^^Response from Reducer: ${JSON.stringify(response.data.data)}`);
+        console.log(`Response from Redux: ${JSON.stringify(response.data.data)}`);
         item.onClick();
       }
       }
@@ -255,6 +265,7 @@ const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) =
         </Text>
       </View>
     </TouchableOpacity>
+   </Shadow>
   );
 };
 

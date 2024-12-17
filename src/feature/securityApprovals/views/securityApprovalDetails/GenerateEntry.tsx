@@ -33,7 +33,7 @@ const GenerateEntry = () => {
     visitorType: '',
     purpose: '',
     inComingDate: 'dd/mm/yyyy',
-    inComingTime: 'hh-mm- AM',
+    inComingTime: 'HH-MM AM',
   });
 
   const [imageUri, setImageUri] = useState(null);
@@ -68,9 +68,9 @@ const GenerateEntry = () => {
     const dt = new Date(date);
     const x = dt.toISOString().split('T');
     const x1 = x[0].split('-');
-    console.log(x1[2]+'/'+x1[1]+'/'+x1[0]);
+    console.log(Number(x1[2])+1+'/'+x1[1]+'/'+x1[0]);
     Toaster(`date has been picked: ${x1}`);
-    handleInputChange('inComingDate',x1[2]+'/'+x1[1]+'/'+x1[0]);
+    handleInputChange('inComingDate',Number(x1[2])+1+'/'+x1[1]+'/'+x1[0]);
     hideDatePicker();
     showTimePicker();
   };
@@ -209,26 +209,27 @@ const GenerateEntry = () => {
       />
 
       <View style={{flexDirection:'row', width:'100%', height:50, marginBottom:15}}>
-        <View style={[{width:'40%', height:50, alignItems:'center',backgroundColor:'#fff', borderRadius:8, marginBottom: 15, borderColor: '#DDD', borderWidth: 1,}]}>
-          <Text style={{fontSize:18, flex:1, textAlignVertical:'center'}}>{formData.inComingDate}</Text>
-        </View>
         <TouchableOpacity style={{flex:1, justifyContent:'center'}} onPress={()=>showDatePicker()}>
-        <Image source={require('../../../../assets/png/calendar.png')} style={{height:30,width:30, marginHorizontal:12,alignSelf:'center'}}/>
+        <Image source={require('../../../../assets/png/calendar.png')} style={{height:24,width:24, marginHorizontal:4,alignSelf:'center'}}/>
         </TouchableOpacity>
-        <View style={{width:'40%', height:50, alignItems:'center', backgroundColor:'#fff',borderRadius:8, marginBottom: 15, borderColor: '#DDD', borderWidth: 1,}}>
-          <Text style={{fontSize:18,flex:1,textAlignVertical:'center'}}>{formData.inComingTime}</Text>
+        
+        <View style={[{width:'35%', height:50, alignItems:'center',backgroundColor:'#fff', borderRadius:8, marginBottom: 15, borderColor: '#DDD', borderWidth: 1,}]}>
+          <TouchableOpacity onPress={()=>showDatePicker()}>
+          <Text style={{fontSize:16, flex:1, textAlignVertical:'center'}}>{formData.inComingDate}</Text>
+        </TouchableOpacity>
+          </View>
+        <TouchableOpacity style={{flex:1, justifyContent:'center'}} onPress={()=>showTimePicker()}>
+        <Image source={require('../../../../assets/png/clock.png')} style={{height:27,width:27, marginHorizontal:4,alignSelf:'center'}}/>
+        </TouchableOpacity>
+        <View style={{width:'35%', height:50, alignItems:'center', backgroundColor:'#fff',borderRadius:8, marginBottom: 15, borderColor: '#DDD', borderWidth: 1,}}>
+          <TouchableOpacity onPress={()=> showTimePicker()}>
+          <Text style={{fontSize:15,flex:1,textAlignVertical:'center'}}>{formData.inComingTime}</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
-      {/* <TextInput
-        style={styles.input}
-        placeholder="Type of vehicle"
-        value={formData.vehicleType}
-        onChangeText={(value) => handleInputChange('vehicleType', value)}
-      /> */}
-
             <View style={styles.dropdownContainer}>
-        {/* <Text style={styles.dropdownLabel}>Type of Vehicle</Text> */}
+              
         <Picker
           selectedValue={formData.vehicleType}
           onValueChange={(value:any) => handleInputChange('vehicleType', value)}
@@ -247,50 +248,60 @@ const GenerateEntry = () => {
         onChangeText={(value) => handleInputChange('numberPlate', value)}
       />
 
-      <View style={[styles.input,{flexDirection:'row', justifyContent:'space-evenly'}]}>
+      <View style={[styles.input,{flexDirection:'row', justifyContent:'space-around'}]}>
+        <Text style={{fontSize:14, color:'grey',alignSelf:'center', marginEnd:12}}>
+          Number of people
+        </Text>
         <TouchableOpacity style={{ justifyContent:'center'}} onPress={()=>handleInputChange('numberOfPeople', String(Math.max((parseInt(formData.numberOfPeople || '0') - 1), 0)))}>
-        <Image source={require('../../../../assets/png/minuss.png')} style={{height:29, width:29}}/>
+        <Image source={require('../../../../assets/png/minuss.png')} style={{height:24, width:24, tintColor:'#000'}}/>
         </TouchableOpacity>
       <TextInput
         style={{backgroundColor: '#FFF',paddingHorizontal: 15,}}
-        placeholder="Number of people"
+        placeholder="0"
         keyboardType="numeric"
         value={formData.numberOfPeople === '0' || formData.numberOfPeople === 0 ? null : String(formData.numberOfPeople)}
         onChangeText={(value) => handleInputChange('numberOfPeople', value)}
       />
       <TouchableOpacity style={{justifyContent:'center'}} onPress={()=>handleInputChange('numberOfPeople', String(Math.max((parseInt(formData.numberOfPeople || '0') + 1))))}>
-      <Image source={require('../../../../assets/png/plus_icon.png')} style={{height:26, width:26, tintColor:'#000'}}/>
+      <Image source={require('../../../../assets/png/plus_icon.png')} style={{height:20, width:20, tintColor:'#000'}}/>
       </TouchableOpacity>
       </View>
 
+      
+<TextInput style={[styles.input, styles.textArea]}
+        placeholder="Type of visitor"
+        multiline
+        value={formData.visitorType}
+        onChangeText={(value) => handleInputChange('visitorType', value)}
+      />
+      <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}>
 
-    <View style={{height:36,backgroundColor:'#fff',borderRadius:8,justifyContent:'flex-start', width:'50%', marginBottom:12,borderColor:'#DDD', borderWidth:1}}>
-      <Text style={{fontSize:21,textAlign:'center', fontStyle:'italic', flex:1,}}>Type of visitor</Text>
-    </View>
-
-      <View style={styles.tagContainer}>
-        {['Family', 'Friend', 'Food Delivery', 'E-commerce delivery'].map((type) => (
+      <View style={[styles.tagContainer, {flexDirection:'row',}]}>
+        {['Family', 'Friend', 'Food Delivery', 'E-commerce delivery', 'other'].map((visitorType) => (
           <TouchableOpacity
-            key={type}
+            key={visitorType}
             style={
-              formData.visitorType === type
+              formData.visitorType === visitorType
                 ? [styles.tag, styles.activeTag]
                 : styles.tag
             }
-            onPress={() => handleInputChange('visitorType', type)}
+            onPress={() => handleInputChange('visitorType', visitorType)}
           >
             <Text
               style={
-                formData.visitorType === type
+                formData.visitorType === visitorType
                   ? styles.activeTagText
                   : styles.tagText
               }
             >
-              {type}
+              {visitorType}
             </Text>
           </TouchableOpacity>
         ))}
       </View>
+      </ScrollView>
 
       <TextInput style={[styles.input, styles.textArea]}
         placeholder="Purpose of visit"
@@ -298,9 +309,12 @@ const GenerateEntry = () => {
         value={formData.purpose}
         onChangeText={(value) => handleInputChange('purpose', value)}
       />
-
+      <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      >
       <View style={styles.tagContainer}>
-        {['Visiting', 'Delivery', 'Lorem'].map((purpose) => (
+        {['Visiting', 'Delivery','for Fun', 'other'].map((purpose) => (
           <TouchableOpacity
             key={purpose}
             style={
@@ -322,6 +336,7 @@ const GenerateEntry = () => {
           </TouchableOpacity>
         ))}
       </View>
+      </ScrollView>
 
       <TouchableOpacity style={styles.button} onPress={() =>{
          console.log(formData);

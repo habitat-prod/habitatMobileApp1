@@ -26,6 +26,7 @@ import { property, set } from "lodash";
 import { fetchHomeProfileData } from "./action/homeProfileAction";
 import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
+import { Shadow } from "react-native-shadow-2";
 
 const HomeScreen: React.FC = () => {
   

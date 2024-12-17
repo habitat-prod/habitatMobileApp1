@@ -11,8 +11,8 @@ const Clubhouse: React.FunctionComponent<IClubhouse> = (props) => {
   return (
     <View style={props.style}>
       <Svg
-        width={96}
-        height={130}
+        width={90}
+        height={110}
         viewBox="0 0 96 130"
         fill="none"
         //   xmlns="http://www.w3.org/2000/svg"
