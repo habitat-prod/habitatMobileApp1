@@ -8,13 +8,15 @@ import {
   ScrollView,
   Image,
   SafeAreaView,
-  Alert
+  Alert,
+  Modal
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import { Toaster } from '../../../../../src/utils/common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { Picker } from '@react-native-picker/picker';
+import FastImage from 'react-native-fast-image';
 
 const GenerateEntry = () => {
 
@@ -30,14 +32,29 @@ const GenerateEntry = () => {
     numberOfPeople: `${people}`,
     visitorType: '',
     purpose: '',
-    inComingDate: '- -/- -/- - - -',
-    inComingTime: '00-00 AM',
+    inComingDate: 'dd/mm/yyyy',
+    inComingTime: 'hh-mm- AM',
   });
 
   const [imageUri, setImageUri] = useState(null);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleGenerateEntry = () => {
+    if(!formData.name || !formData.mobileNumber || formData.numberOfPeople==0 || !formData.visitorType || !formData.purpose || formData.inComingDate.startsWith('dd') || formData.inComingTime.startsWith('hh') || !formData.vehicleType){
+      Toaster('please enter necessary feilds to generate entry!');
+    }
+    else{
+    setModalVisible(true); 
+    setTimeout(() => {
+      setModalVisible(false); 
+      navigation.goBack();
+    }, 3000);
+  }
+  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -126,6 +143,26 @@ const GenerateEntry = () => {
 
   return (
     <SafeAreaView style={{flex:1}}>
+      {/* // dialog to show GIF */}
+      <Modal
+        transparent={true}
+        visible={isModalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.gifContainer}>
+
+            <FastImage
+              style={styles.gif}
+              source={require('../../../../assets/gif/entryGenrated.gif')}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+            <Text style={styles.modalText}>Entry Generated Successfully!</Text>
+          </View>
+        </View>
+      </Modal>
+
       <View style={{backgroundColor:'#06B8C3',height:50,width:'100%',}}>
       <TouchableOpacity style={styles.header} onPress={()=> navigation.goBack()}>
         <Text style={{fontSize:22, fontWeight:'normal',color:'white', alignSelf:'center', marginStart:16, marginEnd:7}}>{'<'}</Text>
@@ -215,7 +252,7 @@ const GenerateEntry = () => {
         <Image source={require('../../../../assets/png/minuss.png')} style={{height:29, width:29}}/>
         </TouchableOpacity>
       <TextInput
-        style={{backgroundColor: '#FFF',paddingHorizontal: 15,}} // i wanna show placeholder when formData.numberOfPeople's value is 0
+        style={{backgroundColor: '#FFF',paddingHorizontal: 15,}}
         placeholder="Number of people"
         keyboardType="numeric"
         value={formData.numberOfPeople === '0' || formData.numberOfPeople === 0 ? null : String(formData.numberOfPeople)}
@@ -288,8 +325,9 @@ const GenerateEntry = () => {
 
       <TouchableOpacity style={styles.button} onPress={() =>{
          console.log(formData);
-         Toaster('Entry Generated Successfully.');
-         navigation.goBack();
+        //  Toaster('Entry Generated Successfully.');
+        //  navigation.goBack();
+        handleGenerateEntry();
          }}>
         <Text style={styles.buttonText}>Generate an entry</Text>
       </TouchableOpacity>
@@ -441,6 +479,29 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 20,
     fontWeight: 'normal',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  gifContainer: {
+    width: 300,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+  },
+  gif: {
+    width: 150,
+    height: 150,
+  },
+  modalText: {
+    marginTop: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });
 

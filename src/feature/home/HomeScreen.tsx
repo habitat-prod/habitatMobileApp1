@@ -103,7 +103,7 @@ const HomeScreen: React.FC = () => {
     }
 }, [societyId, token, dispatch]);
 
-  const postUri = 'https://media-del1-2.cdn.whatsapp.net/v/t61.24694-24/310465591_111619854962689_2603035308081784076_n.jpg?ccb=11-4&oh=01_Q5AaIHV6lp_KN56MzILUeC_w2rrZkm2TmsnsqytFqM3BxdwZ&oe=675E80E0&_nc_sid=5e03e0&_nc_cat=104';
+  const postUri = 'https://upload.wikimedia.org/wikipedia/en/3/3f/NobitaNobi.png';
 
   // useEffect(() => {
     // Back button press handler

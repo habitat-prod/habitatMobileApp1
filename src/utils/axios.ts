@@ -1,7 +1,7 @@
 import RNRestart from 'react-native-restart';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Axios from 'axios';
+import Axios from 'Axios';
 import { isEmpty } from 'lodash';
 
 import { URL } from '../constants/URL';
