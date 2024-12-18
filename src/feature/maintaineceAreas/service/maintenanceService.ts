@@ -16,7 +16,11 @@ export const maintenanceService = async(societyId: Number) =>{
     console.log("URL being called:", url);
 
     console.log('========================BEFORE API CALL INSIDE SERVICE========================');
-    const res = await axios.get(`/society/amenities?societyId=${societyId}`);
+    const res = await axios.get(`/society/amenities?societyId=${societyId}`,{
+        headers: {
+          'Content-Type': 'application/json', // passing it here too
+        },
+      });
     console.log('Request Headers: ', Config.headers);
 
 

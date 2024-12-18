@@ -16,6 +16,7 @@ import IMRadioButtonList from '../../IMRadioButtonList';
 import IMBasePicker, { IMPickerStyleProps, IPickerOption } from '../IMBasePicker';
 import { convertToRadioButtonList } from '../helper';
 import { useStyles } from './styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface ISearchProps {
   onSearch?: (val?: string) => void;
@@ -155,6 +156,8 @@ const IMSinglePicker: FunctionComponent<IMSinglePickerProps> = (props: IMSingleP
 
   const renderBottomSheetBody = () => {
     return (
+      <ScrollView showsVerticalScrollIndicator={false}
+      >
       <View>
         {!!props.searchProps && (
           <IMSearchInput
@@ -183,6 +186,7 @@ const IMSinglePicker: FunctionComponent<IMSinglePickerProps> = (props: IMSingleP
         )}
         {renderRadioButtonList()}
       </View>
+      </ScrollView> 
     );
   };
 

@@ -26,6 +26,8 @@ const locationDropdownList = [ // here i would need to replace it with dynamic l
   { label: 'Location 4', value: 'location4', },
   { label: 'Location 5', value: 'location5', },
   { label: 'Location 6', value: 'location6', },
+  { label: 'Location 7', value: 'location7', },
+  { label: 'Location 8', value: 'location8', },
 ];
 
 const locationOfTowerDropdownList = [

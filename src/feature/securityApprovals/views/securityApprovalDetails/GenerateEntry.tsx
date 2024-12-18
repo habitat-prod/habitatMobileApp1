@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -17,8 +17,13 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { Picker } from '@react-native-picker/picker';
 import FastImage from 'react-native-fast-image';
+import { useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { generateEntry } from '../../action/generateEntryAction';
 
 const GenerateEntry = () => {
+
+  const dispatch = useDispatch();
 
   const [people,setPeople] = useState(0);
 
@@ -26,7 +31,7 @@ const GenerateEntry = () => {
     name: '',
     mobileNumber: '',
     towerNumber: '',
-    flatNumber: '',
+    flatId: '',
     vehicleType: '',
     numberPlate: '',
     numberOfPeople: `${people}`,
@@ -48,10 +53,11 @@ const GenerateEntry = () => {
       Toaster('please enter necessary feilds to generate entry!');
     }
     else{
+      handleIORequest();
     setModalVisible(true); 
     setTimeout(() => {
       setModalVisible(false); 
-      navigation.goBack();
+      // navigation.goBack();
     }, 3000);
   }
   };
@@ -68,7 +74,7 @@ const GenerateEntry = () => {
     const dt = new Date(date);
     const x = dt.toISOString().split('T');
     const x1 = x[0].split('-');
-    console.log(Number(x1[2])+1+'/'+x1[1]+'/'+x1[0]);
+    console.log(Number(x1[2])+'/'+x1[1]+'/'+x1[0]);
     Toaster(`date has been picked: ${x1}`);
     handleInputChange('inComingDate',Number(x1[2])+1+'/'+x1[1]+'/'+x1[0]);
     hideDatePicker();
@@ -98,6 +104,14 @@ const GenerateEntry = () => {
   const handleInputChange = (field:any, value:any) => {
     setFormData({ ...formData, [field]: value });
   };
+
+  useEffect(()=>{
+    const addFlatId = async()=>{
+      const flatId = await AsyncStorage.getItem('flatId');
+      handleInputChange('flatId',flatId);
+    }
+    addFlatId();
+  }, []);
 
   const openCamera = async () => {
     const result = await launchCamera({
@@ -140,6 +154,17 @@ const GenerateEntry = () => {
       { cancelable: true }
     );
   };
+
+  const handleIORequest = async()=>{
+    const response = await dispatch(generateEntry(
+      {
+        flatId: Number(formData.flatId),
+        type: formData.visitorType,
+        role: 'GUEST'
+      }
+    ));
+    console.log(`Response inSide screen is: ${JSON.stringify(response)}`);
+  }
 
   return (
     <SafeAreaView style={{flex:1}}>

@@ -319,12 +319,13 @@ const HomeScreen: React.FC = () => {
     </ScrollView>
 
     { isFirstTime && (
-          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: -45}} onDismiss={() => { isSwitching? setVisible(false): Toaster('Please Select any flat to Access incredible features of APP :)') }}>
+          <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: -110}} onDismiss={() => { isSwitching? setVisible(false): Toaster('Please Select any flat to Access incredible features of APP :)') }}>
             <View
               style={{
                 backgroundColor: '#fff',
                 width: '100%',
-                padding: 5,
+                height: '80%',
+                padding: 1,
                 borderTopStartRadius: 21,
                 borderTopEndRadius: 21,
               }}>
@@ -339,6 +340,8 @@ const HomeScreen: React.FC = () => {
                 keyExtractor={(item) => item.id}
                 renderItem={renderAddressItem}
                 contentContainerStyle={{ paddingBottom: 10 }}
+                scrollEnabled={true}
+                showsVerticalScrollIndicator={false}
               />
 
               {/* <View style={styles.manualInputContainer}>

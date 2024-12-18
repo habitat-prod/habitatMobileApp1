@@ -27,7 +27,7 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
       ).pipe(
         map((response:any) => {
           console.log('Raw response inside epic: ', JSON.stringify(response.data.data.flatDetailsList));
-          console.log('response keys: ',Object.keys(response));
+          // console.log('response keys: ',Object.keys(response));
           const tempToken = response.data.data.tempToken;
           const flatDetailsList = response.data.data.flatDetailsList;
           const flatListSize = response.data.data.flatListSize;
@@ -44,9 +44,9 @@ const verifyOtpEpic = (action$: ActionsObservable<IVerifyOtpActionData>, state$:
           console.log(`savedList is: =========== ${saved}`);
 
           console.log(`full response is: ${JSON.stringify(fullResponse)}`);
-          console.log(`fullResponse2 is: ${JSON.stringify(fullResponse2)}`);
+          // console.log(`fullResponse2 is: ${JSON.stringify(fullResponse2)}`);
 
-          console.log(`flatListSize directly from response: ${flatListSize}`)
+          // console.log(`flatListSize directly from response: ${flatListSize}`)
 
           console.log(`flatList Type is: ${typeof flatDetailsList}`);
           

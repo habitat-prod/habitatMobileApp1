@@ -16,12 +16,14 @@ const axios = Axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
+    Accept: 'application/json', 
   },
 });
 
 // Add a request interceptor
 axios.interceptors.request.use(
   async (config) => {
+    console.log('Final Request Headers From The axios file is ::::::', config.headers);
     // When Internet is not connected.
     const error: IErrorActionData = {
       errorCode: 500,

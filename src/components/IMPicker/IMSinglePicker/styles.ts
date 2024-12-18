@@ -9,11 +9,11 @@ export const useStyles = (theme: ReactNativePaper.Theme) =>
     },
     bottomSheetContentArea: {
       width: wp('100%'),
-      paddingTop: wp('5%'),
+      paddingTop: wp('0%'),
       justifyContent: 'flex-start',
     },
     bottomSheetDefaultContainer: {
-      top: hp('15%'),
+      top: hp('50%'),
     },
     searchBarWrapper: {
       marginTop: 0,
