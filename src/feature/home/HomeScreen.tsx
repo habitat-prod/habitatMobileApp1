@@ -27,6 +27,8 @@ import { fetchHomeProfileData } from "./action/homeProfileAction";
 import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
 import { Shadow } from "react-native-shadow-2";
+import { fetchSecurityApprovalData } from "../securityApprovals/action/securityAprovalsAction";
+import { ActionTypes } from "../../utils/constants";
 
 const HomeScreen: React.FC = () => {
   
@@ -42,6 +44,7 @@ const HomeScreen: React.FC = () => {
   let societyAddress = useSelector((state:RootState)=> state.tokenReducer.societyAddress);
   let token = useSelector((state:RootState)=> state.tokenReducer.token);
   let societyId = useSelector((state:RootState)=> state.tokenReducer.societyId);
+  let flatId = useSelector((state:RootState)=> state.tokenReducer.flatId);
   const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
   const [isSwitching, setIsSwitching] = useState(false);
 
@@ -69,6 +72,7 @@ const HomeScreen: React.FC = () => {
     societyName = await AsyncStorage.getItem('societyName');
     societyAddress = await AsyncStorage.getItem('societyAddress');
     societyId = await AsyncStorage.getItem('societyId');
+    flatId = await AsyncStorage.getItem('flatId');
     token = await AsyncStorage.getItem('token');
     console.log({flatNo}, {buildingName}, {societyName}, {societyAddress});
     
@@ -185,6 +189,17 @@ const HomeScreen: React.FC = () => {
     await dispatch(fetchMaintenanceData());
   }
 
+  const handleSecurityApprovalData = async() =>{
+    // dispatch(fetchSecurityApprovalData(
+    //   {
+    //     flatId: flatId
+    //   }
+    // ));
+    const response = await dispatch(fetchSecurityApprovalData({flatId:1}));
+    console.log(`flatId from Screen is: ${flatId}`)
+    console.log(`the Response inside Screen of Security Approvals is: => ${JSON.stringify(response)}`)
+  }
+
   const handleServiceClick = (service) => {
     switch (service.id) {
       case 1:
@@ -194,6 +209,7 @@ const HomeScreen: React.FC = () => {
         break;
       case 2:
         console.log("Navigate to Security screen");
+        handleSecurityApprovalData();
         defaultNavigation.navigate(NAVIGATION.SecurityApprovalsStackNav); 
         break;
       case 3:

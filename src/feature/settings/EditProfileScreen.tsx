@@ -21,7 +21,7 @@ const EditProfileScreen: React.FC = () => {
   const [block, setBlock] = useState("A");
   const [flatNumber, setFlatNumber] = useState("A1679");
   const [vehicleNumber, setVehicleNumber] = useState("UP-78 ED");
-  const [parkingSpot, setParkingSpot] = useState("A01");
+  const [email, setEmail] = useState("AnitaJi@habitat.com");
   const navigation = useNavigation();
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
@@ -90,6 +90,7 @@ const EditProfileScreen: React.FC = () => {
           <TextInput
             style={styles.input}
             value={block}
+            editable={false}
             onChangeText={(text) => setBlock(text)}
           />
 
@@ -97,21 +98,23 @@ const EditProfileScreen: React.FC = () => {
           <TextInput
             style={styles.input}
             value={flatNumber}
+            editable={false}
             onChangeText={(text) => setFlatNumber(text)}
           />
 
-          <Text style={styles.label}>Vehicle Number</Text>
+          {/* <Text style={styles.label}>Vehicle Number</Text>
           <TextInput
             style={styles.input}
             value={vehicleNumber}
             onChangeText={(text) => setVehicleNumber(text)}
-          />
+          /> */}
 
-          <Text style={styles.label}>Alloted Parking spot</Text>
+          <Text style={styles.label}>Email Id</Text>
           <TextInput
             style={styles.input}
-            value={parkingSpot}
-            onChangeText={(text) => setParkingSpot(text)}
+            value={email}
+            placeholder="enter your email"
+            onChangeText={(text) => setEmail(text)}
           />
         </View>
 

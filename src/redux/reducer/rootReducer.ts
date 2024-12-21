@@ -6,6 +6,7 @@ import homeProfileReducer from "../../../src/feature/home/reducer/homeProfileRed
 import maintenanceReducer from "../../../src/feature/maintaineceAreas/reducers/maintenanceReducer";
 import amenityProblemReducer from "../../../src/feature/maintaineceAreas/reducers/amenityProblemReducer";
 import generateEntryReducer from "../../../src/feature/securityApprovals/reducer/generateEntryReducer";
+import securityApprovalReducer from "../../../src/feature/securityApprovals/reducer/securityApprovalReducer";
 
 export const rootReducer = combineReducers({
     otp: userReducer,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
     maintenanceReducer: maintenanceReducer,
     amenityProblemReducer: amenityProblemReducer,
     generateEntryReducer: generateEntryReducer,
+    securityApprovalReducer: securityApprovalReducer,
 });
 
 export default rootReducer;

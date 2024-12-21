@@ -31,8 +31,8 @@ const generateEntryEpic = (action$: ActionsObservable<IGenerateEntryActionData>,
 
         ),
       ).pipe(
-        map((response) => {
-          console.log('entry generated Successfully: ', response);
+        map((response:any) => {
+          console.log('entry generated Successfully: ', JSON.stringify(response.data));
           
           // case success:
               return generateEntrySuccess({

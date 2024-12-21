@@ -6,6 +6,7 @@ import fetchHomeProfileDataEpic from "../../feature/home/epic/homeProfileEpic";
 import fetchMaintenanceDataEpic from "../../feature/maintaineceAreas/epic/maintenanceEpic";
 import fetchAmenityProblemDataEpic from "../../feature/maintaineceAreas/epic/amenityProblemEpic";
 import generateEntryEpic from "../../feature/securityApprovals/epic/generateEntryEpic";
+import fetchSecurityApprovalDataEpic from "../../feature/securityApprovals/epic/securityApprovalEpic";
 
 const rootEpic = combineEpics(
     sendOtpEpic, 
@@ -14,7 +15,8 @@ const rootEpic = combineEpics(
     fetchHomeProfileDataEpic, 
     fetchMaintenanceDataEpic, 
     fetchAmenityProblemDataEpic,
-    generateEntryEpic
+    generateEntryEpic,
+    fetchSecurityApprovalDataEpic,
 );
 
 export default rootEpic;

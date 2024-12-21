@@ -49,17 +49,17 @@ const GenerateEntry = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleGenerateEntry = () => {
-    if(!formData.name || !formData.mobileNumber || formData.numberOfPeople==0 || !formData.visitorType || !formData.purpose || formData.inComingDate.startsWith('dd') || formData.inComingTime.startsWith('hh') || !formData.vehicleType){
-      Toaster('please enter necessary feilds to generate entry!');
-    }
-    else{
+    // if(!formData.name || !formData.mobileNumber || formData.numberOfPeople==0 || !formData.visitorType || !formData.purpose || formData.inComingDate.startsWith('dd') || formData.inComingTime.startsWith('hh') || !formData.vehicleType){
+    //   Toaster('please enter necessary feilds to generate entry!');
+    // }
+    // else{
       handleIORequest();
     setModalVisible(true); 
     setTimeout(() => {
       setModalVisible(false); 
       // navigation.goBack();
     }, 3000);
-  }
+  // }
   };
 
   const showDatePicker = () => {

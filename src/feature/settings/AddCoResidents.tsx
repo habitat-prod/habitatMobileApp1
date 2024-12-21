@@ -15,6 +15,7 @@ import { HBStackParamList } from "../../navigation/rootNavigation";
 import { NAVIGATION } from "../../constants/screens";
 import { Toaster } from "../../constants/common";
 import CheckBox from "react-native-check-box";
+import { Picker } from "@react-native-picker/picker";
 
 
 const AddCoResidents: React.FC = () => {
@@ -22,7 +23,7 @@ const AddCoResidents: React.FC = () => {
   const [block, setBlock] = useState("A");
   const [flatNumber, setFlatNumber] = useState("21");
   const [contactNumber, setContactNumber] = useState("9878423679");
-  const [role, setRole] = useState("Guest");
+  const [role, setRole] = useState("Select Role");
   const navigation = useNavigation();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -35,6 +36,7 @@ const AddCoResidents: React.FC = () => {
   const handleSave = () => {
     alert("Request added successfully.");
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,30 +57,47 @@ const AddCoResidents: React.FC = () => {
           <TextInput
             style={styles.input}
             value={name}
+            placeholder="enter the name"
             onChangeText={(text) => setName(text)}
           />
 
 
-          <Text style={styles.label}>Flat number</Text>
+          {/* <Text style={styles.label}>Flat number</Text>
           <TextInput
             style={styles.input}
             value={flatNumber}
             onChangeText={(text) => setFlatNumber(text)}
-          />
+          /> */}
 
           <Text style={styles.label}>Contact Details</Text>
           <TextInput
             style={styles.input}
             value={contactNumber}
+            placeholder="enter the phone number"
             onChangeText={(text) => setContactNumber(text)}
           />
 
-          <Text style={styles.label}>Role</Text>
+          {/* <Text style={styles.label}>Role</Text>
           <TextInput
             style={styles.input}
             value={role}
             onChangeText={(text) => setRole(text)}
-          />
+          /> */}
+        
+        <View style={styles.dropdownContainer}>
+              
+              <Picker
+                selectedValue={role}
+                onValueChange={(value:any) => setRole(value)}
+                style={styles.picker}
+              >
+                <Picker.Item label="Select Role" value="" style={styles.option}/>
+                <Picker.Item label="Co-Owner" value="Co-Owner" style={styles.option}/>
+                <Picker.Item label="Tenant" value="Tenant" style={styles.option}/>
+                <Picker.Item label="Guest" value={"Guest"} style={styles.option}/>
+              </Picker>
+            </View>
+          
         </View>
         
       <CheckBox style={{marginStart:12}} rightText="I hereby give consent that the above-provided details are true." isChecked={isChecked} onClick={()=> setIsChecked(!isChecked)} rightTextStyle={{color:'#000'}}/>
@@ -104,6 +123,21 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     // padding: 16,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+  },
+  option: {
+    fontSize:15
+  },
+  dropdownContainer: {
+    marginBottom: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#DDD',
+    overflow: 'hidden', 
   },
   title: {
     fontSize: 16,
