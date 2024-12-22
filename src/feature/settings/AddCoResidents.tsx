@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -8,33 +8,71 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { HBStackParamList } from "../../navigation/rootNavigation";
-import { NAVIGATION } from "../../constants/screens";
 import { Toaster } from "../../constants/common";
 import CheckBox from "react-native-check-box";
 import { Picker } from "@react-native-picker/picker";
+import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { addResident } from "./action/addResidentAction";
 
 
 const AddCoResidents: React.FC = () => {
   const [name, setName] = useState("Tony Stark");
   const [block, setBlock] = useState("A");
-  const [flatNumber, setFlatNumber] = useState("21");
+  const [flatId, setFlatId] = useState<number>(0);
   const [contactNumber, setContactNumber] = useState("9878423679");
   const [role, setRole] = useState("Select Role");
   const navigation = useNavigation();
   const [isChecked, setIsChecked] = useState(false);
+  const [s3Path, setS3Path] = useState('http://good_photo.jpg');
+  const [userPhone, setUserPhone] = useState<number>(0);
+  const dispatch = useDispatch();
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
+
+  useEffect(()=>{
+    const setDetails = async()=>{
+      const id = await AsyncStorage.getItem('flatId')
+      const userNumber = await AsyncStorage.getItem('phoneNumber');
+      setFlatId(Number(id));
+      setUserPhone(Number(userNumber));
+    }
+    setDetails();
+  },[]);
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
   };
+  // name:string,
+  // phone: string,
+  // email: string,
+  // s3Path: string,
+  // active: false,
+  // invitationFlatId: number,
+  // userPhone: number,
+  // desiredRole: string
 
-  const handleSave = () => {
-    alert("Request added successfully.");
+  const handleSave = async() => {
+    const payload = await dispatch(
+      addResident(
+        {
+          name: name,
+          phone: contactNumber,
+          s3Path: s3Path,
+          active: false,
+          invitationFlatId: flatId,
+          userPhone: userPhone,
+          desiredRole: role
+        }
+      )
+    );
+    console.log(`sending payload from action is: ${JSON.stringify(payload)}`);
+    Alert.alert("Request added successfully.");
   };
   
 

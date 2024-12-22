@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { RouteProp, useNavigation } from '@react-navigation/native'
@@ -16,8 +16,11 @@ import IMTextInput from '../../../../../components/IMInput/IMTextInput';
 import IMButton from '../../../../../components/IMButton';
 import MaintainanceListDetailsValidationSchema from './helper';
 import useStyles from './styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/redux/store/configureStore';
+import { Toaster } from '../../../../../../src/utils/common';
+import { maintenanceReport } from '../../../actions/maintenanceReportAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const locationDropdownList = [ // here i would need to replace it with dynamic locationList
   { label: 'Location', value: 'location1' },
@@ -57,6 +60,13 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   const routeParams = props.route.params.title;
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
   const response = useSelector((state:RootState)=>state.amenityProblemReducer);
+  const dispatch = useDispatch();
+  const [problemId,setProblemId] = useState<number>(0);
+  const [societyId, setSocietyId] = useState<number>(0);
+  const [staffId, setStaffId] = useState<number>(0);
+  const [managerId, setManagerId] = useState<number>(0);
+  const [userId, setUserId] = useState<number>(0);
+  const [amenityId, setAmenityId] = useState<number>(0);
 
   // here i'm checking the valid list to map the data
   const problemDropdownList = response?.data?.data?.length? response.data.data.map((item:any) => ({
@@ -65,6 +75,20 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   }))
   :
   [];
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+      const societyId = await AsyncStorage.getItem('societyId');
+      const userId = await AsyncStorage.getItem('userId');
+      setSocietyId(Number(societyId));
+      setUserId(Number(userId));
+      const firstElementAmenityId = await response?.data?.data?.[0]?.amenityId;
+      console.log(`---------------------${firstElementAmenityId}-------------------------`);
+      setAmenityId(firstElementAmenityId);
+    }
+    fetchData();
+    console.log(`GETTING THE DATA FROM SCREEN =>  ${JSON.stringify(response.data.data)}`);
+  }, [2000]);
   
 
   const formikData = useFormik({
@@ -77,10 +101,37 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
     },
     validationSchema: MaintainanceListDetailsValidationSchema,
     validateOnMount: true,
-    onSubmit: (values) => {
+    onSubmit: (values) => {()=>{
       //TODO: will do the api call here
-    },
+      console.log('BTN PRESSED;;;;;');
+
+      Toaster('Api needs to be called here..',5000);
+    }
+  },
   });
+//         status: status,
+//         s3PathProblem :s3PathProblem,
+//         societyId: societyId,
+//         societyAmenityId: societyAmenityId,
+//         problemId: problemId,
+//         managerId: managerId,
+//         staffId: staffId,
+//         userId: userId,
+  const handleSubmit = async() =>{
+    const apiCall = await dispatch(
+      maintenanceReport({
+        status: true,
+        s3PathProblem: 'https://newMaintenanceProblem.com',
+        societyId: societyId,
+        societyAmenityId: amenityId,
+        problemId: problemId,
+        managerId: managerId,
+        staffId: staffId,
+        userId: userId,
+      })
+    );
+    console.log(`api calling in screen: ${JSON.stringify(apiCall)}`);
+  }
 
   const showConditionalDropdownList = () => {
     if (routeParams === 'Stairs') return true;
@@ -195,7 +246,7 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         id="send-request"
         title='Send request'
         disabled={!formikData.isValid}
-        onClick={formikData.handleChange}
+        onClick={()=> handleSubmit()}
         styles={{ container: styles.btnContainer }}
       />
     </SafeAreaView>

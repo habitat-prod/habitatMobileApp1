@@ -32,7 +32,6 @@ const EditProfileScreen: React.FC = () => {
       block,
       flatNumber,
       vehicleNumber,
-      parkingSpot,
     });
     alert("Profile updated successfully!");
   };
