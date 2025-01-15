@@ -309,7 +309,7 @@ const HomeScreen: React.FC = () => {
             <View style={{flexDirection:'row',}}>
                 <Image source={{uri:postUri}} style={styles.profileImage} />
             <View>
-              <Text style={styles.postAuthor}>Shreyash Arvind Gore</Text>
+              <Text style={styles.postAuthor}>Karan Gupta</Text>
               <Text style={styles.postLocation}>Tower C</Text>
             </View>
             </View>
@@ -328,7 +328,7 @@ const HomeScreen: React.FC = () => {
           />
           <TouchableOpacity style={{backgroundColor:'#06B8C3', width:'100%',paddingVertical:8, borderRadius:4, marginTop:5, flexDirection:'row', justifyContent:'space-between'}}>
             <Text style={{fontSize:14, color:'#fff', marginStart:9}}>Purchase This Service</Text>
-            <Text style={{fontSize:14, color:'#fff', marginEnd:9}}>Rs. 5,299/-</Text>
+            <Text style={{fontSize:14, color:'#fff', marginEnd:9}}>Rs. 51,299/-</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -347,7 +347,7 @@ const HomeScreen: React.FC = () => {
               }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={styles.txtTitle}>Select a saved address</Text>
-                <Text style={styles.txtSeeAll}>See all</Text>
+                {/* <Text style={styles.txtSeeAll}>See all</Text> */}
               </View>
 
               {/* Address List */}

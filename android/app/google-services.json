@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "690864277308",
+    "project_id": "habitat-ca72e",
+    "storage_bucket": "habitat-ca72e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690864277308:android:c9f7059d8c9ff9569b0039",
+        "android_client_info": {
+          "package_name": "com.habitatmobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD99J0fDXg00J4mIDlUp_IAxhPKNXCF6w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
