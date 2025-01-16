@@ -11,7 +11,6 @@ import HandPhone from '../../../../assets/svg/HandPhone';
 import IMBadge from '../../../../components/IMBadge';
 import IndiaFlag from '../../../../assets/svg/IndiaFlag';
 import useStyles from './styles';
-import { log, warn } from 'console';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendOTP } from '../../action/login';
@@ -34,9 +33,7 @@ const Login: React.FC = () => {
 
     useEffect( ()=>{
       const checkLoginState = async () => {
-    // const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-    const token = await AsyncStorage.getItem('token');
-    // console.log(`isLogged in: ${isLoggedIn} & token is: ${token}`);
+      const token = await AsyncStorage.getItem('token');
       if(token){
         console.log('inside isLoggedIn condition :)');
         navigation.navigate(NAVIGATION.HomeScreenNav);

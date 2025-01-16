@@ -20,6 +20,8 @@ export enum NAVIGATION {
   PermanentPassesNav = 'PermanentPassesNav',
   AddPermanentPassNav = 'AddPermanentPassNav',
   GenerateEntryNav = 'GenerateEntryNav',
+  SplashScreenNav = 'SplashScreenNav',
+  PermanentPassDetailNav = 'PermanentPassDetailNav',
 }
 
 export enum MaintainanceAreasScreens {
@@ -50,6 +52,8 @@ export enum MaintainanceAreasScreens {
   PermanentPasses = 'PermanentPasses',
   AddPermanentPass = 'AddPermanentPass',
   GenerateEntry = 'GenerateEntry',
+  SplashScreen = 'SplashScreen',
+  PermanentPassDetail = 'PermanentPassDetail',
 }
 
 export enum BootstrapNavigationScreens {

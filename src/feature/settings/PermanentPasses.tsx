@@ -19,6 +19,9 @@ interface Member {
     phone: string;
     fileName: string;
     status: "Friends/Family" | "House Help";
+    image: string;
+    society: string;
+    associatedAddress: string;
   }
 
 const PermanentPasses: React.FC = () => {
@@ -35,6 +38,9 @@ const PermanentPasses: React.FC = () => {
       phone: "+91 9797721763",
       fileName: "Filename.pdf",
       status: "Friends/Family",
+      society: "NRI City",
+      associatedAddress: "Mainavati Marg, Kanpur",
+      image: "https://dthezntil550i.cloudfront.net/kw/latest/kw1912111920026810004182303/1280_960/617e99ed-c7cf-41e5-9252-62b61fe5060a.png"
     },
     {
       id: "2",
@@ -42,6 +48,9 @@ const PermanentPasses: React.FC = () => {
       phone: "+91 7880718700",
       fileName: "Filename.pdf",
       status: "Friends/Family",
+      society: "Emerald Gold",
+      associatedAddress: "Vikas Nagar, Bangalore",
+      image: "https://dthezntil550i.cloudfront.net/kw/latest/kw1912111920026810004182303/1280_960/617e99ed-c7cf-41e5-9252-62b61fe5060a.png"
     },
   ]);
 
@@ -49,29 +58,38 @@ const PermanentPasses: React.FC = () => {
     {
       id: "3",
       name: "Vimal",
-      phone: "+91 7307990967",
+      phone: "9075786634",
       fileName: "Filename.pdf",
+      society: "NRI City",
+      associatedAddress: "Mainavati Marg, Kanpur",
       status: "House Help",
+      image: "https://dthezntil550i.cloudfront.net/kw/latest/kw1912111920026810004182303/1280_960/617e99ed-c7cf-41e5-9252-62b61fe5060a.png"
     },
     {
       id: "4",
       name: "Vinay",
-      phone: "+91 7307990967",
+      phone: "9908765435",
       fileName: "Filename.pdf",
+      society: "NRI City",
+      associatedAddress: "Mainavati Marg, Kanpur",
       status: "House Help",
+      image: "https://dthezntil550i.cloudfront.net/kw/latest/kw1912111920026810004182303/1280_960/617e99ed-c7cf-41e5-9252-62b61fe5060a.png"
     },
     {
       id: "5",
       name: "Kanchana",
-      phone: "+91 7307990967",
+      phone: "7307990967",
       fileName: "Filename.pdf",
+      society: "Signature City",
+      associatedAddress: "Azad Nagar, Chennai",
       status: "House Help",
+      image: "https://st5.depositphotos.com/1040166/73455/i/450/depositphotos_734555736-stock-photo-little-girl-spooky-halloween-makeup.jpg"
     },
   ]);
 
 
 const renderPasses = ({ item }: { item: Member }) => (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={()=> navigation.navigate(NAVIGATION.PermanentPassDetailNav, {member: item})}>
       <View style={{width:'100%'}}>
             <Image source={require('../../assets/png/image_ticket.png')}/>
         <Text style={{color:'blue'}}>{item.name}</Text>
@@ -101,7 +119,7 @@ const renderPasses = ({ item }: { item: Member }) => (
       >
         <Text style={styles.menuDots}>⋮</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 
 

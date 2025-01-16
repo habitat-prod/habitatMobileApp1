@@ -25,6 +25,8 @@ import FeedbackScreen from '../feature/settings/FeedbackScreen';
 import PermanentPasses from '../feature/settings/PermanentPasses';
 import AddPermanentPass from '../feature/settings/AddPermanentPass';
 import GenerateEntry from '../feature/securityApprovals/views/securityApprovalDetails/GenerateEntry';
+import SplashScreen from '../feature/SplashScreen';
+import PermanentPassDetail from '../feature/settings/PermanentPassDetail';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -41,8 +43,11 @@ const RootNavigation: React.FunctionComponent = () => {
   const StackNav = createNativeStackNavigator<HBStackParamList>();
 
   return (
-    <NavigationContainer>
-      <StackNav.Navigator screenOptions={{ headerShown: false }}>
+    <NavigationContainer
+    onReady={() => console.log('Navigation is ready!')}
+    onStateChange={(state) => console.log('Navigation state changed:', state)}
+    >
+      <StackNav.Navigator screenOptions={{ headerShown: false }} initialRouteName={NAVIGATION.SplashScreenNav}>
       <StackNav.Screen name={NAVIGATION.BootstrapStackNav} component={BootstrapStackNav} />
         <StackNav.Screen name={NAVIGATION.HomeProfileNav} component={HomeStackNav} />
         <StackNav.Screen name={NAVIGATION.MaintainaceAreaStackNav} component={MaintainaceAreaStackNav} />
@@ -64,6 +69,8 @@ const RootNavigation: React.FunctionComponent = () => {
         <StackNav.Screen name={NAVIGATION.PermanentPassesNav} component = {PermanentPasses}/>
         <StackNav.Screen name={NAVIGATION.AddPermanentPassNav} component = {AddPermanentPass}/>
         <StackNav.Screen name={NAVIGATION.GenerateEntryNav} component = {GenerateEntry}/>
+        <StackNav.Screen name={NAVIGATION.SplashScreenNav} component = {SplashScreen}/>
+        <StackNav.Screen name={NAVIGATION.PermanentPassDetailNav} component = {PermanentPassDetail}/>
 
       </StackNav.Navigator>
     </NavigationContainer>
