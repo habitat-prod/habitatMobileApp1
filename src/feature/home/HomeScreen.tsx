@@ -3,12 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   ScrollView,
   TouchableOpacity,
   Image,
-  Alert,
-  BackHandler,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
@@ -22,13 +19,10 @@ import { NAVIGATION } from "../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "../../../src/utils/common";
 import { generateToken } from "./action/tokenGenAction";
-import { property, set } from "lodash";
 import { fetchHomeProfileData } from "./action/homeProfileAction";
 import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
-import { Shadow } from "react-native-shadow-2";
 import { fetchSecurityApprovalData } from "../securityApprovals/action/securityAprovalsAction";
-import { ActionTypes } from "../../utils/constants";
 
 const HomeScreen: React.FC = () => {
   
@@ -47,7 +41,6 @@ const HomeScreen: React.FC = () => {
   let flatId = useSelector((state:RootState)=> state.tokenReducer.flatId);
   const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
   const [isSwitching, setIsSwitching] = useState(false);
-
   const [flatList, setFlatList] = useState(flatDetailsList);
   const [isServicesVisible,setIsServiceVisible] = useState(false);
   const [rotation, setRotation] = useState(0);  
@@ -94,9 +87,6 @@ const HomeScreen: React.FC = () => {
       societyName:societyName,
       societyAddress:societyAddress,
     });
-    // console.log('going to call pms response API');
-    // const pmsResponse = dispatch(fetchHomeProfileData());
-    // console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
   } 
   setUserDetails();
   },[]);
@@ -109,32 +99,6 @@ const HomeScreen: React.FC = () => {
 }, [societyId, token, dispatch]);
 
   const postUri = 'https://upload.wikimedia.org/wikipedia/en/3/3f/NobitaNobi.png';
-
-  // useEffect(() => {
-    // Back button press handler
-    // const backAction = () => {
-      // Alert.alert(
-      //   'Exit App', 
-      //   'Are you sure you want to exit the app?', 
-      //   [
-      //     { text: 'Cancel', onPress: () => null, style: 'cancel' },
-      //     { text: 'Yes', onPress: () => BackHandler.exitApp() },
-      //   ]
-      // );
-  //     BackHandler.exitApp();
-  //     return true;
-  //   };
-
-  //   // Add event listener
-  //   const backHandler = BackHandler.addEventListener(
-  //     'hardwareBackPress',
-  //     backAction
-  //   );
-
-  //   // Cleanup the listener on unmount
-  //   return () => backHandler.remove();
-  // }, []);
-
 
   useEffect(() => {
     dispatch(fetchHomeProfileData());
@@ -164,8 +128,6 @@ const HomeScreen: React.FC = () => {
     try{
     Toaster(`flatId is: ${item.flatId.toString()} flatName is: ${item.flatName}`);
     const response = await dispatch(generateToken({propertyId: Number(item.flatId), userType: 'USER'}));
-    // const token = await AsyncStorage.getItem('token');
-    // const societyId = await AsyncStorage.getItem('societyId');
     console.log('going to call pms response API');
     const pmsResponse = await dispatch(fetchHomeProfileData());
     console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
@@ -190,11 +152,6 @@ const HomeScreen: React.FC = () => {
   }
 
   const handleSecurityApprovalData = async() =>{
-    // dispatch(fetchSecurityApprovalData(
-    //   {
-    //     flatId: flatId
-    //   }
-    // ));
     const response = await dispatch(fetchSecurityApprovalData({flatId:1}));
     console.log(`flatId from Screen is: ${flatId}`)
     console.log(`the Response inside Screen of Security Approvals is: => ${JSON.stringify(response)}`)
@@ -208,7 +165,7 @@ const HomeScreen: React.FC = () => {
         defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav); 
         break;
       case 2:
-        console.log("Navigate to Security screen");
+        console.log("Navigate to Security screen "+service.id);
         handleSecurityApprovalData();
         defaultNavigation.navigate(NAVIGATION.SecurityApprovalsStackNav); 
         break;
@@ -240,7 +197,6 @@ const HomeScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container2}>
-        
     <ScrollView style={styles.container}>
         
       <View style={styles.header}>
@@ -259,18 +215,6 @@ const HomeScreen: React.FC = () => {
           <Image style={{width:34, height:34}} source={require('../../assets/png/account.png')}/>
         </TouchableOpacity>
       </View>
-
-      {/* <View style={styles.searchContainer}>
-        <Image source={require('../../assets/png/icon_search.png')} />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search for services..."
-          placeholderTextColor="#888"
-        />
-        <TouchableOpacity>
-            <Image source={require('../../assets/png/mic.png')} style={{alignSelf:'flex-end', alignContent:'center',alignItems:'center',justifyContent:'center', marginEnd:5}}/>
-        </TouchableOpacity>
-        </View> */}
 
       <View style={styles.servicesContainer}>
         <View style={styles.servicesHeader}>
@@ -303,7 +247,6 @@ const HomeScreen: React.FC = () => {
 
       <View style={styles.happeningsContainer}>
         <Text style={styles.happeningsTitle}>Happenings Around You</Text>
-
         <View style={styles.post}>
           <View style={styles.postHeader}>
             <View style={{flexDirection:'row',}}>
@@ -347,7 +290,6 @@ const HomeScreen: React.FC = () => {
               }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={styles.txtTitle}>Select a saved address</Text>
-                {/* <Text style={styles.txtSeeAll}>See all</Text> */}
               </View>
 
               {/* Address List */}
@@ -359,11 +301,6 @@ const HomeScreen: React.FC = () => {
                 scrollEnabled={true}
                 showsVerticalScrollIndicator={false}
               />
-
-              {/* <View style={styles.manualInputContainer}>
-                <Image source={require('../../assets/png/icon_search.png')} style={styles.iconStyle} />
-                <TextInput style={styles.textInput} placeholder="Select Location Manually" />
-              </View> */}
             </View>
           </Modal>
         )}

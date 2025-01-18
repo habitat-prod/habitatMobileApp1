@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -15,6 +16,7 @@ import { HBStackParamList } from "../../navigation/rootNavigation";
 import { NAVIGATION } from "../../constants/screens";
 import { Toaster } from "../../constants/common";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 const EditProfileScreen: React.FC = () => {
   const [name, setName] = useState("Karan Gupta");
@@ -23,6 +25,7 @@ const EditProfileScreen: React.FC = () => {
   const [vehicleNumber, setVehicleNumber] = useState("UP-78 ED");
   const [email, setEmail] = useState("AnitaJi@habitat.com");
   const navigation = useNavigation();
+  const [imageUri, setImageUri] = useState('');
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
@@ -48,6 +51,50 @@ const EditProfileScreen: React.FC = () => {
     fetchUserDetails();
   },[]);
 
+  const openCamera = async () => {
+    const result = await launchCamera({
+      mediaType: 'photo',
+      quality: 0.8,
+    });
+    if (result.assets && result.assets[0]) {
+      setImageUri(result.assets[0].uri);
+      console.log(`image uri is: ${imageUri}`);
+    }
+  };
+
+  const openGallery = async () => {
+    const result = await launchImageLibrary({
+      mediaType: 'photo',
+      quality: 0.8,
+    });
+    if (result.assets && result.assets[0]) {
+      setImageUri(result.assets[0].uri);
+      console.log(`image uri is: ${imageUri}`);
+    }
+  };
+
+  const handleImageSelection = () => {
+    Alert.alert(
+      'Select Image',
+      'Choose an option to select an image',
+      [
+        {
+          text: 'Camera',
+          onPress: () => openCamera(),
+        },
+        {
+          text: 'Gallery',
+          onPress: () => openGallery(),
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -62,10 +109,10 @@ const EditProfileScreen: React.FC = () => {
         <View style = {styles.settingItemCard}>
         <Text style={styles.title}>Edit your profile info</Text>
 
-        <View style={styles.imageContainer}>
+        <TouchableOpacity style={styles.imageContainer} onPress={()=> handleImageSelection()}>
           <Image
             source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYNphtDWjxGOpOsQmMnT1HOW8knK0ta_G3tQ&s", 
+              uri:imageUri, 
             }}
             style={styles.profileImage}
           />
@@ -75,7 +122,7 @@ const EditProfileScreen: React.FC = () => {
                   />
             <Text style={styles.editIconText}>Edit picture</Text>
           </View>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Name</Text>
@@ -83,6 +130,7 @@ const EditProfileScreen: React.FC = () => {
             style={styles.input}
             value={name}
             onChangeText={(text) => setName(text)}
+            editable={false}
           />
 
           <Text style={styles.label}>Block</Text>
@@ -101,12 +149,12 @@ const EditProfileScreen: React.FC = () => {
             onChangeText={(text) => setFlatNumber(text)}
           />
 
-          {/* <Text style={styles.label}>Vehicle Number</Text>
+          <Text style={styles.label}>Vehicle Number</Text>
           <TextInput
             style={styles.input}
             value={vehicleNumber}
             onChangeText={(text) => setVehicleNumber(text)}
-          /> */}
+          />
 
           <Text style={styles.label}>Email Id</Text>
           <TextInput
@@ -170,6 +218,7 @@ const styles = StyleSheet.create({
     alignContent:'center',
     marginVertical: 16,
     marginStart:16,
+    // backgroundColor:'red'
   },
   settingItemCard:{
     backgroundColor:'#fff',
@@ -186,6 +235,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 2,
     borderColor: "#ddd",
+    backgroundColor:'grey'
   },
   editIconContainer: {
     // flex:1,

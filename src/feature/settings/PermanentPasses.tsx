@@ -35,7 +35,7 @@ const PermanentPasses: React.FC = () => {
     {
       id: "1",
       name: "Sheetal",
-      phone: "+91 9797721763",
+      phone: "9797721763",
       fileName: "Filename.pdf",
       status: "Friends/Family",
       society: "NRI City",
@@ -45,7 +45,7 @@ const PermanentPasses: React.FC = () => {
     {
       id: "2",
       name: "Sarita",
-      phone: "+91 7880718700",
+      phone: "7880718700",
       fileName: "Filename.pdf",
       status: "Friends/Family",
       society: "Emerald Gold",
@@ -95,7 +95,7 @@ const renderPasses = ({ item }: { item: Member }) => (
         <Text style={{color:'blue'}}>{item.name}</Text>
         <View style={{flexDirection:'row', marginBottom:5, marginTop:3}}>
         <Image source={require('../../assets/png/call.png')} style={{alignSelf:'center'}}/>
-        <Text >{item.phone}</Text>
+        <Text >+91 {item.phone}</Text>
         </View>
         <View style={{backgroundColor:'grey',height:1,width:'100%'}}/>
         <View >

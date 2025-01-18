@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaintainanceAreasScreens } from '../../../constants/screens';
 import SecurityApprovalDetails from '../views/securityApprovalDetails';
 import { SecurityApprovalListTabs } from '../components/securityApprovalTabs';
-import NotificationDetails from '../../home/NotificationDetails';
 
 
 export type SecurityApprovalList = {

@@ -31,7 +31,7 @@ axios.interceptors.request.use(
     };
     const isConnected = await isNetworkAvailable();
     if (!isConnected) {
-      Toaster(error.errorMessage);
+      Toaster('Error',error.errorMessage);
       return Promise.reject(error);
     }
 

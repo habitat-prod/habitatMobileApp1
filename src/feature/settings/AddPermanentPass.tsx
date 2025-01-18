@@ -16,7 +16,7 @@ const AddPermanentPass: React.FC = () => {
   const [name, setName] = useState("Sarita ji");
   const [flatNumber, setFlatNumber] = useState("29");
   const [contactNumber, setContactNumber] = useState("9878423679");
-  const [role, setRole] = useState("Made");
+  const [role, setRole] = useState("Maid");
   const navigation = useNavigation();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -40,7 +40,7 @@ const AddPermanentPass: React.FC = () => {
               </View>
               
         <View style = {styles.itemCard}>
-        <Text style={styles.title}>Add your co-residents details here</Text>
+        {/* <Text style={styles.title}>Add your co-residents details here</Text> */}
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Name</Text>

@@ -86,6 +86,7 @@ if (route.params && route.params.member) {
           placeholder="Name"
           placeholderTextColor={'grey'}
           value={formData.name}
+          editable={false}
           onChangeText={(value) => console.log('name', value)}
         />
 
@@ -96,6 +97,7 @@ if (route.params && route.params.member) {
           keyboardType="numeric"
           placeholderTextColor={'grey'}
           maxLength={10}
+          editable={false}
           value={formData.age}
           onChangeText={(value) => console.log('age', value)}
         />
@@ -106,6 +108,7 @@ if (route.params && route.params.member) {
           keyboardType="numeric"
           placeholderTextColor={'grey'}
           maxLength={10}
+          editable={false}
           value={formData.mobileNumber}
           onChangeText={(value) => console.log('mobileNumber', value)}
         />
@@ -116,6 +119,7 @@ if (route.params && route.params.member) {
           placeholder="Position"
           placeholderTextColor={'grey'}
           value={formData.passType}
+          editable={false}
           onChangeText={(value) => console.log('position', value)}
         />
 
@@ -125,6 +129,7 @@ if (route.params && route.params.member) {
           placeholder="Assigned Society"
           placeholderTextColor={'grey'}
           value={formData.society}
+          editable={false}
           onChangeText={(value) => console.log('assignedSociety', value)}
         />
 
@@ -132,6 +137,7 @@ if (route.params && route.params.member) {
           style={styles.input}
           placeholder="Address"
           placeholderTextColor={'grey'}
+          editable={false}
           value={formData.associatedAddress}
           onChangeText={(value) => console.log('address', value)}
         />
