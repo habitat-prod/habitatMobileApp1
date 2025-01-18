@@ -91,7 +91,7 @@ if (route.params && route.params.member) {
         />
 
 
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           placeholder="Age"
           keyboardType="numeric"
@@ -100,7 +100,7 @@ if (route.params && route.params.member) {
           editable={false}
           value={formData.age}
           onChangeText={(value) => console.log('age', value)}
-        />
+        /> */}
 
         <TextInput
           style={styles.input}
