@@ -36,7 +36,7 @@ const EditProfileScreen: React.FC = () => {
       flatNumber,
       vehicleNumber,
     });
-    alert("Profile updated successfully!");
+    Alert.alert('Update',"Profile updated successfully!");
   };
 
   useEffect(()=>{
@@ -102,9 +102,9 @@ const EditProfileScreen: React.FC = () => {
                 
                     <TouchableOpacity style={styles.header} onPress={()=> navigation.goBack()}>
                   <Text style={{fontSize:24, fontWeight:'normal',color:'white', marginTop:34, marginStart:16, marginEnd:9}}>{'<'}</Text>
-                  <Text style={styles.headerText}>Edit Profile</Text>
-                    </TouchableOpacity>
-              </View>
+                  </TouchableOpacity>
+              <Text style={styles.headerText}>Edit Profile</Text>
+                    </View>
               
         <View style = {styles.settingItemCard}>
         <Text style={styles.title}>Edit your profile info</Text>
@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
     height:200,
     borderBottomLeftRadius:12,
     borderBottomRightRadius:12,
+    paddingLeft:2
   },
   headerText: {
     color: '#fff',
