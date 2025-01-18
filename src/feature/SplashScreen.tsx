@@ -11,7 +11,7 @@ const SplashScreen = ({ navigation }) => {
         const token = await AsyncStorage.getItem('token');
         if (!token) {
           console.log('Navigating to Login screen without the token...');
-          navigation.replace(BootstrapNavigationScreens.Login); // Replace ensures no back to splash
+          navigation.navigate(BootstrapNavigationScreens.Login); // Replace ensures no back to splash
           return;
         }
         console.log('Navigating to Home screen with the token...');

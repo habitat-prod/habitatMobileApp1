@@ -27,6 +27,7 @@ import AddPermanentPass from '../feature/settings/AddPermanentPass';
 import GenerateEntry from '../feature/securityApprovals/views/securityApprovalDetails/GenerateEntry';
 import SplashScreen from '../feature/SplashScreen';
 import PermanentPassDetail from '../feature/settings/PermanentPassDetail';
+import VerifyOTPScreen from '../feature/auth/views/otpScreen';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -49,6 +50,8 @@ const RootNavigation: React.FunctionComponent = () => {
     >
       <StackNav.Navigator screenOptions={{ headerShown: false }} initialRouteName={NAVIGATION.SplashScreenNav}>
       <StackNav.Screen name={NAVIGATION.BootstrapStackNav} component={BootstrapStackNav} />
+        <StackNav.Screen name={BootstrapNavigationScreens.Login} component={Login}/>
+        <StackNav.Screen name={BootstrapNavigationScreens.VerifyOTP} component={VerifyOTPScreen}/>
         <StackNav.Screen name={NAVIGATION.HomeProfileNav} component={HomeStackNav} />
         <StackNav.Screen name={NAVIGATION.MaintainaceAreaStackNav} component={MaintainaceAreaStackNav} />
         <StackNav.Screen name={NAVIGATION.SecurityApprovalsStackNav} component={SecurityApprovalsStackNav} />
