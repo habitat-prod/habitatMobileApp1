@@ -21,7 +21,7 @@ const maintenanceReportReducer: Reducer<MaintenanceReportState, maintenanceRepor
 ): MaintenanceReportState => {
   switch (action.type) {
     case ActionTypes.MAINTENANCE_REPORT_ACTION:
-      console.log(`inside maintenanceReport Action ${action.payload}`);
+      console.log(`inside maintenanceReport Action ${JSON.stringify(action.payload)}`);
       return {
         ...state,
         isSuccess: false,
@@ -36,17 +36,18 @@ const maintenanceReportReducer: Reducer<MaintenanceReportState, maintenanceRepor
         isLoading: false,
         error: undefined,
       };
-    case ActionTypes.MAINTENANCE_REPORT_FAILURE:
-      console.log(`inside failure action:${JSON.stringify(action.payload)}`);
-      return {
-        ...state,
-        isSuccess: false,
-        isLoading: false,
-        error: {
-          errorCode: action.payload.errorCode,
-          errorMessage: action.payload.message,
-        },
-      };
+      case ActionTypes.MAINTENANCE_REPORT_FAILURE:
+        console.log(`Failure action payload: ${JSON.stringify(action.payload)}`);
+        return {
+            ...state,
+            isSuccess: false,
+            isLoading: false,
+            error: {
+                errorCode: action.payload.errorCode,
+                errorMessage: action.payload.message,
+            },
+        };
+    ;
       default:
           console.warn(`Unhandled action type: ${action.type}`);
           return state;

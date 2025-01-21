@@ -1,81 +1,40 @@
-// import axios from '../../../utils/axios';
-
-// export const maintenanceReportService = async (
-//     status: boolean,
-//     s3PathProblem: string,
-//     societyId: number,
-//     societyAmenityId: number,
-//     problemId: number,
-//     managerId: number,
-//     staffId: number,
-//     userId: number,
-//     description: string
-// ) => {
-//     try {
-//         console.log('inside verify service..')
-//         const response = await axios.post(`/api/maintenance/register`, {
-//             status: status,
-//             s3PathProblem: s3PathProblem,
-//             societyId: societyId,
-//             societyAmenityId: societyAmenityId,
-//             problemId: problemId,
-//             managerId: managerId,
-//             staffId: staffId,
-//             userId: userId,
-//             description: description
-//         });
-//         return response;
-//     } catch (error) {
-//         console.log("API error found: ", error);
-//         throw error;
-//     }
-// };
-
-import axios from "../../../utils/axios";
+import axios from '../../../utils/axios';
 
 export const maintenanceReportService = async (
-    status: boolean,
-    s3PathProblem: string,
     societyId: number,
+    description: string,
     societyAmenityId: number,
-    problemId: number,
-    managerId: number,
-    staffId: number,
     userId: number,
-    description: string
+    problemId: number,
 ) => {
-  const FormData = require('form-data');
-  let data = new FormData();
-  data.append(
-    'maintenanceReport', JSON.stringify({
-        status: status,
-        s3PathProblem: s3PathProblem,
-        societyId: societyId,
-        societyAmenityId: societyAmenityId,
-        problemId: problemId,
-        managerId: managerId,
-        staffId: staffId,
-        userId: userId,
-        description: description
-     }),
-    { contentType: 'application/json' }
-  );
-
-  let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: '/api/maintenance/register',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    data
-  };
-
-  await axios.request(config)
-    .then((response:any) => {
-      console.log(`JSON.stringify(response.data) from service is: ${JSON.stringify(response)}`);
-    })
-    .catch((error:any) => {
-      console.log(`error?.response from service is: ${JSON.stringify(error?.response)}`);
-    });
-}
+    try {
+        console.log('inside maintenance Report service..');
+        console.log('Payload being sent:', {
+            societyId,
+            description,
+            societyAmenityId,
+            userId,
+            problemId,
+        });
+        const response = await axios.post(`/api/maintenance/register`, {
+            societyId: societyId,
+            description: description,
+            societyAmenityId: societyAmenityId,
+            userId: userId,
+            problemId: problemId,
+        });
+        console.log(`Api response is:=> ${response}`)
+        return response;
+    } catch (error) {
+        if (error.response) {
+            console.log('API Error Status:', error.response.status); // HTTP status code
+            console.log('API Error Data:', error.response.data);     // Error payload
+            console.log('API Error Headers:', error.response.headers); // Headers
+        } else if (error.request) {
+            console.log('API Request Error:', error.request);        // Network error
+        } else {
+            console.log('Unexpected Error Message:', error.message); // Unexpected error
+        }
+        throw error;
+    }
+};

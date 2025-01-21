@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { NavigationProp, RouteProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTranslation } from 'react-i18next';
-import { Image, Keyboard, SafeAreaView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, Keyboard, SafeAreaView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import IMButton from '../../../../components/IMButton';
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { verifyOtp } from '../../action/verifyOtp';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { sendOTP } from '../../action/login';
+import { RootState } from 'src/redux/store/configureStore';
 
 interface IVerifyOTPProps {
   navigation: StackNavigationProp<BootstrapParamsList>;
@@ -42,7 +43,14 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
   const otpVerified = useSelector((state)=> state.otpVerification.isSuccess);
   const flatDetailsList = useSelector((state)=> state.otpVerification.userDetails);
   const flatListSize = useSelector((state) => state.otpVerification.flatListSize);
-  
+  const isLoading = useSelector((state:RootState)=> state.otpVerification.isLoading);
+  const isError = useSelector((state:RootState)=> state.otpVerification.error);
+
+  useEffect(()=>{
+    if(isError){
+      Alert.alert('', 'Invalid OTP!!');
+    }
+  },[isError])
 
   useEffect(()=>{
     console.log(`flatDetailsList in otpScreen: ${flatDetailsList}`);
@@ -138,7 +146,7 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
         <View style={styles.phoneNumberContainer}>
         <Text style={{marginTop:9,fontSize:18,}}>We’ve sent you a one time verification code to{' '} 
         <Text style={{textDecorationLine:'underline',textDecorationColor:'green', paddingHorizontal:9}}>+91 {props.route.params.phoneNumber}  </Text>
-        <TouchableOpacity onPress={()=> defaultNavigation.navigate(BootstrapNavigationScreens.Login)}>
+        <TouchableOpacity onPress={()=> defaultNavigation.goBack()}>
         <Image source={require('../../../../assets/png/edit.png')} style={{height:17,width:17, tintColor:'#3266AE',}}/>          
         </TouchableOpacity></Text>
         
@@ -162,6 +170,7 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
           container: [styles.btnContainer, otp.length !== 6 && styles.disableBtn]
         }}
       />
+      {isLoading && <ActivityIndicator/>}
       <View style={styles.resendContainer}>
         <View style={styles.timerContainer}>
           {timerState !== TimerStates.stopped && (

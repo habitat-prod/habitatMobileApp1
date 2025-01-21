@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {useNavigation} from "@react-navigation/native"
+import { callPerson } from "../../utils/calling";
 
 interface ContactInfo {
   id: string;
@@ -23,21 +24,21 @@ const ContactScreen: React.FC = () => {
     {
       id: "1",
       role: "Manager",
-      name: "Binod",
-      phone: "9878219090",
-    },
-    {
-      id: "2",
-      role: "Gardener",
-      name: "Mahesh",
-      phone: "7017332124",
+      name: "Shreyas Gore",
+      phone: "9797721763",
     },
     {
       id: "3",
-      role: "Cleaner",
-      name: "Tony Stark",
-      phone: "7009713130",
+      role: "Manager",
+      name: "Keshav Vyas",
+      phone: "9166969436",
     },
+    // {
+    //   id: "4",
+    //   role: "Manager",
+    //   name: "Aman Shrivastava",
+    //   phone: "7009713130",
+    // },
   ];
 
   const renderContactItem = ({ item }: { item: ContactInfo }) => (
@@ -49,7 +50,7 @@ const ContactScreen: React.FC = () => {
         <Text style={styles.description}>{item.phone}</Text>
       </View>
 
-    <TouchableOpacity>
+    <TouchableOpacity onPress={()=> callPerson(item.phone.toString())}>
       <View style={styles.iconContainer}>
         <Image
           source={ require('../../assets/png/contact.png')}

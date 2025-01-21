@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import React, { useEffect, useId, useState } from 'react';
+import { ActivityIndicator, Alert, Image, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { RouteProp, useNavigation } from '@react-navigation/native'
 import { useFormik } from 'formik';;
@@ -21,17 +21,8 @@ import { RootState } from 'src/redux/store/configureStore';
 import { Toaster } from '../../../../../../src/utils/common';
 import { maintenanceReport } from '../../../actions/maintenanceReportAction';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const locationDropdownList = [ // here i would need to replace it with dynamic locationList
-  { label: 'Location', value: 'location1' },
-  { label: 'Location 2', value: 'location2', },
-  { label: 'Location 3', value: 'location3', },
-  { label: 'Location 4', value: 'location4', },
-  { label: 'Location 5', value: 'location5', },
-  { label: 'Location 6', value: 'location6', },
-  { label: 'Location 7', value: 'location7', },
-  { label: 'Location 8', value: 'location8', },
-];
+import axios from '../../../../../utils/axios';
+import { maintenanceReportService } from 'src/feature/maintaineceAreas/service/maintenanceReportService';
 
 const locationOfTowerDropdownList = [
   { label: 'Location of tower', value: 'location' },
@@ -43,11 +34,6 @@ const locationOfFloorDropdownList = [
   { label: 'Shreyas', value: 'location' },
 ];
 
-// const problemDropdownList = [// here i need to replace it with dynamic problemList by amenityId.
-//   { label: 'Problem', value: 'problem' },
-//   { label: 'Vishwas', value: 'location' },
-// ];
-  
 
 export interface IMaintainanceListDetails {
   navigation: StackNavigationProp<MaintainaceAreaList>;
@@ -63,10 +49,10 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   const dispatch = useDispatch();
   const [problemId,setProblemId] = useState<number>(0);
   const [societyId, setSocietyId] = useState<number>(0);
-  const [staffId, setStaffId] = useState<number>(0);
-  const [managerId, setManagerId] = useState<number>(0);
   const [userId, setUserId] = useState<number>(0);
-  const [amenityId, setAmenityId] = useState<number>(0);
+  const [amenityId, setAmenityId] = useState<number>(props.route.params.amenityId);
+  const locationList = useSelector((state:RootState)=> state.maintenanceReducer.data);
+  const {error, isLoading, isSuccess} = useSelector((state:RootState)=> state.maintenanceReportReducer);
 
   // here i'm checking the valid list to map the data
   const problemDropdownList = response?.data?.data?.length? response.data.data.map((item:any) => ({
@@ -76,63 +62,73 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   :
   [];
 
+  const filteredLocations = locationList.filter((location)=>{
+    return location.amenityId===amenityId;
+  }); 
+  
+    // console.log(`FILTERED LOCATION LIST IS:=> ${JSON.stringify(filteredLocations)}`);
+    const locationDropdownList = filteredLocations.map((location) => ({
+      label: location.locationName, // Use locationName for the label
+      value: location.id,          // Use id for the value
+    }));
+
   useEffect(()=>{
     const fetchData = async()=>{
       const societyId = await AsyncStorage.getItem('societyId');
       const userId = await AsyncStorage.getItem('userId');
       setSocietyId(Number(societyId));
       setUserId(Number(userId));
-      const firstElementAmenityId = await response?.data?.data?.[0]?.amenityId;
-      console.log(`---------------------${firstElementAmenityId}-------------------------`);
-      setAmenityId(firstElementAmenityId);
     }
     fetchData();
     console.log(`GETTING THE DATA FROM SCREEN =>  ${JSON.stringify(response.data.data)}`);
-  }, [2000]);
+    console.log(`GETTING THE LOCATION LIST FROM REDUCER:=> ${JSON.stringify(locationList)}`);
+    console.log(`props.route.params data is: => ${JSON.stringify(props.route.params.amenityId)}`);
+  }, []);
+
+  useEffect(()=>{
+    if(isSuccess){
+      console.log('=====================================================');
+      console.log('Data posted successfully!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log('======================================================');
+      Alert.alert('Succeed','Maintenance reported successfully.');
+    }
+  },[isSuccess]);
+
+  useEffect(()=>{
+    if(error){
+      Alert.alert('Error', 'Something went wrong!');
+    }
+  },[error]);
   
 
   const formikData = useFormik({
     initialValues: {
       location: {} as IPickerOption,
-      locationOfTower: {} as IPickerOption,
-      locationOfFloor: {} as IPickerOption,
       problem: {} as IPickerOption,
       remarks: '',
     },
     validationSchema: MaintainanceListDetailsValidationSchema,
-    validateOnMount: true,
-    onSubmit: (values) => {()=>{
-      //TODO: will do the api call here
-      console.log('BTN PRESSED;;;;;');
-
-      Toaster('Api needs to be called here..',5000);
-    }
-  },
-  });
-//         status: status,
-//         s3PathProblem :s3PathProblem,
-//         societyId: societyId,
-//         societyAmenityId: societyAmenityId,
-//         problemId: problemId,
-//         managerId: managerId,
-//         staffId: staffId,
-//         userId: userId,
-  const handleSubmit = async() =>{
-    const apiCall = await dispatch(
-      maintenanceReport({
-        status: true,
-        s3PathProblem: 'https://newMaintenanceProblem.com',
-        societyId: societyId,
+    onSubmit: async (values) => {
+      const payload = {
+        societyId,
+        description: values.remarks,
         societyAmenityId: amenityId,
-        problemId: problemId,
-        managerId: managerId,
-        staffId: staffId,
-        userId: userId,
-      })
-    );
-    console.log(`api calling in screen: ${JSON.stringify(apiCall)}`);
-  }
-
+        userId,
+        problemId: values.problem.value,
+      };
+      console.log(`data sending payLoad: ${JSON.stringify(payload)}`)
+      // dispatch(maintenanceReport(payload)); // while calling this action apk is crashing.
+    try {
+      const response = await axios.post('/api/maintenance/register', payload);
+      console.log("API Response:", response);
+      dispatch({ type: 'MAINTENANCE_REPORT_SUCCESS', payload: response.data });
+   } catch (error) {
+      console.error("API Error:", error.message);
+      dispatch({ type: 'MAINTENANCE_REPORT_FAILURE', payload: { error: error.message } });
+   }
+    },
+  });
+  
   const showConditionalDropdownList = () => {
     if (routeParams === 'Stairs') return true;
     if (routeParams === 'Elevators') return true;
@@ -242,11 +238,12 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
           style={{ container: styles.inputStyle }}
         />
       </ScrollView>
+      {isLoading && <ActivityIndicator size={'large'}/>}
       <IMButton
         id="send-request"
         title='Send request'
         disabled={!formikData.isValid}
-        onClick={()=> handleSubmit()}
+        onClick={()=> formikData.handleSubmit()}
         styles={{ container: styles.btnContainer }}
       />
     </SafeAreaView>

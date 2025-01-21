@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -40,13 +40,29 @@ const MaintainaceDetailsArea: React.FC = () => {
   const styles = useStyles(theme);
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
   const dispatch = useDispatch();
-  const response = useSelector((state:RootState)=>state.amenityProblemReducer);
+  const response = useSelector((state:RootState)=>state.maintenanceReducer.data);
+  const isLoading = useSelector((state:RootState)=>state.maintenanceReducer.isLoading);
+  const isError = useSelector((state:RootState)=>state.maintenanceReducer.error);
 
   useEffect(()=>{
-    
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+    console.log(`getting the LIST IS=> ${JSON.stringify(response)}`)
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
   }, []);
 
-  const maintainanceListingCardData = [
+  const iconMapping: Record<string, { small: JSX.Element; big: JSX.Element }> = {
+    CLUBHOUSE: { small: <Clubhouse />, big: <ClubhouseBig /> },
+    PARKING: { small: <Parking />, big: <ParkingBig /> },
+    GARDEN: { small: <Garden />, big: <GardenBig /> },
+    STAIRS: { small: <Stairs />, big: <StairsBig /> },
+    ELEVATOR: { small: <Elevator />, big: <ElevatorBig /> },
+    PAVEMENT: { small: <Pavement />, big: <PavementBig /> },
+    WAITING_AREA: { small: <WaitingArea />, big: <WaitingAreaBig /> },
+    GUEST_PARKING: { small: <GuestParking />, big: <GuestParkingBig /> },
+    LOG: { small: <Log />, big: <Log /> }, // Adjust if "big" is different
+  };
+
+  const maintainanceListingCardData = [ 
     {
       id:1,
       title: 'Clubhouse',
@@ -171,46 +187,20 @@ const MaintainaceDetailsArea: React.FC = () => {
     }
   ];
 
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <View style={styles.subContainer}>
-//         <IMIcon testId='ArrowBackFilled' iconSvg={<ArrowBackFilled />} onClick={defaultNavigation.goBack} />
-//         <Text style={styles.textStyle}> All Spaces </Text>
-//       </View>
-//       {/* <View style={styles.cardsContainer}>
-//         {maintainanceListingCardData.map((item, index) => (
-//           <MaintainanceListingCard
-//             key={index}
-//             title={item.title}
-//             iconSvg={item.iconSvg}
-//             imageUri={item.imageUri}
-//             onClick={item.onClick}
-//           />
-//         ))}
-//       </View> */}
+        const getPic = (amenityId:any)=>{
+          switch(amenityId){
+            case 1: return <Garden/>
+            case 2: return <Stairs/>
+            case 3: return <Elevator/>
+            case 4: return <Clubhouse/>
+            case 5: return <Log/>
+          }
+        }
 
-//       <View style={{width:'100%',alignItems:'center', marginBottom:39}}>
-//         <FlatList
-//         data={maintainanceListingCardData}
-//         numColumns={2}
-//         renderItem={({item, index})=>{
-//           return <View style={{width:Dimensions.get('window').width/2-20, height:200, borderRadius:9,backgroundColor:'#000', margin:5}}>
-//             <Image source={{uri:item.imageUri}}/>
-//           </View>
-//         }}/>
-//       </View>
+const renderCard = ({ item }: { item: any }) => {
+  
+  const iconData = iconMapping[item.amenityName] || { small: <Log />, big: <Log /> };
 
-//     </SafeAreaView>
-//   );
-// };
-
-// const SCREEN_WIDTH = Dimensions.get('window').width;
-// const ITEM_SPACING = 10;
-// const ITEM_WIDTH = (SCREEN_WIDTH - ITEM_SPACING * 4) / 3; // 3 columns, 4 spacings
-
-
-
-const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) => {
   return (
     <Shadow
     style={{flex:1, alignContent:'center', }}
@@ -232,15 +222,25 @@ const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) =
         paddingVertical:12,
         justifyContent:'center'
       }}
-      onPress={async()=>{
+      onPress={async () => {
         await dispatch({
-          type:ActionTypes.FETCH_Amenity_Problem_DATA,
-          amenityId:item.id
+          type: ActionTypes.FETCH_Amenity_Problem_DATA,
+          amenityId: item.id,
         });
-        console.log(`Response from Redux: ${JSON.stringify(response.data.data)}`);
-        item.onClick();
-      }
-      }
+        
+        console.log(`Response from Redux: ${JSON.stringify(response)}`);
+
+
+    defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+      screen: MaintainanceAreasScreens.MaintainanceListDetails,
+      params: {
+        title: item.amenityName,
+        imageUrl: item.s3Path || 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+        iconSvg: iconData.big,
+        amenityId: item.amenityId
+      },
+    });
+  }}
     >
       {/* <Image
         source={{ uri: item.imageUri }}
@@ -259,9 +259,9 @@ const renderCard = ({ item }: { item: typeof maintainanceListingCardData[0] }) =
           padding: 5,
         }}
       >
-        {item.iconSvg}
+        {getPic(item.amenityId)}
         <Text style={{ fontSize: 16, fontWeight: 'bold', textAlign: 'center', marginTop:3 }}>
-          {item.title}
+          {item.amenityName}
         </Text>
       </View>
     </TouchableOpacity>
@@ -281,16 +281,17 @@ return (
     </View>
     <View style={{ flex: 1, }}>
     <FlatList
-      data={maintainanceListingCardData}
+      data={response}
       numColumns={2}
       renderItem={renderCard}
-      keyExtractor={(item: typeof maintainanceListingCardData[0]) => item.id}
+      keyExtractor={(item: any) => item.id.toString()}
       contentContainerStyle={{
         // paddingHorizontal: 10,
         paddingVertical: 4,
       }}
     />
     </View>
+      {isLoading && <ActivityIndicator style={{flex:1,justifyContent:'center'}}/>}
   </SafeAreaView>
 );
 };

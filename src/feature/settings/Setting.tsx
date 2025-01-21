@@ -30,32 +30,12 @@ const Setting: React.FC = () => {
   },[]);
 
   const openLogout = () => (
-    // <View style={styles.modal}>
-    //   <View style={styles.body}>
-    //     <Text>Are you really wants to Logout ?</Text>
-    //     <View style={{marginTop:12, alignContent:'space-between', flexDirection:'row'}}>
-    //       <TouchableOpacity onPress={()=>{setShow(false)}}>
-    //         <Text style={{color:'red'}}>No</Text>
-    //       </TouchableOpacity>
-    //       <TouchableOpacity onPress={()=> setShow(false)}>
-    //         <Text style={{color:'blue'}}>yes</Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   </View>
-    // </View>
     Alert.alert("Logout","Are you sure you want to Logout?",[
     {
       text: 'Cancel',onPress: ()=> {Toaster('logging out cancelled.')}
     },
     {
       text:'OK', onPress: async()=> {
-        // await AsyncStorage.removeItem('token');
-        // await AsyncStorage.removeItem('userName');
-        // await AsyncStorage.removeItem('flatNo');
-        // await AsyncStorage.removeItem('buildingName');
-        // await AsyncStorage.removeItem('societyName');
-        // await AsyncStorage.removeItem('societyAddress');
-        // await AsyncStorage.removeItem('societyId');
         await AsyncStorage.clear();
 
         defaultNavigation.navigate(BootstrapNavigationScreens.Login);
@@ -92,14 +72,14 @@ const Setting: React.FC = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Account Settings</Text>
         <SettingsOption title="Edit profile" onPress={() => defaultNavigation.navigate(NAVIGATION.EditProfileNav)} />
-        <SettingsOption title="Payment Dues" onPress={() => defaultNavigation.navigate(NAVIGATION.PaymentDuesScreenNav)} />
-        <SettingsOption
+        {/* <SettingsOption title="Payment Dues" onPress={() => defaultNavigation.navigate(NAVIGATION.PaymentDuesScreenNav)} /> */}
+        {/* <SettingsOption
           title="Add a payment method"
           onPress={() => console.log('Add payment method')}
           icon="+"
-        />
+        /> */}
         <SettingsOption title="Permanent Passes" onPress={() => defaultNavigation.navigate(NAVIGATION.PermanentPassesNav)} />
-        <SettingsOption title="Active Bookings" onPress={() => defaultNavigation.navigate(NAVIGATION.ActiveBookingsNav)} />
+        {/* <SettingsOption title="Active Bookings" onPress={() => defaultNavigation.navigate(NAVIGATION.ActiveBookingsNav)} /> */}
         <SettingsOption
           title="Co-Residents"
           onPress={() => defaultNavigation.navigate(NAVIGATION.CoResidentsNav)}

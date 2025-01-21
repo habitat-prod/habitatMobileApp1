@@ -14,41 +14,58 @@ const maintenanceReportEpic = (action$: ActionsObservable<IMaintenanceReportActi
   return action$.pipe(
     filter(isOfType(ActionTypes.MAINTENANCE_REPORT_ACTION)),
     mergeMap((action: maintenanceReportAction) => {
-      console.log('maintenance Report Epic (uploading data): ', action.payload);
-      // API calling to add resident:
+      console.log('maintenance Report Epic, Payload being sent to API: ', JSON.stringify(action.payload));
+      
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
+      console.log('Epic Epic Epic Epic Epic Epic Epic');
 
       return from(
         maintenanceReportService(
-            action.success,
-            action.s3PathProblem,
-            Number(action.societyId),
-            Number(action.societyAmenityId),
-            Number(action.problemId),
-            Number(action.managerId),
-            Number(action.staffId),
-            Number(action.userId),
-            action.description
-        ),
+          Number(action.payload.societyId) || 0,
+          action.payload.description || '',
+          Number(action.payload.societyAmenityId) || 0,
+          Number(action.payload.userId) || 0,
+          Number(action.payload.problemId) || 0,
+      )
+      
       ).pipe(
-        map((response:any) => {
+        map((response: any) => {
           console.log('Raw response inside epic: ', JSON.stringify(response.data));
+          return maintenanceReportSuccess({
+              message: response?.data?.message || 'Operation completed successfully',
+              success: response?.data?.success ?? false, // Default to `false` if not provided.
+          });
+      }),      
 
-          // case success:
-              return maintenanceReportSuccess({
-                message: response.data.message,
-                success: response.data.success
-              });
-        }),
-
-        catchError((error: IErrorActionData) => {
-          console.log('adding Resident failed: ', error);
-          return of(
+      catchError((error: any) => {
+        const errorCode = error?.response?.status || 500;
+        const errorMessage =
+            error?.response?.data?.message || 'Unexpected error occurred!';
+        console.error('Error in maintenanceReport epic:', { errorCode, errorMessage });
+    
+        return of(
             maintenanceReportFailure({
-              errorCode: error.errorCode || 500,
-              message: error.errorMessage || 'failed to post maintenance Report!',
+                errorCode,
+                message: errorMessage,
             }),
-          );
-        }),
+        );
+    }),      
       );
     }),
   );

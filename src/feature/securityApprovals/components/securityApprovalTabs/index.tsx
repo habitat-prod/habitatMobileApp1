@@ -21,20 +21,22 @@ const SecurityApprovalTabs: React.FC = () => {
 
   const tabs = [
     {
-      name: 'Visitor Log',
+      name: SecurityApprovalListTabs.Visitor,
       component: SecurityApprovalListSection,
       initialParams: {
         selectedTab: SecurityApprovalListTabs.Visitor,
       },
     },
     {
-      name: 'Pending Approval',
+      name: SecurityApprovalListTabs.Pending,
       component: SecurityApprovalListSection,
       initialParams: {
         selectedTab: SecurityApprovalListTabs.Pending,
       },
     },
   ];
+
+  console.log(`security aproval list selection.....: ${JSON.stringify(SecurityApprovalListTabs)}`)
 
   return (
     <IMTopTabNavigator

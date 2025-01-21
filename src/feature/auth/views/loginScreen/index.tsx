@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import IMTextInput from '../../../../components/IMInput/IMTextInput';
@@ -19,59 +19,51 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 
 const Login: React.FC = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
   const theme = useTheme();
   const styles = useStyles(theme);
   const bootstrapNavigation: NavigationProp<BootstrapParamsList> = useNavigation();
-  // const [isLoggedIn,setIsLoggedIn] = useState(false);
-
   const navigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
   const dispatch = useDispatch();
-  const otpSent = useSelector((state)=> state.otp.sentOtp);
-
-    useEffect( ()=>{
-      const checkLoginState = async () => {
-      const token = await AsyncStorage.getItem('token');
-      if(token){
-        console.log('inside isLoggedIn condition :)');
-        navigation.navigate(NAVIGATION.HomeScreenNav);
-      }
-      };
-      checkLoginState();
-    },[]);
+  const {error, isLoading, isSuccess} = useSelector((state)=> state.otp);
 
     useEffect(() => {
-      console.log(`otpSent is: ${otpSent}`);
-      if (otpSent) {
+      console.log(`otpSent is: ${isSuccess}`);
+      if (isSuccess) {
         bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
           phoneNumber: loginData.mobileNumber,
         });
       }
-  }, [otpSent]); // Trigger only when otpSent changes
+  }, [isSuccess]); // Trigger only when otpSent changes
 
-  const handleSentOtp = async() =>{
-    if (!mobileRegex.test(loginData.mobileNumber)) {
-      setMessage("Invalid mobile number.");
-      return;
-    }
-    try{
-    console.log('inside the handleSendOtp fun.')
+  useEffect(()=>{
+  if(error){
+    Alert.alert('','Mobile Number not found in Society Data. Please contact the society admin.');
+  }
+  },[error])
+
+const handleSentOtp = async () => {
+  if (!mobileRegex.test(loginData.mobileNumber)) {
+    setMessage('Invalid mobile number.');
+    return;
+  }
+  try {
+    console.log('inside the handleSendOtp fun.');
     if (loginData.mobileNumber.length === 10) {
-      console.log('number digits are perfect.')
-      await AsyncStorage.setItem('phoneNumber',loginData.mobileNumber);
-      // Dispatch OTP action
-      dispatch(sendOTP({
-        phoneNumber: Number(loginData.mobileNumber),
-        userType: 'user', 
-      }));
+      await AsyncStorage.setItem('phoneNumber', loginData.mobileNumber);
+      await dispatch(
+        sendOTP({
+          phoneNumber: Number(loginData.mobileNumber),
+          userType: 'USER',
+        })
+      );
+    }
+  } catch (error) {
+    console.error('Error in handleSentOtp:', error);
+    Alert.alert('error','Something went wrong. Please try again.');
   }
-}
-  catch(error) {
-    console.error(`Error in handleSendOtp: ${error}`);
-  }
-  }
+};
 
 
   const mobileRegex = /^[6-9][0-9]{9}$/;
@@ -137,12 +129,10 @@ const Login: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {renderLoginView()}
+      {isLoading && <ActivityIndicator style={{flex:1,justifyContent:'center', alignSelf:'center'}}/>}
         <IMButton
           id='btn'
           title='Get Verification Code'
-          // onClick={() =>    bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
-          //   phoneNumber: loginData.mobileNumber,
-          // })}
           onClick={()=> handleSentOtp()}
           disabled={loginData.mobileNumber.length !== 10}
           styles={{

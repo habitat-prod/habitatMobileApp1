@@ -22,6 +22,7 @@ const EditProfileScreen: React.FC = () => {
   const [name, setName] = useState("Karan Gupta");
   const [block, setBlock] = useState("A");
   const [flatNumber, setFlatNumber] = useState("A1679");
+  const [parkingSpot, setParkingSpot] = useState('SS-18');
   const [vehicleNumber, setVehicleNumber] = useState("UP-78 ED");
   const [email, setEmail] = useState("AnitaJi@habitat.com");
   const navigation = useNavigation();
@@ -44,6 +45,7 @@ const EditProfileScreen: React.FC = () => {
     const a: any = await AsyncStorage.getItem('userName');
     const b: any = await AsyncStorage.getItem('flatNo');
     const c: any = await AsyncStorage.getItem('buildingName');
+    const d: any = await AsyncStorage.getItem('parking');
     setName(a);
     setFlatNumber(b);
     setBlock(c);
@@ -133,18 +135,26 @@ const EditProfileScreen: React.FC = () => {
             editable={false}
           />
 
-          <Text style={styles.label}>Block</Text>
+          <Text style={styles.label}>Address</Text>
           <TextInput
             style={styles.input}
-            value={block}
+            value={`${flatNumber} , ${block}`}
             editable={false}
             onChangeText={(text) => setBlock(text)}
           />
 
-          <Text style={styles.label}>Flat number</Text>
+          {/* <Text style={styles.label}>Flat number</Text>
           <TextInput
             style={styles.input}
             value={flatNumber}
+            editable={false}
+            onChangeText={(text) => setFlatNumber(text)}
+          /> */}
+
+          <Text style={styles.label}>Parking Spott</Text>
+          <TextInput
+            style={styles.input}
+            value={parkingSpot}
             editable={false}
             onChangeText={(text) => setFlatNumber(text)}
           />

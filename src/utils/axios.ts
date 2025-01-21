@@ -131,4 +131,47 @@ axios.interceptors.response.use(
   },
 );
 
+// axios.interceptors.response.use(
+//   (response) => {
+//     // Handle successful response
+//     return response;
+//   },
+//   (error) => {
+//     console.log('Entering in error block: ', error);
+    
+//     const newError = {
+//       errorCode: 500,
+//       errorMessage: error?.code,
+//     };
+
+//     if (error?.response) {
+//       console.log('Error response: ', error?.response);
+//       console.log("Error Response Data:", error.response.data);
+//       console.log("Error Response Status:", error.response.status);
+//       console.log("Error Response Headers:", error.response.headers);
+
+//       // Specific check for 415 - Unsupported Media Type
+//       if (error.response.status === 415) {
+//         console.error("Unsupported Media Type detected:^^^^^^^^^^^^^^^^^^^^^^^");
+//         console.error("Request Data:", error.config?.data);
+//         console.error("Request Headers:", error.config?.headers);
+//       }
+
+//       newError.errorCode = error.response.status;
+//       newError.errorMessage =
+//         error?.response?.data['error_message'] === undefined ? error.code : error.response.data['error_message'];
+//     } else if (error.request) {
+//       console.log("No response received. Request:", error.request);
+//     } else {
+//       console.log("Error Message:", error.message);
+//     }
+
+//     console.log("Full Error Object:", error);
+
+//     // Return or handle the error
+//     return Promise.reject(newError);
+//   }
+// );
+
+
 export default axios;

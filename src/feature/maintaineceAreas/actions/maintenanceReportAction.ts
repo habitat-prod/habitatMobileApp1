@@ -2,14 +2,11 @@ import { ActionType, createAction } from "typesafe-actions";
 import { ActionTypes } from "../../../utils/constants";
 
 export interface IMaintenanceReportActionData {
-    status: boolean,
-    s3PathProblem?: string,
     societyId: number,
+    description: string,
     societyAmenityId: number,
+    userId: number,
     problemId: number,
-    managerId: number,
-    staffId: number,
-    userId: number
 }
 
   export interface IMaintenanceReportSuccessData {

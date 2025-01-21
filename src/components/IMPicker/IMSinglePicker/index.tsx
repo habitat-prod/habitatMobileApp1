@@ -98,7 +98,7 @@ const IMSinglePicker: FunctionComponent<IMSinglePickerProps> = (props: IMSingleP
       setRadioButtonList(convertToRadioButtonList(props.pickerOptions, renderListItem, selectedValue, styles));
       props.onChange?.(
         props.name,
-        props.pickerOptions.find((pickerOption) => pickerOption.value.toString() === selectedValue) ??
+        props.pickerOptions.find((pickerOption) => pickerOption.value.toString() === selectedValue.toString()) ??
           ({} as IPickerOption),
       );
       props.onBlur?.();

@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
@@ -36,6 +37,7 @@ const HomeScreen: React.FC = () => {
   let buildingName = useSelector((state:RootState)=> state.tokenReducer.buildingName);
   let societyName = useSelector((state:RootState)=> state.tokenReducer.societyName);
   let societyAddress = useSelector((state:RootState)=> state.tokenReducer.societyAddress);
+  // let parkingSpot = useSelector((state:RootState)=> state.tokenReducer.parking);
   let token = useSelector((state:RootState)=> state.tokenReducer.token);
   let societyId = useSelector((state:RootState)=> state.tokenReducer.societyId);
   let flatId = useSelector((state:RootState)=> state.tokenReducer.flatId);
@@ -44,6 +46,10 @@ const HomeScreen: React.FC = () => {
   const [flatList, setFlatList] = useState(flatDetailsList);
   const [isServicesVisible,setIsServiceVisible] = useState(false);
   const [rotation, setRotation] = useState(0);  
+  // const {maintenanceIsLoading, maintenanceData, maintenanceError}
+  const maintenanceData = useSelector((state:RootState)=> state.maintenanceReducer.data);
+  const maintenanceError = useSelector((state:RootState)=> state.maintenanceReducer.error);
+  const maintenanceLoading = useSelector((state:RootState)=> state.maintenanceReducer.isLoading);
 
   console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
 
@@ -54,7 +60,7 @@ const HomeScreen: React.FC = () => {
     societyAddress: ''
     });
 
-  console.log(`serviceList from redux pipelines is: ${JSON.stringify(serviceList)}`);
+  // console.log(`serviceList from redux pipelines is: ${JSON.stringify(datas)}`);
 
   console.log(`the token after flat selection in HomeScreen from redux store is: ${JSON.stringify(token)}`);
 
@@ -146,9 +152,16 @@ const HomeScreen: React.FC = () => {
     setVisible(true); 
     setIsFirstTime(true);
   }
+  
+  useEffect(()=>{
+    console.log(`maintenance Data from Home: ${JSON.stringify(maintenanceData)}`);
+    console.log(`maintenance Error from Home: ${JSON.stringify(maintenanceError)}`);
+    console.log(`maintenance Loading from Home: ${JSON.stringify(maintenanceLoading)}`);
+    // if(maintenanceLoading) {return <ActivityIndicator/>}
+  },[maintenanceData,maintenanceError, maintenanceLoading]);
 
   const handleMaintenanceData = async()=> {
-    await dispatch(fetchMaintenanceData());
+    const maintenance = await dispatch(fetchMaintenanceData());
   }
 
   const handleSecurityApprovalData = async() =>{
@@ -162,7 +175,7 @@ const HomeScreen: React.FC = () => {
       case 1:
         console.log("Navigate to Maintenance screen");
         handleMaintenanceData();
-        defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav); 
+        defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav,{list:maintenanceData}); 
         break;
       case 2:
         console.log("Navigate to Security screen "+service.id);
@@ -244,6 +257,8 @@ const HomeScreen: React.FC = () => {
         </View>)
         }
       </View>
+
+      {maintenanceLoading && <ActivityIndicator style={{flex:1, justifyContent:'center'}}/>}
 
       <View style={styles.happeningsContainer}>
         <Text style={styles.happeningsTitle}>Happenings Around You</Text>

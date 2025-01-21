@@ -62,7 +62,7 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
             authorisationToken: newToken,
           }),
         );
-        // const userId = response.data?.userId;
+        const userId = response?.data?.userId;
         const flatId = response.data?.flatId;
         // const buildingId = response.data?.buildingId;
         const societyId = response.data?.societyId;
@@ -71,7 +71,7 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
 
         await AsyncStorage.setItem('societyId',`${societyId}`);
 
-        // await AsyncStorage.setItem('userId',userId);
+        await AsyncStorage.setItem('userId',`${userId}`);
         await AsyncStorage.setItem('userName',userName);
         await AsyncStorage.setItem('flatId',`${flatId}`);
         await AsyncStorage.setItem('flatNo',`${flatNo}`);
