@@ -47,7 +47,6 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
   const response = useSelector((state:RootState)=>state.amenityProblemReducer);
   const dispatch = useDispatch();
-  const [problemId,setProblemId] = useState<number>(0);
   const [societyId, setSocietyId] = useState<number>(0);
   const [userId, setUserId] = useState<number>(0);
   const [amenityId, setAmenityId] = useState<number>(props.route.params.amenityId);
@@ -80,17 +79,26 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
       setUserId(Number(userId));
     }
     fetchData();
-    console.log(`GETTING THE DATA FROM SCREEN =>  ${JSON.stringify(response.data.data)}`);
-    console.log(`GETTING THE LOCATION LIST FROM REDUCER:=> ${JSON.stringify(locationList)}`);
-    console.log(`props.route.params data is: => ${JSON.stringify(props.route.params.amenityId)}`);
+    // console.log(`GETTING THE DATA FROM SCREEN =>  ${JSON.stringify(response.data.data)}`);
+    // console.log(`GETTING THE LOCATION LIST FROM REDUCER:=> ${JSON.stringify(locationList)}`);
+    // console.log(`props.route.params data is: => ${JSON.stringify(props.route.params.amenityId)}`);
   }, []);
 
   useEffect(()=>{
     if(isSuccess){
-      console.log('=====================================================');
       console.log('Data posted successfully!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      console.log('======================================================');
-      Alert.alert('Succeed','Maintenance reported successfully.');
+      Alert.alert('Succeed','Maintenance reported successfully.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              props.navigation.goBack();
+              dispatch({ type: 'RESET_SUCCESS' });
+            },
+          },
+        ],
+        {cancelable:false}
+      );
     }
   },[isSuccess]);
 
@@ -116,11 +124,11 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         userId,
         problemId: values.problem.value,
       };
-      console.log(`data sending payLoad: ${JSON.stringify(payload)}`)
+      // console.log(`data sending payLoad: ${JSON.stringify(payload)}`)
       // dispatch(maintenanceReport(payload)); // while calling this action apk is crashing.
     try {
       const response = await axios.post('/api/maintenance/register', payload);
-      console.log("API Response:", response);
+      // console.log("API Response:", response);
       dispatch({ type: 'MAINTENANCE_REPORT_SUCCESS', payload: response.data });
    } catch (error) {
       console.error("API Error:", error.message);

@@ -67,7 +67,7 @@ axios.interceptors.response.use(
       errorCode: 500,
       errorMessage: 'somethingWentWrong',
     };
-    if (response.status != 200) {
+    if (response.status != 200 && response.status !=201) {
       console.error('response error', response);
       error = {
         errorCode: response?.status,
