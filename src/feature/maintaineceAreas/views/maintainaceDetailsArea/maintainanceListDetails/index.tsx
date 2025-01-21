@@ -125,15 +125,15 @@ const MaintainanceListDetails: React.FC<IMaintainanceListDetails> = (props) => {
         problemId: values.problem.value,
       };
       // console.log(`data sending payLoad: ${JSON.stringify(payload)}`)
-      // dispatch(maintenanceReport(payload)); // while calling this action apk is crashing.
-    try {
-      const response = await axios.post('/api/maintenance/register', payload);
-      // console.log("API Response:", response);
-      dispatch({ type: 'MAINTENANCE_REPORT_SUCCESS', payload: response.data });
-   } catch (error) {
-      console.error("API Error:", error.message);
-      dispatch({ type: 'MAINTENANCE_REPORT_FAILURE', payload: { error: error.message } });
-   }
+      dispatch(maintenanceReport(payload)); // while calling this action apk is crashing.
+  //   try {
+  //     const response = await axios.post('/api/maintenance/register', payload);
+  //     console.log("API Response:", response);
+  //     dispatch({ type: 'MAINTENANCE_REPORT_SUCCESS', payload: response.data });
+  //  } catch (error) {
+  //     console.error("API Error:", error.message);
+  //     dispatch({ type: 'MAINTENANCE_REPORT_FAILURE', payload: { error: error.message } });
+  //  }
     },
   });
   
