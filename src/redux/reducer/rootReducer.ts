@@ -9,6 +9,7 @@ import generateEntryReducer from "../../../src/feature/securityApprovals/reducer
 import securityApprovalReducer from "../../../src/feature/securityApprovals/reducer/securityApprovalReducer";
 import addResidentReducer from "../../../src/feature/settings/reducer/addResidentReducer";
 import maintenanceReportReducer from "../../../src/feature/maintaineceAreas/reducers/maintenanceReportReducer";
+import editProfileReducer from "../../../src/feature/settings/reducer/editProfileReducer";
 
 export const rootReducer = combineReducers({
     otp: userReducer,
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
     securityApprovalReducer: securityApprovalReducer,
     addResidentReducer: addResidentReducer,
     maintenanceReportReducer: maintenanceReportReducer,
+    editProfileReducer: editProfileReducer
 });
 
 export default rootReducer;

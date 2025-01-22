@@ -9,6 +9,7 @@ import {
   Image,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -17,6 +18,10 @@ import { NAVIGATION } from "../../constants/screens";
 import { Toaster } from "../../constants/common";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import { useDispatch, useSelector } from "react-redux";
+import { ActionTypes } from "src/utils/constants";
+import { editProfile } from "./action/editProfileAction";
+import { RootState } from "src/redux/store/configureStore";
 
 const EditProfileScreen: React.FC = () => {
   const [name, setName] = useState("Karan Gupta");
@@ -24,21 +29,49 @@ const EditProfileScreen: React.FC = () => {
   const [flatNumber, setFlatNumber] = useState("A1679");
   const [parkingSpot, setParkingSpot] = useState('SS-18');
   const [vehicleNumber, setVehicleNumber] = useState("UP-78 ED");
-  const [email, setEmail] = useState("AnitaJi@habitat.com");
+  const [email, setEmail] = useState("abc@habitat.com");
+  const [userId,setUserId] = useState(0);
   const navigation = useNavigation();
   const [imageUri, setImageUri] = useState('');
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state:RootState)=>state.editProfileReducer.isLoading);
+  const isSuccess = useSelector((state:RootState)=> state.editProfileReducer.isSuccess);
+  const error = useSelector((state:RootState)=> state.editProfileReducer.error);
 
   const defaultNavigation: StackNavigationProp<HBStackParamList> = useNavigation();
 
-  const handleSave = () => {
+  const handleSave = async() => {
     console.log({
       name,
       block,
       flatNumber,
+      email,
       vehicleNumber,
     });
-    Alert.alert('Update',"Profile updated successfully!");
+    const payload = {
+      email,
+      vehicleNumber,
+      userId
+    }
+    dispatch(editProfile(payload));
+    if(isSuccess) Alert.alert('Update',"Profile updated successfully!",[
+      {
+        'text':'OK',
+        'onPress':()=>{
+          defaultNavigation.goBack();
+          dispatch({type:'RESET_PROFILE_SUCCESS'});
+        }
+      },
+    ],
+  {cancelable:false});
   };
+
+  useEffect(()=>{
+    if(error){
+      console.log(`the error found in update profile: ${JSON.stringify(error)}`);
+      Alert.alert('','Something went wrong!!');
+    }
+  },[error]);
 
   useEffect(()=>{
     const fetchUserDetails = async()=>{
@@ -46,9 +79,13 @@ const EditProfileScreen: React.FC = () => {
     const b: any = await AsyncStorage.getItem('flatNo');
     const c: any = await AsyncStorage.getItem('buildingName');
     const d: any = await AsyncStorage.getItem('parking');
+    const e: any = await AsyncStorage.getItem('email');
+    const f: any = await AsyncStorage.getItem('userId');
     setName(a);
     setFlatNumber(b);
     setBlock(c);
+    setEmail(e);
+    setUserId(f);
     }
     fetchUserDetails();
   },[]);
@@ -174,6 +211,7 @@ const EditProfileScreen: React.FC = () => {
             onChangeText={(text) => setEmail(text)}
           />
         </View>
+        {isLoading && <ActivityIndicator size={'large'}/>}
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.cancelButton} onPress={() => alert("Changes discarded")}>

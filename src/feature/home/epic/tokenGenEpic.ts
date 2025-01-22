@@ -66,11 +66,14 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         const flatId = response.data?.flatId;
         // const buildingId = response.data?.buildingId;
         const societyId = response.data?.societyId;
+        const email = response?.data?.email;
+
+        console.log(`email in tokenGenEpic: ${email}`);
 
         console.log(`societyId in TOKENGENEPIC is: => ${societyId}`);
 
         await AsyncStorage.setItem('societyId',`${societyId}`);
-
+        await AsyncStorage.setItem('email', `${email}`);
         await AsyncStorage.setItem('userId',`${userId}`);
         await AsyncStorage.setItem('userName',userName);
         await AsyncStorage.setItem('flatId',`${flatId}`);

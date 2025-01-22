@@ -9,6 +9,7 @@ import generateEntryEpic from "../../feature/securityApprovals/epic/generateEntr
 import fetchSecurityApprovalDataEpic from "../../feature/securityApprovals/epic/securityApprovalEpic";
 import addResidentEpic from "../../feature/settings/epic/addResidentEpic";
 import maintenanceReportEpic from "../../feature/maintaineceAreas/epic/maintenanceReportEpic";
+import editProfileEpic from "../../feature/settings/epic/editProfileEpic";
 
 const rootEpic = combineEpics(
     sendOtpEpic, 
@@ -21,6 +22,7 @@ const rootEpic = combineEpics(
     fetchSecurityApprovalDataEpic,
     addResidentEpic,
     maintenanceReportEpic,
+    editProfileEpic,
 );
 
 export default rootEpic;

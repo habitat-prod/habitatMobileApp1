@@ -62,138 +62,142 @@ const MaintainaceDetailsArea: React.FC = () => {
     LOG: { small: <Log />, big: <Log /> }, // Adjust if "big" is different
   };
 
-  const maintainanceListingCardData = [ 
-    {
-      id:1,
-      title: 'Clubhouse',
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      iconSvg: <Clubhouse />,
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Clubhouse',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <ClubhouseBig />
-        },
-      }),
-    },
-    {
-      id:2,
-      title: 'Parking',
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      iconSvg: <Parking />,
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Parking',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <ParkingBig />
-        },
-      }),
-    },
-    {
-      id:3,
-      title: 'Gardens',
-      iconSvg: <Garden />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Gardens',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <GardenBig />,
-        },
-      }),
-    },
-    {
-      id:4,
-      title: 'Stairs',
-      iconSvg: <Stairs />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: async() => await defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Stairs',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <StairsBig />
-        },
-      }),
-    },
-    {
-      id:4,
-      title: 'Elevators',
-      iconSvg: <Elevator />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Elevators',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <ElevatorBig />
-        },
-      }),
-    },
-    {
-      id:5,
-      title: 'Pavements',
-      iconSvg: <Pavement />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Pavements',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <PavementBig />
-        },
-      }),
-    },
-    {
-      id:6,
-      title: 'Waiting area',
-      iconSvg: <WaitingArea />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Waiting area',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <WaitingAreaBig />
-        },
-      }),
-    },
-    {
-      id:7,
-      title: 'Guest Parking',
-      iconSvg: <GuestParking />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.MaintainanceListDetails,
-        params: {
-          title: 'Guest Parking',
-          imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-          iconSvg: <GuestParkingBig />
-        },
-      }),
-    },
-    {
-      id:8,
-      title: 'Log',
-      iconSvg: <Log />,
-      imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
-      onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
-        screen: MaintainanceAreasScreens.LogDetailsArea,
-        params: {},
-      }),
-    }
-  ];
+  // const maintainanceListingCardData = [ 
+  //   {
+  //     id:1,
+  //     title: 'Clubhouse',
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     iconSvg: <Clubhouse />,
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Clubhouse',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <ClubhouseBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:2,
+  //     title: 'Parking',
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     iconSvg: <Parking />,
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Parking',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <ParkingBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:3,
+  //     title: 'Gardens',
+  //     iconSvg: <Garden />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Gardens',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <GardenBig />,
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:4,
+  //     title: 'Stairs',
+  //     iconSvg: <Stairs />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: async() => await defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Stairs',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <StairsBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:4,
+  //     title: 'Elevators',
+  //     iconSvg: <Elevator />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Elevators',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <ElevatorBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:5,
+  //     title: 'Pavements',
+  //     iconSvg: <Pavement />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Pavements',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <PavementBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:6,
+  //     title: 'Waiting area',
+  //     iconSvg: <WaitingArea />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Waiting area',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <WaitingAreaBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:7,
+  //     title: 'Guest Parking',
+  //     iconSvg: <GuestParking />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.MaintainanceListDetails,
+  //       params: {
+  //         title: 'Guest Parking',
+  //         imageUrl: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //         iconSvg: <GuestParkingBig />
+  //       },
+  //     }),
+  //   },
+  //   {
+  //     id:8,
+  //     title: 'Log',
+  //     iconSvg: <Log />,
+  //     imageUri: 'http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.s2014.png',
+  //     onClick: () => defaultNavigation.navigate(NAVIGATION.MaintainaceAreaStackNav, {
+  //       screen: MaintainanceAreasScreens.LogDetailsArea,
+  //       params: {},
+  //     }),
+  //   }
+  // ];
 
         const getPic = (amenityId:any)=>{
-          switch(amenityId){
+          switch(amenityId){ // here i'll update the logic to show the images, according to the amenity names.
             case 1: return <Garden/>
             case 2: return <Stairs/>
             case 3: return <Elevator/>
-            case 4: return <Clubhouse/>
-            case 5: return <Log/>
+            case 4: return <Parking/>
+            case 5: return <WaitingArea/>
+            case 6: return <Pavement/>
+            case 7: return <GuestParking/>
+            case 8: return <Log/>
+            case 9: return <Clubhouse/>
           }
         }
 
