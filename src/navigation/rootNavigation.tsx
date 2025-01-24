@@ -28,6 +28,7 @@ import GenerateEntry from '../feature/securityApprovals/views/securityApprovalDe
 import SplashScreen from '../feature/SplashScreen';
 import PermanentPassDetail from '../feature/settings/PermanentPassDetail';
 import VerifyOTPScreen from '../feature/auth/views/otpScreen';
+import AnnouncementScreen from '../feature/home/AnnouncementScreen';
 
 export type HBStackParamList = {
   HomeProfileNav: { screen: string; params: Record<string, any> } | undefined;
@@ -74,7 +75,7 @@ const RootNavigation: React.FunctionComponent = () => {
         <StackNav.Screen name={NAVIGATION.GenerateEntryNav} component = {GenerateEntry}/>
         <StackNav.Screen name={NAVIGATION.SplashScreenNav} component = {SplashScreen}/>
         <StackNav.Screen name={NAVIGATION.PermanentPassDetailNav} component = {PermanentPassDetail}/>
-
+        <StackNav.Screen name={NAVIGATION.AnnouncementScreenNav} component={AnnouncementScreen}/>
       </StackNav.Navigator>
     </NavigationContainer>
   );

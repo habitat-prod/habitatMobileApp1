@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
@@ -24,6 +25,7 @@ import { fetchHomeProfileData } from "./action/homeProfileAction";
 import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
 import { fetchSecurityApprovalData } from "../securityApprovals/action/securityAprovalsAction";
+import { Noticeboard } from "../maintaineceAreas/components/Noticeboard";
 
 const HomeScreen: React.FC = () => {
   
@@ -44,14 +46,41 @@ const HomeScreen: React.FC = () => {
   const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
   const [isSwitching, setIsSwitching] = useState(false);
   const [flatList, setFlatList] = useState(flatDetailsList);
-  const [isServicesVisible,setIsServiceVisible] = useState(false);
-  const [rotation, setRotation] = useState(0);  
+  const [isServicesVisible,setIsServiceVisible] = useState(true);
+  const [rotation, setRotation] = useState(180);  
   // const {maintenanceIsLoading, maintenanceData, maintenanceError}
   const maintenanceData = useSelector((state:RootState)=> state.maintenanceReducer.data);
   const maintenanceError = useSelector((state:RootState)=> state.maintenanceReducer.error);
   const maintenanceLoading = useSelector((state:RootState)=> state.maintenanceReducer.isLoading);
 
   console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
+
+  const list = [
+    {
+      name: "Ravi Mishra",
+      buildingName:"Designation, Society Name",
+      image: "",
+      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
+    },
+    {
+      name: "Druv Patil",
+      buildingName:"Designation, Society Name",
+      image: "",
+      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
+    },
+    {
+      name: "Mangal Singh",
+      buildingName:"Signature city",
+      image: "",
+      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
+    },
+    {
+      name: "Varun Pratap",
+      buildingName:"Tower C",
+      image: "",
+      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
+    },
+  ]
 
     const [userDetails, setUserDetail] = useState({
     flatNo: '',
@@ -261,34 +290,21 @@ const HomeScreen: React.FC = () => {
       {maintenanceLoading && <ActivityIndicator style={{flex:1, justifyContent:'center'}}/>}
 
       <View style={styles.happeningsContainer}>
-        <Text style={styles.happeningsTitle}>Happenings Around You</Text>
-        <View style={styles.post}>
-          <View style={styles.postHeader}>
-            <View style={{flexDirection:'row',}}>
-                <Image source={{uri:postUri}} style={styles.profileImage} />
-            <View>
-              <Text style={styles.postAuthor}>Karan Gupta</Text>
-              <Text style={styles.postLocation}>Tower C</Text>
-            </View>
-            </View>
-            <TouchableOpacity>
-              <Image source={require('../../assets/png/dots.png')} style={{marginEnd:9}} />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.postContent}>
-            Binance Expands Account Statement Function. With our VIP and
-            institutional clients in mind, we've upgraded the account statement
-            function.
-          </Text>
-          <Image
-            source={{ uri: "https://t3.ftcdn.net/jpg/02/71/71/82/360_F_271718267_7B2jXwEGv1dZYdPC4ZNSQSDTuHAhWbsU.jpg" }}
-            style={styles.postImage}
-          />
-          <TouchableOpacity style={{backgroundColor:'#06B8C3', width:'100%',paddingVertical:8, borderRadius:4, marginTop:5, flexDirection:'row', justifyContent:'space-between'}}>
-            <Text style={{fontSize:14, color:'#fff', marginStart:9}}>Purchase This Service</Text>
-            <Text style={{fontSize:14, color:'#fff', marginEnd:9}}>Rs. 51,299/-</Text>
-          </TouchableOpacity>
+        <View style={{flexDirection:'row',marginHorizontal:9, justifyContent:'space-between'}}>
+        <Text style={[styles.happeningsTitle,{justifyContent:'flex-start'}]}>Announcements</Text>
+        <TouchableOpacity 
+        onPress={()=> 
+          defaultNavigation.navigate(NAVIGATION.AnnouncementScreenNav)}
+          >
+        <Text style={[styles.happeningsTitle,{marginEnd:9,fontSize:19,justifyContent:'flex-end', alignSelf:'flex-end'}]}>+</Text>
+        </TouchableOpacity>
         </View>
+        {/* use flatList here... */}
+        <FlatList
+        data={list}
+        renderItem={(item)=><Noticeboard item={item.item}/>}
+        showsVerticalScrollIndicator={false}
+        />
       </View>
     </ScrollView>
 
@@ -413,7 +429,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   happeningsTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
     marginBottom: 12,
     marginTop:9,

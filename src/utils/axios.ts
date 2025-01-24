@@ -12,7 +12,7 @@ import { getUserLoginData } from './device';
 import { isNetworkAvailable } from './networkUtil';
 
 const axios = Axios.create({
-  baseURL: 'https://backend-dev.habitatautomations.com',
+  baseURL: 'https://backend-qa.habitatautomations.com',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
