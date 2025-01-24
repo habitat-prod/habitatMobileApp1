@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { NavigationProp, RouteProp, useFocusEffect, useNavigation } from '@react-navigation/native';
+import { CommonActions, NavigationProp, RouteProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Alert, Image, Keyboard, SafeAreaView, Text, View } from 'react-native';
@@ -48,9 +48,19 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
 
   useEffect(()=>{
     if(isError){
-      Alert.alert('', 'Invalid OTP!!');
+      Alert.alert('','Invalid OTP!',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              dispatch({ type: 'RESET_STATUS' });
+            },
+          },
+        ],
+        {cancelable:false}
+      );
     }
-  },[isError])
+  },[isError]);
 
   useEffect(()=>{
     console.log(`flatDetailsList in otpScreen: ${flatDetailsList}`);
@@ -59,9 +69,21 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
     }
     console.log(`isOtpVerified: ${otpVerified}`);
     if(otpVerified){
-    defaultNavigation.navigate(NAVIGATION.HomeScreenNav, {
-      screen: MaintainanceAreasScreens.HomeScreen,
-    })
+    // defaultNavigation.replace(NAVIGATION.HomeScreenNav, {
+    //   screen: MaintainanceAreasScreens.HomeScreen,
+    // });
+    defaultNavigation.dispatch(
+      CommonActions.reset({
+        index: 0, 
+        routes: [
+          {
+            name: NAVIGATION.HomeScreenNav,
+            params: { screen: MaintainanceAreasScreens.HomeScreen },
+          },
+        ],
+      })
+    );
+    dispatch({ type: 'RESET_STATUS' });
   }
   },[otpVerified]); // it triggers when otpVerified updates.
 

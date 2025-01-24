@@ -5,7 +5,7 @@ import { Toaster } from '../../constants/common';
 import { BootstrapNavigationScreens, NAVIGATION } from '../../constants/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HBStackParamList } from '../../navigation/rootNavigation';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Setting: React.FC = () => {
@@ -38,7 +38,17 @@ const Setting: React.FC = () => {
       text:'OK', onPress: async()=> {
         await AsyncStorage.clear();
 
-        defaultNavigation.navigate(BootstrapNavigationScreens.Login);
+        // defaultNavigation.navigate(BootstrapNavigationScreens.Login);
+        defaultNavigation.dispatch(
+          CommonActions.reset({
+            index: 0, // Login screen will be the root screen
+            routes: [
+              {
+                name: BootstrapNavigationScreens.Login, // Name of the target screen
+              },
+            ],
+          })
+        );
         Toaster('logged out successfully.');
       }
     },

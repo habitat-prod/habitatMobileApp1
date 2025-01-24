@@ -60,6 +60,13 @@ const otpVerificationReducer: Reducer<OtpVerificationState, loginActions> = (
           errorMessage: action.payload.message,
         },
       };
+      case "RESET_STATUS":
+        return {
+          ...state,
+          isLoading: false,
+          isSuccess:false,
+          error: undefined,
+        }
     default:
       return state;
   }
