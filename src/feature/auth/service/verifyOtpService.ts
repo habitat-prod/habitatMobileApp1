@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from '../../../utils/axios';
 
 export const VerifyOTPService = async (
@@ -6,11 +7,14 @@ export const VerifyOTPService = async (
   userType: string
 ) => {
   try {
-    console.log('inside verify service..')
+    console.log('inside verify service..');
+    const deviceToken = await AsyncStorage.getItem('fcmToken');
+    console.log(`fcm token passed in device token: ${deviceToken}`);
         const response = await axios.post(`/login/validateOTP`, {
             otp:otp,
             phoneNumber:phoneNumber,
-            userType:userType
+            userType:userType,
+            deviceToken: deviceToken,
         });
         return response;
     } catch (error) {
