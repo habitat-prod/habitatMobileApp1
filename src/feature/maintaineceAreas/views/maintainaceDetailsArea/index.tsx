@@ -44,10 +44,14 @@ const MaintainaceDetailsArea: React.FC = () => {
   const isLoading = useSelector((state:RootState)=>state.maintenanceReducer.isLoading);
   const isError = useSelector((state:RootState)=>state.maintenanceReducer.error);
 
-  useEffect(()=>{
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-    console.log(`getting the LIST IS=> ${JSON.stringify(response)}`)
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+
+  const filteredList = response.reduce((unique, item) => {
+    
+    if (!unique.some(element => element.amenityId === item.amenityId)) {
+      unique.push(item);
+    }
+    // console.log(unique);
+    return unique;
   }, []);
 
   const iconMapping: Record<string, { small: JSX.Element; big: JSX.Element }> = {
@@ -285,7 +289,7 @@ return (
     </View>
     <View style={{ flex: 1, }}>
     <FlatList
-      data={response}
+      data={filteredList}
       numColumns={2}
       renderItem={renderCard}
       keyExtractor={(item: any) => item.id.toString()}
