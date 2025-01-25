@@ -26,6 +26,8 @@ import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
 import { fetchSecurityApprovalData } from "../securityApprovals/action/securityAprovalsAction";
 import { Noticeboard } from "../maintaineceAreas/components/Noticeboard";
+import MaintainanceAllAreas from "../../assets/svgv1/MaintainanceAllAreas";
+import SecurityApproval from "../../assets/svgv1/SecurityApprovals";
 
 const HomeScreen: React.FC = () => {
   
@@ -274,10 +276,9 @@ const HomeScreen: React.FC = () => {
         <View style={styles.servicesGrid}>
           {Array.isArray(serviceList)? serviceList.map((service) => (
             <TouchableOpacity key={service.pmsId} style={styles.serviceItem} onPress={()=>{handleServiceClick(service); console.log(service.pmsId)}}>
-              <Image
-                source={{ uri: service.s3Path }}
-                style={styles.serviceIcon}
-              />
+              
+                {service.pmsName==='MAINTENANCE'?<MaintainanceAllAreas height={100}/>:<SecurityApproval height={100}/>}
+              
               <Text style={styles.serviceText}>{service.pmsName}</Text>
             </TouchableOpacity>
           ))
@@ -296,7 +297,7 @@ const HomeScreen: React.FC = () => {
         onPress={()=> 
           defaultNavigation.navigate(NAVIGATION.AnnouncementScreenNav)}
           >
-        <Text style={[styles.happeningsTitle,{marginEnd:9,fontSize:19,justifyContent:'flex-end', alignSelf:'flex-end'}]}>+</Text>
+        <Text style={[styles.happeningsTitle,{marginEnd:9,fontSize:24,justifyContent:'flex-end', alignSelf:'flex-end', fontStyle:'normal', fontWeight:'400',marginTop:2}]}>+</Text>
         </TouchableOpacity>
         </View>
         {/* use flatList here... */}
@@ -307,7 +308,7 @@ const HomeScreen: React.FC = () => {
         />
       </View>
     </ScrollView>
-
+ 
     { isFirstTime && (
           <Modal visible={visible} style={{ bottom: 0, position: 'absolute', paddingTop: 220, marginHorizontal: 5, marginBottom: -110}} onDismiss={() => { isSwitching? setVisible(false): Toaster('Please Select any flat to Access incredible features of APP :)') }}>
             <View
@@ -405,7 +406,7 @@ const styles = StyleSheet.create({
   servicesGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   serviceItem: {
     width: "30%",
@@ -413,8 +414,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   serviceIcon: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     marginBottom: 4,
     borderRadius: 8,
     borderWidth:0.4,

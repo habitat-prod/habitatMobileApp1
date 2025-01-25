@@ -98,13 +98,13 @@ const Setting: React.FC = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>More</Text>
-        <SettingsOption title="About us" onPress={() => console.log('About us')} />
-        <SettingsOption title="Privacy policy" onPress={() => console.log('Privacy policy')} />
-        <SettingsOption
+        {/* <Text style={styles.sectionTitle}>More</Text> */}
+        {/* <SettingsOption title="About us" onPress={() => console.log('About us')} /> */}
+        {/* <SettingsOption title="Privacy policy" onPress={() => console.log('Privacy policy')} /> */}
+        {/* <SettingsOption
           title="Terms and conditions"
           onPress={() => defaultNavigation.navigate(NAVIGATION.TermsConditionsNav)}
-        />
+        /> */}
         <SettingsOption title="Contact us" onPress={() => defaultNavigation.navigate(NAVIGATION.ContactScreenNav)} />
         <SettingsOption title="Logout" onPress={() => {
           openLogout();
