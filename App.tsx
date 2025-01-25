@@ -10,7 +10,10 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { NotificationServices, requestUserPermission } from './src/firebase/PushNotifications';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+
+const queryClient = new QueryClient();
 
 const App: React.FC = (props) => {
 
@@ -31,11 +34,13 @@ useEffect(()=>{
 
   return (
     <GestureHandlerRootView>
+    <QueryClientProvider client={queryClient}>
     <PaperProvider theme={customTheme}>
       <SafeAreaProvider>
         <RootNavigation />
       </SafeAreaProvider>
     </PaperProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 };

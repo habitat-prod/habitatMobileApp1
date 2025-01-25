@@ -10,6 +10,7 @@ import securityApprovalReducer from "../../../src/feature/securityApprovals/redu
 import addResidentReducer from "../../../src/feature/settings/reducer/addResidentReducer";
 import maintenanceReportReducer from "../../../src/feature/maintaineceAreas/reducers/maintenanceReportReducer";
 import editProfileReducer from "../../../src/feature/settings/reducer/editProfileReducer";
+import announcementReducer from "../../../src/feature/home/reducer/announcementReducer";
 
 export const rootReducer = combineReducers({
     otp: userReducer,
@@ -22,7 +23,8 @@ export const rootReducer = combineReducers({
     securityApprovalReducer: securityApprovalReducer,
     addResidentReducer: addResidentReducer,
     maintenanceReportReducer: maintenanceReportReducer,
-    editProfileReducer: editProfileReducer
+    editProfileReducer: editProfileReducer,
+    announcementReducer,
 });
 
 export default rootReducer;

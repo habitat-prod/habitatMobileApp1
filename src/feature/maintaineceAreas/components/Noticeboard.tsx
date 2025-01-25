@@ -32,17 +32,17 @@ export const Noticeboard = ({ item }: { item: any }) => {
     return <View style={styles.post}>
         <View style={styles.postHeader}>
             <View style={{ flexDirection: 'row', }}>
-                <Image source={{ uri: item?.image }} style={styles.profileImage} />
+                <Image source={{ uri: item?.user?.s3Path }} style={styles.profileImage} />
                 <View>
-                    <Text style={styles.postAuthor}>{item?.name}</Text>
-                    <Text style={styles.postLocation}>{item?.buildingName}</Text>
+                    <Text style={styles.postAuthor}>{item?.user?.name}</Text>
+                    <Text style={styles.postLocation}>{item?.societyAdmin?.societyRole}, {item.society?.name}</Text>
                 </View>
             </View>
             <TouchableOpacity onPress={(handleDotsPress)}>
                 <Image source={require('../../../assets/png/dots.png')} style={{ marginEnd: 9, marginBottom: 15 }} />
             </TouchableOpacity>
         </View>
-        <Text style={styles.postContent}>{item?.description}
+        <Text style={styles.postContent}>{item?.content}
         </Text>
 
         <Modal

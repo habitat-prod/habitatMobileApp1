@@ -10,6 +10,7 @@ import fetchSecurityApprovalDataEpic from "../../feature/securityApprovals/epic/
 import addResidentEpic from "../../feature/settings/epic/addResidentEpic";
 import maintenanceReportEpic from "../../feature/maintaineceAreas/epic/maintenanceReportEpic";
 import editProfileEpic from "../../feature/settings/epic/editProfileEpic";
+import fetchAnnouncementsEpic from "../../feature/home/epic/announcementsEpic";
 
 const rootEpic = combineEpics(
     sendOtpEpic, 
@@ -23,6 +24,7 @@ const rootEpic = combineEpics(
     addResidentEpic,
     maintenanceReportEpic,
     editProfileEpic,
+    fetchAnnouncementsEpic
 );
 
 export default rootEpic;

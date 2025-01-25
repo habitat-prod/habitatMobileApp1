@@ -21,13 +21,16 @@ import { NAVIGATION } from "../../constants/screens";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "../../../src/utils/common";
 import { generateToken } from "./action/tokenGenAction";
-import { fetchHomeProfileData } from "./action/homeProfileAction";
+// import { fetchHomeProfileData } from "./action/homeProfileAction";
 import { RootState } from "src/redux/store/configureStore";
 import { fetchMaintenanceData } from "../maintaineceAreas/actions/maintenanceAction";
 import { fetchSecurityApprovalData } from "../securityApprovals/action/securityAprovalsAction";
 import { Noticeboard } from "../maintaineceAreas/components/Noticeboard";
 import MaintainanceAllAreas from "../../assets/svgv1/MaintainanceAllAreas";
 import SecurityApproval from "../../assets/svgv1/SecurityApprovals";
+import { fetchAnnouncementData } from "./action/announcementAction";
+import { useTaskQuery } from "../../utils/tanstack/useTaskQuery";
+import { homeProfileService } from "./service/homeProfileService";
 
 const HomeScreen: React.FC = () => {
   
@@ -37,15 +40,20 @@ const HomeScreen: React.FC = () => {
   const flatDetailsList = useSelector((state:RootState) => state.otpVerification.userDetails);
   const flatListSize = useSelector((state:RootState)=> state.otpVerification.flatListSize);
   const dispatch = useDispatch();
+  const announcementData = useSelector((state:RootState)=> state?.announcementReducer?.announcementData);
+  const announcementError = useSelector((state:RootState)=> state.announcementReducer.error);
+  const announcementLoading = useSelector((state: RootState)=> state.announcementReducer.isLoading);
   let flatNo = useSelector((state:RootState)=> state.tokenReducer.flatNo); // tried to define the type of state
   let buildingName = useSelector((state:RootState)=> state.tokenReducer.buildingName);
   let societyName = useSelector((state:RootState)=> state.tokenReducer.societyName);
   let societyAddress = useSelector((state:RootState)=> state.tokenReducer.societyAddress);
   // let parkingSpot = useSelector((state:RootState)=> state.tokenReducer.parking);
   let token = useSelector((state:RootState)=> state.tokenReducer.token);
-  let societyId = useSelector((state:RootState)=> state.tokenReducer.societyId);
+  // let societyId = useSelector((state:RootState)=> state.tokenReducer.societyId);
   let flatId = useSelector((state:RootState)=> state.tokenReducer.flatId);
-  const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
+  // const serviceList = useSelector((state:RootState)=> state.pmsReducer.data.data);
+  // const serviceError = useSelector((state:RootState)=> state.pmsReducer.error);
+  // const serviceLoading = useSelector((state:RootState)=> state.pmsReducer.isLoading);
   const [isSwitching, setIsSwitching] = useState(false);
   const [flatList, setFlatList] = useState(flatDetailsList);
   const [isServicesVisible,setIsServiceVisible] = useState(true);
@@ -54,70 +62,53 @@ const HomeScreen: React.FC = () => {
   const maintenanceData = useSelector((state:RootState)=> state.maintenanceReducer.data);
   const maintenanceError = useSelector((state:RootState)=> state.maintenanceReducer.error);
   const maintenanceLoading = useSelector((state:RootState)=> state.maintenanceReducer.isLoading);
+  const [societyId,setSocietyId] = useState<Number>(0);
 
-  console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
+  // console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
 
-  const list = [
-    {
-      name: "Ravi Mishra",
-      buildingName:"Designation, Society Name",
-      image: "",
-      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
-    },
-    {
-      name: "Druv Patil",
-      buildingName:"Designation, Society Name",
-      image: "",
-      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
-    },
-    {
-      name: "Mangal Singh",
-      buildingName:"Signature city",
-      image: "",
-      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
-    },
-    {
-      name: "Varun Pratap",
-      buildingName:"Tower C",
-      image: "",
-      description:"Binance Expands Account Statement Function. With our VIP and institutional clients in mind, we’ve upgraded the account statement function"
-    },
-  ]
-
+      // Fetch Current Visitors:-
+      const { data: pmsService, error: serviceError, isLoading: serviceLoading } =
+      useTaskQuery({
+        key: 'fetchServices',
+        fetchFn: homeProfileService,
+        params:  societyId ,
+        enabled: !!societyId, // Ensure staffId is not null
+      });
+  
+    // console.log(`Pms Services inside Home Screen are nothing but: ${pmsService? JSON.stringify(pmsService): 'Empty!!!!!!!!'} `);
+  
     const [userDetails, setUserDetail] = useState({
     flatNo: '',
     buildingName: '',
     societyName: '',
     societyAddress: ''
     });
-
-  // console.log(`serviceList from redux pipelines is: ${JSON.stringify(datas)}`);
-
-  console.log(`the token after flat selection in HomeScreen from redux store is: ${JSON.stringify(token)}`);
-
+  // console.log(`the token after flat selection in HomeScreen from redux store is: ${JSON.stringify(token)}`);
   useEffect(()=>{
   const setUserDetails = async () => {
     flatNo = await AsyncStorage.getItem('flatNo');
     buildingName = await AsyncStorage.getItem('buildingName');
     societyName = await AsyncStorage.getItem('societyName');
     societyAddress = await AsyncStorage.getItem('societyAddress');
-    societyId = await AsyncStorage.getItem('societyId');
     flatId = await AsyncStorage.getItem('flatId');
     token = await AsyncStorage.getItem('token');
     console.log({flatNo}, {buildingName}, {societyName}, {societyAddress});
     
       if(flatDetailsList.length === 0) {
-        console.log('flatDetailsList has been end :((((((((((((((((((((((((((((((((((((((((((((((((((((');
+        // console.log('flatDetailsList has been end :((((((((((((((((((((((((((((((((((((((((((((((((((((');
         const flats = await AsyncStorage.getItem('flatList');
         const array = JSON.parse(flats);
         setFlatList(array);
         console.log(`SAVED list in Home Screen is: ${JSON.stringify(array)}`);
       }
       else{
-        console.log('flatDetailList is alive :)))))))))))))))))))))))))))))))))))))))');
+        // console.log('flatDetailList is alive :)))))))))))))))))))))))))))))))))))))))');
         console.log(flatDetailsList);
       }
 
+    const societyId: Number = Number(await AsyncStorage.getItem('societyId'));
+    setSocietyId(societyId);
+    console.log(`societyId is ======================================= ${societyId}`)
     setUserDetail({
       flatNo:flatNo,
       buildingName:buildingName,
@@ -128,17 +119,27 @@ const HomeScreen: React.FC = () => {
   setUserDetails();
   },[]);
 
-  useEffect(() => {
-    if (societyId && token) {
-        console.log("Fetching PMS services...");
-        dispatch(fetchHomeProfileData());
+  useEffect(()=>{
+    if(announcementError) {
+      Alert.alert('',`Something went wrong!`);
+      console.log(announcementError);
     }
-}, [societyId, token, dispatch]);
-
-  const postUri = 'https://upload.wikimedia.org/wikipedia/en/3/3f/NobitaNobi.png';
+    if(serviceError){
+      Alert.alert('','Something went wrong!');
+      console.log(serviceError);
+    }
+  },[announcementError,serviceError]);
 
   useEffect(() => {
-    dispatch(fetchHomeProfileData());
+        // console.log("Fetching PMS services...");
+        // dispatch(fetchHomeProfileData());
+        dispatch(fetchAnnouncementData());
+}, []);
+
+  // const postUri = 'https://upload.wikimedia.org/wikipedia/en/3/3f/NobitaNobi.png';
+
+  useEffect(() => {
+    // dispatch(fetchHomeProfileData());
     const checkFirstTimeUser = async () => {
       const firstTime = await AsyncStorage.getItem('isFirstTimeUser');
       if (firstTime && flatListSize>1) {
@@ -191,12 +192,12 @@ const HomeScreen: React.FC = () => {
     // if(maintenanceLoading) {return <ActivityIndicator/>}
   },[maintenanceData,maintenanceError, maintenanceLoading]);
 
-  const handleMaintenanceData = async()=> {
-    const maintenance = await dispatch(fetchMaintenanceData());
+  const handleMaintenanceData = ()=> {
+    dispatch(fetchMaintenanceData());
   }
 
-  const handleSecurityApprovalData = async() =>{
-    const response = await dispatch(fetchSecurityApprovalData({flatId:1}));
+  const handleSecurityApprovalData = () =>{
+    const response = dispatch(fetchSecurityApprovalData({ flatId: 1 }));
     console.log(`flatId from Screen is: ${flatId}`)
     console.log(`the Response inside Screen of Security Approvals is: => ${JSON.stringify(response)}`)
   }
@@ -274,10 +275,10 @@ const HomeScreen: React.FC = () => {
         </View>
         {isServicesVisible && (
         <View style={styles.servicesGrid}>
-          {Array.isArray(serviceList)? serviceList.map((service) => (
+          {Array.isArray(pmsService?.data?.data)? pmsService?.data?.data.map((service) => (
             <TouchableOpacity key={service.pmsId} style={styles.serviceItem} onPress={()=>{handleServiceClick(service); console.log(service.pmsId)}}>
               
-                {service.pmsName==='MAINTENANCE'?<MaintainanceAllAreas height={100}/>:<SecurityApproval height={100}/>}
+                {service.pmsName==='MAINTENANCE'?<MaintainanceAllAreas height={100}/> : <SecurityApproval height={100}/>}
               
               <Text style={styles.serviceText}>{service.pmsName}</Text>
             </TouchableOpacity>
@@ -286,6 +287,7 @@ const HomeScreen: React.FC = () => {
         }
         </View>)
         }
+        {serviceLoading && <ActivityIndicator size={'small'}/>}
       </View>
 
       {maintenanceLoading && <ActivityIndicator style={{flex:1, justifyContent:'center'}}/>}
@@ -300,9 +302,10 @@ const HomeScreen: React.FC = () => {
         <Text style={[styles.happeningsTitle,{marginEnd:9,fontSize:24,justifyContent:'flex-end', alignSelf:'flex-end', fontStyle:'normal', fontWeight:'400',marginTop:2}]}>+</Text>
         </TouchableOpacity>
         </View>
+        {announcementLoading && <ActivityIndicator size={'large'}/>}
         {/* use flatList here... */}
         <FlatList
-        data={list}
+        data={announcementData?.data}
         renderItem={(item)=><Noticeboard item={item.item}/>}
         showsVerticalScrollIndicator={false}
         />

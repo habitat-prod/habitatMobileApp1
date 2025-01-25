@@ -12,7 +12,7 @@ const AnnouncementScreen = ({route}) => {
     // },[announcement]);
 
     useEffect(()=>{
-      setAnnouncement(route.params?.data?.description);
+      setAnnouncement(route.params?.data?.content);
     },[])
 
     const handleSubmit = ()=> {

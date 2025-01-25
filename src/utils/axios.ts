@@ -13,7 +13,7 @@ import { isNetworkAvailable } from './networkUtil';
 
 const axios = Axios.create({
   baseURL: 'https://backend-qa.habitatautomations.com',
-  timeout: 10000,
+  timeout: 120000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json', 
