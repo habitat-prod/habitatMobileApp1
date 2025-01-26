@@ -67,15 +67,20 @@ const HomeScreen: React.FC = () => {
   // console.log(`societyId inside the HOMESCREEN: === ${societyId}`);
 
       // Fetch Current Visitors:-
-      const { data: pmsService, error: serviceError, isLoading: serviceLoading } =
+      const { data: pmsService, error: serviceError, isLoading: serviceLoading, refetch } =
       useTaskQuery({
         key: 'fetchServices',
         fetchFn: homeProfileService,
         params:  societyId ,
         enabled: !!societyId, // Ensure staffId is not null
+        refetch
       });
   
     // console.log(`Pms Services inside Home Screen are nothing but: ${pmsService? JSON.stringify(pmsService): 'Empty!!!!!!!!'} `);
+
+    const refresh = ()=>{
+      return refetch();
+    }
   
     const [userDetails, setUserDetail] = useState({
     flatNo: '',
@@ -119,18 +124,19 @@ const HomeScreen: React.FC = () => {
   setUserDetails();
   },[]);
 
-  useEffect(()=>{
-    if(announcementError) {
-      Alert.alert('',`Something went wrong!`);
-      console.log(announcementError);
-    }
-    if(serviceError){
-      Alert.alert('','Something went wrong!');
-      console.log(serviceError);
-    }
-  },[announcementError,serviceError]);
+  // useEffect(()=>{
+  //   if(announcementError) {
+  //     Alert.alert('',`Something went wrong!`);
+  //     console.log(announcementError);
+  //   }
+  //   if(serviceError){
+  //     Alert.alert('','Something went wrong!');
+  //     console.log(serviceError);
+  //   }
+  // },[announcementError,serviceError]);
 
   useEffect(() => {
+    refetch();
         // console.log("Fetching PMS services...");
         // dispatch(fetchHomeProfileData());
         dispatch(fetchAnnouncementData());
@@ -167,7 +173,8 @@ const HomeScreen: React.FC = () => {
     Toaster(`flatId is: ${item.flatId.toString()} flatName is: ${item.flatName}`);
     const response = await dispatch(generateToken({propertyId: Number(item.flatId), userType: 'USER'}));
     console.log('going to call pms response API');
-    const pmsResponse = await dispatch(fetchHomeProfileData());
+    // const pmsResponse = await dispatch(fetchHomeProfileData());
+    const pmsResponse = refresh();
     console.log(`pms response in Home Screen is: ${JSON.stringify(pmsResponse)}`);
     console.log(JSON.stringify(response));
     await AsyncStorage.setItem('isFirstTimeUser', 'false');

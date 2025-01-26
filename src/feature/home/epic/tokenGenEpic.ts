@@ -18,6 +18,7 @@ const generateTokenEpic = (action$: ActionsObservable<any>, state$: StateObserva
         // const propertyId = await AsyncStorage.getItem("propertyId");
         const token = await AsyncStorage.getItem("token");
 
+        
         // console.log(`phone is ${phone}`);
         // console.log(`token is: ${token}`);
         // console.log(`payload propertyId is: ${action.payload.propertyId}`);

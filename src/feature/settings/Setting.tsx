@@ -36,8 +36,7 @@ const Setting: React.FC = () => {
     },
     {
       text:'OK', onPress: async()=> {
-        await AsyncStorage.clear();
-
+        await AsyncStorage.clear().then(()=>{
         // defaultNavigation.navigate(BootstrapNavigationScreens.Login);
         defaultNavigation.dispatch(
           CommonActions.reset({
@@ -50,6 +49,7 @@ const Setting: React.FC = () => {
           })
         );
         Toaster('logged out successfully.');
+        });
       }
     },
   ])

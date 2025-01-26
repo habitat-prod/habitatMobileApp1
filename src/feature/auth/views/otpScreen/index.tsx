@@ -48,17 +48,18 @@ const VerifyOTPScreen: React.FC<IVerifyOTPProps> = (props) => {
 
   useEffect(()=>{
     if(isError){
-      Alert.alert('','Invalid OTP!',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              dispatch({ type: 'RESET_STATUS' });
-            },
-          },
-        ],
-        {cancelable:false}
-      );
+      console.log('isError from OTP verification Screen:',isError);
+      // Alert.alert('','Invalid OTP!',
+      //   [
+      //     {
+      //       text: 'OK',
+      //       onPress: () => {
+      //         dispatch({ type: 'RESET_STATUS' });
+      //       },
+      //     },
+      //   ],
+      //   {cancelable:false}
+      // );
     }
   },[isError]);
 

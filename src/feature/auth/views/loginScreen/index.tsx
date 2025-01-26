@@ -34,6 +34,7 @@ const Login: React.FC = () => {
         bootstrapNavigation.navigate(BootstrapNavigationScreens.VerifyOTP, {
           phoneNumber: loginData.mobileNumber,
         });
+        dispatch({ type: 'RESET_Login_STATUS' });
       }
   }, [isSuccess]); // Trigger only when otpSent changes
 
@@ -41,7 +42,7 @@ const Login: React.FC = () => {
   if(error){
     Alert.alert('','Mobile Number not found in Society Data. Please contact the society admin.');
   }
-  },[error])
+  },[error]);
 
 const handleSentOtp = async () => {
   if (!mobileRegex.test(loginData.mobileNumber)) {
